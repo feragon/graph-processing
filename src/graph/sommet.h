@@ -1,7 +1,6 @@
 #pragma once
 
 #include <ostream>
-#include "board/position.h"
 #include "conteneur.h"
 
 template <class T>
