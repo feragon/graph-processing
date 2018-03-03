@@ -6,6 +6,7 @@
 #include "sourcesectionparser.h"
 #include "puitssectionparser.h"
 #include "arcssectionparser.h"
+#include "graphsectionparser.h"
 
 /**
  * @param c1 Caractère 1
@@ -24,6 +25,7 @@ GPRParser::GPRParser(std::istream& buffer) :
     _parser = new SourceSectionParser(_parser);
     _parser = new PuitsSectionParser(_parser);
     _parser = new ArcsSectionParser(_parser);
+    _parser = new GraphSectionParser(_parser);
 }
 
 GPRParser::~GPRParser() {
