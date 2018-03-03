@@ -16,6 +16,13 @@ set(SOURCE_FILES
     src/main.cpp
     src/file/sectionparser.h
     src/file/sectionparser.cpp
+    src/file/sectionparsercor.cpp
+    src/file/sectionparsercor.h
+    src/file/parseexception.h
+    src/file/resourcessectionparser.cpp
+    src/file/resourcessectionparser.h
+    src/util/string.cpp
+    src/util/string.h
 )
 
 add_executable(projet-modelisation ${SOURCE_FILES})

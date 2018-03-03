@@ -7,11 +7,20 @@ class SectionParser {
         SectionParser(const std::string& sectionName);
         /**
          * @brief Lit une ligne du fichier
-         * @param line Ligne à lire, nettoyée des commentaires et des espaces en double
-         * @return Vrai si la ligne a bien été traitée
+         * @param is Buffer du fichier
+         * @throw ParseException si une ligne n'a pas pu être traitée
          */
-        virtual bool parse(std::string line) const = 0;
+        virtual void parse(std::istream& is) = 0;
+
+        /**
+         * @return Nom de la section traitée
+         */
+        inline const std::string& sectionName() const;
 
     private:
         std::string _sectionName;
 };
+
+const std::string& SectionParser::sectionName() const {
+        return _sectionName;
+}

@@ -1,5 +1,7 @@
 #include <algorithm>
 #include "gprparser.h"
+#include "resourcessectionparser.h"
+#include "parseexception.h"
 
 /**
  * @param c1 Caractère 1
@@ -13,18 +15,21 @@ bool bothAreSpaces(char c1, char c2) {
 GPRParser::GPRParser(std::istream& buffer) :
     _buffer(buffer) {
 
+    _parser = new ResourcesSectionParser("ressources", nullptr);
+}
+
+GPRParser::~GPRParser() {
+    delete _parser;
 }
 
 void GPRParser::load() {
-    std::string line;
-    while(std::getline(_buffer, line)) {
-        cleanLine(line);
-
-        if(line.empty()) {
-            continue;
+    while(_buffer) {
+        try {
+            _parser->parse(_buffer);
         }
-
-        std::cout << line << std::endl;
+        catch (ParseException& e) {
+            std::cerr << e.what() << std::endl;
+        }
     }
 }
 
