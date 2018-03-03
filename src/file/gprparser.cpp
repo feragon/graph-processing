@@ -3,6 +3,7 @@
 #include "resourcessectionparser.h"
 #include "parseexception.h"
 #include "verticessectionparser.h"
+#include "sourcesectionparser.h"
 
 /**
  * @param c1 Caractère 1
@@ -18,6 +19,7 @@ GPRParser::GPRParser(std::istream& buffer) :
 
     _parser = new ResourcesSectionParser(nullptr);
     _parser = new VerticesSectionParser(_parser);
+    _parser = new SourceSectionParser(_parser);
 }
 
 GPRParser::~GPRParser() {

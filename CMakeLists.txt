@@ -25,6 +25,8 @@ set(SOURCE_FILES
     src/util/string.h
     src/file/verticessectionparser.cpp
     src/file/verticessectionparser.h
+    src/file/sourcesectionparser.cpp
+    src/file/sourcesectionparser.h
 )
 
 add_executable(projet-modelisation ${SOURCE_FILES})
