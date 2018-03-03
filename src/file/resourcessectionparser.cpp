@@ -3,8 +3,8 @@
 #include "resourcessectionparser.h"
 #include "../util/string.h"
 
-ResourcesSectionParser::ResourcesSectionParser(const std::string& sectionName, SectionParserCOR* next) :
-        SectionParserCOR(sectionName, next) {
+ResourcesSectionParser::ResourcesSectionParser(SectionParserCOR* next) :
+        SectionParserCOR("ressources", next) {
 
 }
 

@@ -1,6 +1,7 @@
 #include "sectionparsercor.h"
 #include "parseexception.h"
 #include "gprparser.h"
+#include "../util/string.h"
 
 SectionParserCOR::SectionParserCOR(const std::string& sectionName, SectionParserCOR* next) :
         SectionParser(sectionName),
@@ -9,7 +10,7 @@ SectionParserCOR::SectionParserCOR(const std::string& sectionName, SectionParser
 }
 
 bool SectionParserCOR::canParse(const std::string& name) const {
-    return sectionName() == name;
+    return compareCaseInsensitive(sectionName(), name);
 }
 
 void SectionParserCOR::parse(std::istream& is) {
@@ -26,7 +27,7 @@ void SectionParserCOR::parse(std::istream& is) {
     if(!canParse(line)) {
         if(_next) {
             is.seekg(position);
-            _next->parse(is);
+            return _next->parse(is);
         }
         else {
             throw ParseException(("Impossible de traiter la ligne " + line).c_str());
@@ -40,10 +41,6 @@ void SectionParserCOR::parse(std::istream& is) {
         }
 
         GPRParser::cleanLine(line);
-
-        if(!line.empty()) {
-            continue;
-        }
     }
 
     is.seekg(position);

@@ -4,7 +4,7 @@
 
 class ResourcesSectionParser : public SectionParserCOR {
     public:
-        ResourcesSectionParser(const std::string& sectionName, SectionParserCOR* next);
+        ResourcesSectionParser(SectionParserCOR* next);
 
         virtual bool parseInternal(const std::string& line) override;
 

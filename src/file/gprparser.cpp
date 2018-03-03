@@ -2,6 +2,7 @@
 #include "gprparser.h"
 #include "resourcessectionparser.h"
 #include "parseexception.h"
+#include "verticessectionparser.h"
 
 /**
  * @param c1 Caractère 1
@@ -15,11 +16,12 @@ bool bothAreSpaces(char c1, char c2) {
 GPRParser::GPRParser(std::istream& buffer) :
     _buffer(buffer) {
 
-    _parser = new ResourcesSectionParser("ressources", nullptr);
+    _parser = new ResourcesSectionParser(nullptr);
+    _parser = new VerticesSectionParser(_parser);
 }
 
 GPRParser::~GPRParser() {
-    delete _parser;
+    delete _parser; //TODO: libérer tous les traitements
 }
 
 void GPRParser::load() {
