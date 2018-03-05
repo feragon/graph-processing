@@ -4,34 +4,34 @@
 
 class Identifiable {
     private:
-        int _cle;
+        std::string _cle;
 
     public:
         /**
          * @brief Crée un élément identifiable
          * @param cle Clé
          */
-        Identifiable(int cle);
+        Identifiable(const std::string& cle);
 
         /**
          * @return Clé
          */
-        inline int cle() const;
+        inline std::string cle() const;
 
         /**
          * @brief Change la clé
          * @param cle Nouvelle clé
          */
-        inline void setCle(int cle);
+        inline void setCle(const std::string& cle);
 
         operator std::string() const;
         friend std::ostream& operator << (std::ostream& o, const Identifiable& i);
 };
 
-int Identifiable::cle() const {
+std::string Identifiable::cle() const {
     return _cle;
 }
 
-void Identifiable::setCle(int cle) {
+void Identifiable::setCle(const std::string& cle) {
     _cle = cle;
 }

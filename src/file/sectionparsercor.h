@@ -6,7 +6,7 @@ class SectionParserCOR : public SectionParser {
     public:
         SectionParserCOR(const std::string& sectionName, SectionParserCOR* next);
 
-        virtual void parse(std::istream& is) override;
+        virtual void parse(std::istream& is, GPRParser* parser) override;
 
         /**
          * @param line Permière ligne du bloc
@@ -19,7 +19,7 @@ class SectionParserCOR : public SectionParser {
          * @param line Ligne
          * @return Faux si la ligne n'est pas reconnue
          */
-        virtual bool parseInternal(const std::string& line) = 0;
+        virtual bool parseInternal(const std::string& line, GPRParser* parser) = 0;
     private:
         SectionParserCOR* _next;
 };

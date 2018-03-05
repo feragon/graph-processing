@@ -35,7 +35,7 @@ GPRParser::~GPRParser() {
 void GPRParser::load() {
     while(_buffer) {
         try {
-            _parser->parse(_buffer);
+            _parser->parse(_buffer, this);
         }
         catch (ParseException& e) {
             std::cerr << e.what() << std::endl;
@@ -71,4 +71,8 @@ void GPRParser::cleanLine(std::string& line) {
     if(index != std::string::npos) {
         line.erase(index + 1, line.length());
     }
+}
+
+const Graphe<EdgeData, VertexData>& GPRParser::graphe() const {
+    return _graphe;
 }

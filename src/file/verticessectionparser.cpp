@@ -7,7 +7,7 @@ VerticesSectionParser::VerticesSectionParser(SectionParserCOR* next) :
 
 }
 
-bool VerticesSectionParser::parseInternal(const std::string& line) {
+bool VerticesSectionParser::parseInternal(const std::string& line, GPRParser* parser) {
     if(line.empty()) {
         return false;
     }
@@ -25,10 +25,13 @@ bool VerticesSectionParser::parseInternal(const std::string& line) {
             std::string name = line.substr(0, pos);
 
             try {
-                int x = std::stoi(line.substr(pos, pos2 - pos));
-                int y = std::stoi(line.substr(pos2));
+                //Borne inf et sup
+                //L'attente est possible ici
+                //T_j <- Max {a_j, T_i + t_ij}
+                int inf = std::stoi(line.substr(pos, pos2 - pos));
+                int sup = std::stoi(line.substr(pos2));
 
-                std::cout << "Sommet " << name << " trouvé (" << x << ";" << y << ")" << std::endl;
+                std::cout << "Sommet " << name << " trouvé (" << inf << ";" << sup << ")" << std::endl;
             }
             catch (std::exception& e) {
                 std::cerr << "Impossible de lire les coordonnées de " << std::endl;

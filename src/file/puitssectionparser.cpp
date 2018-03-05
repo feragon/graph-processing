@@ -6,7 +6,7 @@ PuitsSectionParser::PuitsSectionParser(SectionParserCOR* next) :
 
 }
 
-bool PuitsSectionParser::parseInternal(const std::string& line) {
+bool PuitsSectionParser::parseInternal(const std::string& line, GPRParser* parser) {
     if(canParse(line)) {
         return true;
     }

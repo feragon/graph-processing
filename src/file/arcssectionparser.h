@@ -6,5 +6,5 @@ class ArcsSectionParser : public SectionParserCOR {
     public:
         ArcsSectionParser(SectionParserCOR* next);
 
-        virtual bool parseInternal(const std::string& line) override;
+        virtual bool parseInternal(const std::string& line, GPRParser* parser) override;
 };

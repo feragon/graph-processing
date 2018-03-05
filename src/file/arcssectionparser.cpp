@@ -7,7 +7,7 @@ ArcsSectionParser::ArcsSectionParser(SectionParserCOR* next) :
 
 }
 
-bool ArcsSectionParser::parseInternal(const std::string& line) {
+bool ArcsSectionParser::parseInternal(const std::string& line, GPRParser* parser) {
     if(canParse(line)) {
         return true;
     }

@@ -6,5 +6,5 @@ class PuitsSectionParser : public SectionParserCOR {
     public:
         PuitsSectionParser(SectionParserCOR* next);
 
-        virtual bool parseInternal(const std::string& line) override;
+        virtual bool parseInternal(const std::string& line, GPRParser* parser) override;
 };

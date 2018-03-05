@@ -8,7 +8,7 @@ ResourcesSectionParser::ResourcesSectionParser(SectionParserCOR* next) :
 
 }
 
-bool ResourcesSectionParser::parseInternal(const std::string& line) {
+bool ResourcesSectionParser::parseInternal(const std::string& line, GPRParser* parser) {
     if(!compareCaseInsensitive(line.substr(0, 10), "ressources")) {
         return false;
     }

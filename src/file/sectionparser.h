@@ -2,6 +2,8 @@
 
 #include <string>
 
+class GPRParser;
+
 class SectionParser {
     public:
         SectionParser(const std::string& sectionName);
@@ -10,7 +12,7 @@ class SectionParser {
          * @param is Buffer du fichier
          * @throw ParseException si une ligne n'a pas pu être traitée
          */
-        virtual void parse(std::istream& is) = 0;
+        virtual void parse(std::istream& is, GPRParser* parser) = 0;
 
         /**
          * @return Nom de la section traitée

@@ -1,7 +1,7 @@
 #include <sstream>
 #include "identifiable.h"
 
-Identifiable::Identifiable(int cle) {
+Identifiable::Identifiable(const std::string& cle) {
     _cle = cle;
 }
 

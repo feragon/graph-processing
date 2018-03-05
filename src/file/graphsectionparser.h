@@ -8,5 +8,5 @@ class GraphSectionParser : public SectionParserCOR {
 
         virtual bool canParse(const std::string& line) const override;
 
-        virtual bool parseInternal(const std::string& line) override;
+        virtual bool parseInternal(const std::string& line, GPRParser* parser) override;
 };

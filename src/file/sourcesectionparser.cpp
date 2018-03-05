@@ -11,7 +11,7 @@ bool SourceSectionParser::canParse(const std::string& line) const {
     return SectionParserCOR::canParse(line) || compareCaseInsensitive(line, "sources");
 }
 
-bool SourceSectionParser::parseInternal(const std::string& line) {
+bool SourceSectionParser::parseInternal(const std::string& line, GPRParser* parser) {
     if(canParse(line)) {
         return true;
     }
