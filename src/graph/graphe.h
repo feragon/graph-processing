@@ -58,7 +58,7 @@ class Graphe {
 
         Graphe<S,T>& operator = (const Graphe& graphe);
 
-        /**
+        virtual /**
           * @brief Crée un sommet dans le graphe
           * @param cle Clé du sommet
           * @param content Contenu du sommet

@@ -1,9 +1,9 @@
 #pragma once
 
-#include "../graph/graphe.h"
 #include "sectionparsercor.h"
 #include "../processor/vertexdata.h"
 #include "../processor/edgedata.h"
+#include "../processor/modelinggraph.h"
 
 class GPRParser {
     public:
@@ -21,16 +21,16 @@ class GPRParser {
          */
         static void cleanLine(std::string& line);
 
-        inline Graphe<EdgeData, VertexData>& graphe();
+        inline ModelingGraph& graphe();
 
     private:
         GPRParser(const GPRParser&);
 
         std::istream& _buffer;
         SectionParserCOR* _parser;
-        Graphe<EdgeData, VertexData> _graphe;
+        ModelingGraph _graphe;
 };
 
-Graphe<EdgeData, VertexData>& GPRParser::graphe() {
+ModelingGraph& GPRParser::graphe() {
     return _graphe;
 }
