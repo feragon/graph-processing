@@ -14,7 +14,7 @@ class Conteneur : public Identifiable {
          * @param identifiant Identifiant du conteneur
          * @param contenu Contenu
          */
-        Conteneur(int identifiant, const T& contenu);
+        Conteneur(const std::string& identifiant, const T& contenu);
 
         /**
          * @return Contenu
@@ -39,7 +39,7 @@ class Conteneur : public Identifiable {
 };
 
 template <class T>
-Conteneur<T>::Conteneur(int identifiant, const T& contenu) :
+Conteneur<T>::Conteneur(const std::string& identifiant, const T& contenu) :
     Identifiable(identifiant),
     _contenu(contenu) {
 

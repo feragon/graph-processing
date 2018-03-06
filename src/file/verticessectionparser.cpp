@@ -1,6 +1,7 @@
 #include <iostream>
 #include "verticessectionparser.h"
 #include "../util/string.h"
+#include "gprparser.h"
 
 VerticesSectionParser::VerticesSectionParser(SectionParserCOR* next) :
         SectionParserCOR("sectionSommets", next) {
@@ -17,8 +18,9 @@ bool VerticesSectionParser::parseInternal(const std::string& line, GPRParser* pa
     }
     else {
         unsigned long pos = line.find(' ');
+        VertexData* data;
         if(pos == std::string::npos) {
-            std::cout << "Sommet " << line << " trouvé" << std::endl;
+            data = new VertexData();
         }
         else {
             unsigned long pos2 = line.find(' ', pos + 1);
@@ -31,12 +33,16 @@ bool VerticesSectionParser::parseInternal(const std::string& line, GPRParser* pa
                 int inf = std::stoi(line.substr(pos, pos2 - pos));
                 int sup = std::stoi(line.substr(pos2));
 
-                std::cout << "Sommet " << name << " trouvé (" << inf << ";" << sup << ")" << std::endl;
+                data = new VertexData(inf, sup);
             }
             catch (std::exception& e) {
+                data = new VertexData();
                 std::cerr << "Impossible de lire les coordonnées de " << std::endl;
             }
         }
+
+        parser->graphe().creerSommet(line, *data);
+        delete data;
         return true;
     }
 }

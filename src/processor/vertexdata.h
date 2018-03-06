@@ -5,7 +5,7 @@
 class VertexData {
     public:
         VertexData();
-        VertexData(int x = 0, int y = 0);
+        VertexData(int x, int y);
 
         inline int x() const;
 

@@ -72,7 +72,3 @@ void GPRParser::cleanLine(std::string& line) {
         line.erase(index + 1, line.length());
     }
 }
-
-const Graphe<EdgeData, VertexData>& GPRParser::graphe() const {
-    return _graphe;
-}

@@ -14,7 +14,7 @@ class Sommet : public Conteneur<T> {
          * @param identifiant Identifiant du sommet
          * @param contenu Contenu du sommet
          */
-        Sommet(int identifiant, const T& contenu);
+        Sommet(const std::string& identifiant, const T& contenu);
 
         /**
          * @return Degré du sommet
@@ -35,7 +35,7 @@ class Sommet : public Conteneur<T> {
 };
 
 template <class T>
-Sommet<T>::Sommet(int identifiant, const T& contenu) :
+Sommet<T>::Sommet(const std::string& identifiant, const T& contenu) :
         Conteneur<T>(identifiant, contenu),
         _degre(0) {
 

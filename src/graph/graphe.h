@@ -44,14 +44,6 @@ class Graphe {
          */
         void copie(const Graphe& graphe);
 
-        /**
-         * @brief Crée un sommet dans le graphe
-         * @param cle Clé du sommet
-         * @param content Contenu du sommet
-         * @return Nouveau sommet
-         */
-        Sommet<T>* creerSommet(int cle, const T& content);
-
         Liste<Sommet<T>>* _sommets;
         Liste<Arete<S,T>>* _aretes;
         int _prochaineCle;
@@ -67,11 +59,12 @@ class Graphe {
         Graphe<S,T>& operator = (const Graphe& graphe);
 
         /**
-         * @brief Crée un sommet isolé
-         * @param contenu du sommet
-         * @return Nouveau sommet
-         */
-        virtual Sommet<T>* creeSommet(const T& contenu);
+          * @brief Crée un sommet dans le graphe
+          * @param cle Clé du sommet
+          * @param content Contenu du sommet
+          * @return Nouveau sommet
+          */
+        Sommet<T>* creerSommet(const std::string& cle, const T& content);
 
         /**
          * @brief Crée une arête entre 2 sommets supposés existants
@@ -194,17 +187,12 @@ void Graphe<S,T>::copie(const Graphe& graphe) {
 }
 
 template <class S, class T>
-Sommet<T>* Graphe<S,T>::creerSommet(int cle, const T& content) {
+Sommet<T>* Graphe<S,T>::creerSommet(const std::string& cle, const T& content) {
     Sommet<T>* sommet = new Sommet<T>(cle, content);
 
     _sommets = new Liste<Sommet<T>>(sommet, _sommets);
 
     return sommet;
-}
-
-template <class S, class T>
-Sommet<T>* Graphe<S,T>::creeSommet(const T& contenu) {
-    return creerSommet(_prochaineCle++, contenu);
 }
 
 template <class S, class T>

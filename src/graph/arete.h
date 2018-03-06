@@ -16,7 +16,7 @@ class Arete : public Conteneur<S> {
          * @param debut Sommet de début
          * @param fin Sommet de fin
          */
-        Arete(int clef, const S& contenu, Sommet<T>* debut, Sommet<T>* fin);
+        Arete(const std::string& clef, const S& contenu, Sommet<T>* debut, Sommet<T>* fin);
 
         virtual ~Arete();
 
@@ -44,7 +44,7 @@ class Arete : public Conteneur<S> {
 
 
 template <class S, class T>
-Arete<S,T>::Arete(int clef, const S& contenu, Sommet<T>* debut, Sommet<T>* fin) :
+Arete<S,T>::Arete(const std::string& clef, const S& contenu, Sommet<T>* debut, Sommet<T>* fin) :
     Conteneur<S>(clef, contenu){
 
     _debut = debut;
