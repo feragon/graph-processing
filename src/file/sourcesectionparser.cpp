@@ -1,6 +1,7 @@
 #include <iostream>
 #include "sourcesectionparser.h"
 #include "../util/string.h"
+#include "gprparser.h"
 
 SourceSectionParser::SourceSectionParser(SectionParserCOR* next) :
         SectionParserCOR("source", next) {
@@ -20,5 +21,10 @@ bool SourceSectionParser::parseInternal(const std::string& line, GPRParser* pars
         return false;
     }
 
-    std::cout << "Source trouvée : " << line.substr(0, line.find(' ')) << std::endl;
+    try {
+        parser->setSource(parser->graphe().vertex(line.substr(0, line.find(' '))));
+    }
+    catch(std::exception& e) {
+        std::cerr << e.what() << std::endl;
+    }
 }

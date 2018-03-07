@@ -1,5 +1,6 @@
 #include <iostream>
 #include "puitssectionparser.h"
+#include "gprparser.h"
 
 PuitsSectionParser::PuitsSectionParser(SectionParserCOR* next) :
         SectionParserCOR("puits", next) {
@@ -15,5 +16,10 @@ bool PuitsSectionParser::parseInternal(const std::string& line, GPRParser* parse
         return false;
     }
 
-    std::cout << "Puits trouvée : " << line.substr(0, line.find(' ')) << std::endl;
+    try {
+        parser->setPuits(parser->graphe().vertex(line.substr(0, line.find(' '))));
+    }
+    catch(std::exception& e) {
+        std::cerr << e.what() << std::endl;
+    }
 }

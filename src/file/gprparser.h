@@ -23,14 +23,54 @@ class GPRParser {
 
         inline ModelingGraph& graphe();
 
+        /**
+         * @return Source
+         */
+        inline Sommet<VertexData>* source() const;
+
+        /**
+         * @brief Change la source
+         * @param source Nouvelle source
+         */
+        inline void setSource(Sommet<VertexData>* source);
+
+        /**
+         * @return Puits
+         */
+        inline Sommet<VertexData>* puits() const;
+
+        /**
+         * @brief Change le puits
+         * @param puits Nouveau puits
+         */
+        inline void setPuits(Sommet<VertexData>* puits);
+
     private:
         GPRParser(const GPRParser&);
 
         std::istream& _buffer;
         SectionParserCOR* _parser;
         ModelingGraph _graphe;
+        Sommet<VertexData>* _source;
+        Sommet<VertexData>* _puits;
 };
 
 ModelingGraph& GPRParser::graphe() {
     return _graphe;
+}
+
+Sommet<VertexData>* GPRParser::source() const {
+    return _source;
+}
+
+void GPRParser::setSource(Sommet<VertexData>* source) {
+    _source = source;
+}
+
+Sommet<VertexData>* GPRParser::puits() const {
+    return _puits;
+}
+
+void GPRParser::setPuits(Sommet<VertexData>* puits) {
+    _puits = puits;
 }

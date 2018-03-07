@@ -26,6 +26,9 @@ GPRParser::GPRParser(std::istream& buffer) :
     _parser = new PuitsSectionParser(_parser);
     _parser = new ArcsSectionParser(_parser);
     _parser = new GraphSectionParser(_parser);
+
+    _source = nullptr;
+    _puits = nullptr;
 }
 
 GPRParser::~GPRParser() {
