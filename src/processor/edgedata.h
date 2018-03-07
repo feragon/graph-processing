@@ -2,6 +2,12 @@
 
 class EdgeData {
     public:
+        /**
+         * @brief Données d'un arc
+         * @param cost Coût
+         * @param time Temps
+         * @throw NegativeValuation si une valuation est négative
+         */
         EdgeData(int cost = 0, int time = 0);
 
         inline int cost() const;
