@@ -31,6 +31,6 @@ set(SOURCE_FILES
     src/file/puitssectionparser.h
     src/file/arcssectionparser.cpp
     src/file/arcssectionparser.h
-        src/file/graphsectionparser.cpp src/file/graphsectionparser.h src/processor/vertexdata.h src/processor/vertexdata.cpp src/processor/edgedata.cpp src/processor/edgedata.h src/processor/modelinggraph.cpp src/processor/modelinggraph.h)
+        src/file/graphsectionparser.cpp src/file/graphsectionparser.h src/processor/vertexdata.h src/processor/vertexdata.cpp src/processor/edgedata.cpp src/processor/edgedata.h src/processor/modelinggraph.cpp src/processor/modelinggraph.h src/processor/vertexnotfound.h)
 
 add_executable(projet-modelisation ${SOURCE_FILES})

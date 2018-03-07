@@ -68,12 +68,13 @@ class Graphe {
 
         /**
          * @brief Crée une arête entre 2 sommets supposés existants
+         * @param identifiant Identifiant de l'arête
          * @param contenu Contenu de l'arête
          * @param debut Sommet de début
          * @param fin Sommet de fin
          * @return Nouvelle arête
          */
-        Arete<S,T>* creeArete(const S& contenu, Sommet<T>* debut, Sommet<T>* fin);
+        Arete<S,T>* creeArete(const std::string& identifiant, const S& contenu, Sommet<T>* debut, Sommet<T>* fin);
 
         /**
          * @brief Donne le nombre de sommets dans le graphe
@@ -196,8 +197,8 @@ Sommet<T>* Graphe<S,T>::creerSommet(const std::string& cle, const T& content) {
 }
 
 template <class S, class T>
-Arete<S, T>* Graphe<S, T>::creeArete(const S& contenu, Sommet<T>* debut, Sommet<T>* fin) {
-    Arete<S,T>* arete = new Arete<S,T>(0, contenu, debut, fin);
+Arete<S, T>* Graphe<S, T>::creeArete(const std::string& identifiant, const S& contenu, Sommet<T>* debut, Sommet<T>* fin) {
+    Arete<S,T>* arete = new Arete<S,T>(identifiant, contenu, debut, fin);
 
     _aretes = new Liste<Arete<S,T>>(arete, _aretes);
 

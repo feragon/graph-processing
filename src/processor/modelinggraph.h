@@ -11,7 +11,7 @@ class ModelingGraph : public Graphe<EdgeData, VertexData> {
          * @brief Donne un sommet à partir de son nom
          * @param name Nom du sommet
          * @return Sommet
-         * @throw std::out_of_bounds si le sommet n'existe pas
+         * @throw VertexNotFound si le sommet n'existe pas
          */
         Sommet<VertexData>* vertex(const std::string& name) const;
 

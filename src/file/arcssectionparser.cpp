@@ -1,6 +1,7 @@
 #include <iostream>
 #include "arcssectionparser.h"
 #include "parseexception.h"
+#include "gprparser.h"
 
 ArcsSectionParser::ArcsSectionParser(SectionParserCOR* next) :
         SectionParserCOR("sectionArcs", next) {
@@ -38,6 +39,11 @@ bool ArcsSectionParser::parseInternal(const std::string& line, GPRParser* parser
         throw ParseException(("Ligne d'arc invalide : " + line).c_str());
     }
 
-    std::cout << "Arc trouvé: " << name << " depuis " << s1 << " vers " << s2 << " cout " << cost << " temps " << time << std::endl;
+    try {
+        parser->graphe().creeArete(name, EdgeData(cost, time), parser->graphe().vertex(s1), parser->graphe().vertex(s2));
+    }
+    catch (std::exception& e) {
+        std::cerr << e.what() << std::endl;
+    }
     return true;
 }

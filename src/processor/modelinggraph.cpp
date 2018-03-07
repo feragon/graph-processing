@@ -1,4 +1,5 @@
 #include "modelinggraph.h"
+#include "vertexnotfound.h"
 
 Sommet<VertexData>* ModelingGraph::creerSommet(const std::string& cle, const VertexData& content) {
     Sommet<VertexData>* vertex = Graphe::creerSommet(cle, content);
@@ -7,5 +8,10 @@ Sommet<VertexData>* ModelingGraph::creerSommet(const std::string& cle, const Ver
 }
 
 Sommet<VertexData>* ModelingGraph::vertex(const std::string& name) const {
-    return _vertexes.at(name);
+    try {
+        return _vertexes.at(name);
+    }
+    catch (std::out_of_range& e) {
+        throw VertexNotFound(("Le sommet " + name + " n'a pas été trouvé.").c_str());
+    }
 }

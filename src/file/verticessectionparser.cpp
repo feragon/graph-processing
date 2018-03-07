@@ -24,7 +24,6 @@ bool VerticesSectionParser::parseInternal(const std::string& line, GPRParser* pa
         }
         else {
             unsigned long pos2 = line.find(' ', pos + 1);
-            std::string name = line.substr(0, pos);
 
             try {
                 //Borne inf et sup
@@ -41,7 +40,7 @@ bool VerticesSectionParser::parseInternal(const std::string& line, GPRParser* pa
             }
         }
 
-        parser->graphe().creerSommet(line, *data);
+        parser->graphe().creerSommet(line.substr(0, pos), *data);
         delete data;
         return true;
     }
