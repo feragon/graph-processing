@@ -47,6 +47,9 @@ set(SOURCE_FILES
     src/algorithm/dfs.h
     src/algorithm/search.h
     src/algorithm/search.cpp
-)
+    src/algorithm/pcc.cpp
+    src/algorithm/pcc.h
+    src/algorithm/pairPereValeur.cpp
+    src/algorithm/pairPereValeur.h)
 
 add_executable(projet-modelisation ${SOURCE_FILES})

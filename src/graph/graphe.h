@@ -113,13 +113,13 @@ class Graphe {
          * @brief Donne la liste des sommets du graphe
          * @return Liste des sommets du graphe
          */
-        Liste<Sommet<T>>* sommets();
+        Liste<Sommet<T>>* sommets() const;
 
         /**
          * @brief Donne la liste des arêtes du graphe
          * @return Liste des arêtes du graphe
          */
-        Liste<Arete<S, T>>* aretes();
+        Liste<Arete<S, T>>* aretes() const;
 
         /**
          * @brief Retourne l'arrête contenant les deux sommets
@@ -283,12 +283,12 @@ Liste<Sommet<T>>* Graphe<S,T>::voisins(const Sommet<T>* sommet) const {
 }
 
 template<class S, class T>
-Liste<Sommet<T>>* Graphe<S,T>::sommets() {
+Liste<Sommet<T>>* Graphe<S,T>::sommets() const {
     return _sommets;
 }
 
 template<class S, class T>
-Liste<Arete<S, T>>* Graphe<S,T>::aretes() {
+Liste<Arete<S, T>>* Graphe<S,T>::aretes() const {
     return _aretes;
 }
 
