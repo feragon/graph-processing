@@ -1,6 +1,8 @@
 #pragma once
 
 #include <ostream>
+#include "conteneur.h"
+#include "sommet.h"
 
 template <class S, class T>
 class Arete : public Conteneur<S> {

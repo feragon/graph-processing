@@ -3,6 +3,8 @@ project(projet-modelisation)
 
 set(CMAKE_CXX_STANDARD 11)
 
+include_directories(src)
+
 set(SOURCE_FILES
     src/graph/arete.h
     src/graph/conteneur.h
@@ -31,6 +33,19 @@ set(SOURCE_FILES
     src/file/puitssectionparser.h
     src/file/arcssectionparser.cpp
     src/file/arcssectionparser.h
-        src/file/graphsectionparser.cpp src/file/graphsectionparser.h src/processor/vertexdata.h src/processor/vertexdata.cpp src/processor/edgedata.cpp src/processor/edgedata.h src/processor/modelinggraph.cpp src/processor/modelinggraph.h src/processor/vertexnotfound.h src/processor/negativevaluation.h)
+    src/file/graphsectionparser.cpp
+    src/file/graphsectionparser.h
+    src/processor/vertexdata.h
+    src/processor/vertexdata.cpp
+    src/processor/edgedata.cpp
+    src/processor/edgedata.h
+    src/processor/modelinggraph.cpp
+    src/processor/modelinggraph.h
+    src/processor/vertexnotfound.h
+    src/processor/negativevaluation.h
+    src/algorithm/dfs.cpp
+    src/algorithm/dfs.h
+        src/algorithm/search.h
+)
 
 add_executable(projet-modelisation ${SOURCE_FILES})
