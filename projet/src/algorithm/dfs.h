@@ -5,7 +5,7 @@
 
 class DFS : public Search {
     public:
-        DFS(const Graphe<EdgeData, VertexData>& graph);
+        DFS(const Graphe<EdgeData, VertexData>* graph, const Sommet<VertexData>* start);
 
-        void search() override;
+        virtual void analyzeVertex(const Sommet<VertexData>* vertex) override;
 };
