@@ -45,7 +45,8 @@ set(SOURCE_FILES
     src/processor/negativevaluation.h
     src/algorithm/dfs.cpp
     src/algorithm/dfs.h
-        src/algorithm/search.h
+    src/algorithm/search.h
+    src/algorithm/search.cpp
 )
 
 add_executable(projet-modelisation ${SOURCE_FILES})
