@@ -9,7 +9,7 @@
 struct PereLambda {
     const Sommet<VertexData>* sommet;
     const Sommet<VertexData>* pere;
-    int lamba;
+    int _lambda;
 };
 
 class pairPereValeur {

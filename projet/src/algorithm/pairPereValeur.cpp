@@ -11,7 +11,7 @@ pairPereValeur::pairPereValeur(const Graphe<EdgeData, VertexData> *graphe, const
         PereLambda* pl = new PereLambda;
         pl->sommet = l->value;
         pl->pere = NULL;
-        pl->lamba = (l->value == source) ? 0 : std::numeric_limits<int>::max();
+        pl->_lambda = (l->value == source) ? 0 : std::numeric_limits<int>::max();
 
         liste = new Liste<PereLambda>(pl, liste);
 
@@ -24,7 +24,7 @@ int pairPereValeur::getLambda(const Sommet<VertexData> *sommet) {
 
     while(l != NULL) {
         if(l->value->sommet == sommet)
-            return l->value->lamba;
+            return l->value->_lambda;
         l = l->next;
     }
     return std::numeric_limits<int>::max();
@@ -46,7 +46,7 @@ void pairPereValeur::setLambda(const Sommet<VertexData> *sommet, int lambda) {
 
     while(l != NULL) {
         if(l->value->sommet == sommet)
-            l->value->lamba = lambda;
+            l->value->_lambda = lambda;
         l = l->next;
     }
 }
