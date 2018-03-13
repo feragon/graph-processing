@@ -10,6 +10,49 @@ PCC::PCC(const Graphe<EdgeData, VertexData>* graphe, const Sommet<VertexData>* s
 }
 
 void PCC::analyzeVertex(const Sommet<VertexData>* vertex) {
+    if(closed(vertex)) {
+        return;
+    }
+
+    auto neighbors = graph()->adjacences(vertex);
+    std::pair<Sommet<VertexData>*, Arete<EdgeData, VertexData>*>* nextVertex = NULL;
+    int nouveauLambda;
+
+    for(auto l = neighbors; l; l = l->next) {
+        if(!closed(l->value->first)) {
+
+            if (_ppv->getLambda(vertex) == std::numeric_limits<int>::max())
+                nouveauLambda = std::numeric_limits<int>::max();
+            else
+                nouveauLambda = _ppv->getLambda(vertex) + _choixDonnee(l->value->second);
+
+            if (nouveauLambda < _ppv->getLambda(l->value->first)) {
+                _ppv->setLambda(l->value->first, nouveauLambda);
+                _ppv->setPere(l->value->first, vertex);
+
+                std::cout << "Mise a jour de " << l->value->first->cle() << " : pere=" << vertex->cle() << " val="
+                          << _ppv->getLambda(l->value->first) << std::endl;
+            }
+
+            if (nextVertex == NULL)
+                nextVertex = l->value;
+            else if (_ppv->getLambda(l->value->first) < _ppv->getLambda(nextVertex->first))
+                nextVertex = l->value;
+        }
+    }
+
+    if(nextVertex != NULL) {
+        nextVertices().insert(nextVertices().begin(), *nextVertex);
+    }
+
+    setExplored(vertex);
+    setClosed(vertex);
+
+    Liste<std::pair<Sommet<VertexData>*, Arete<EdgeData, VertexData>*>>::efface1(neighbors);
+}
+
+/*
+void PCC::analyzeVertex(const Sommet<VertexData>* vertex) {
 
     Liste<Sommet<VertexData>>* l = graph()->voisins(vertex);
     int nouveauLambda;
@@ -75,7 +118,7 @@ void PCC::search1() {
     }
 
 }
-
+*/
 
 void PCC::pluscourtchemin(Sommet<VertexData>* sommet) {
     int valeur = _ppv->getLambda(sommet);
