@@ -1,7 +1,7 @@
 #pragma once
 
-#include <processor/vertexdata.h>
-#include <processor/edgedata.h>
+#include <modeling/vertexdata.h>
+#include <modeling/edgedata.h>
 #include <graph/arete.h>
 #include <vector>
 #include <set>

@@ -3,8 +3,8 @@
 #include <graph/liste.h>
 #include <graph/graphe.h>
 #include <graph/sommet.h>
-#include <processor/vertexdata.h>
-#include <processor/edgedata.h>
+#include <modeling/vertexdata.h>
+#include <modeling/edgedata.h>
 
 struct PereLambda {
     const Sommet<VertexData>* sommet;

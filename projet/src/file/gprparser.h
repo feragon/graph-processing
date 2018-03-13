@@ -1,9 +1,9 @@
 #pragma once
 
 #include "sectionparsercor.h"
-#include "../processor/vertexdata.h"
-#include "../processor/edgedata.h"
-#include "../processor/modelinggraph.h"
+#include <modeling/vertexdata.h>
+#include <modeling/edgedata.h>
+#include <modeling/modelinggraph.h>
 
 class GPRParser {
     public:

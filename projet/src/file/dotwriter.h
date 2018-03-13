@@ -1,7 +1,7 @@
 #pragma once
 
 #include <ostream>
-#include <processor/modelinggraph.h>
+#include <modeling/modelinggraph.h>
 
 class DotWriter {
     public:

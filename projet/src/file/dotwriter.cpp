@@ -1,3 +1,4 @@
+#include <modeling/modelinggraph.h>
 #include "dotwriter.h"
 
 DotWriter::DotWriter(std::ostream& out) : _out(out) {
@@ -19,5 +20,7 @@ void DotWriter::writeEdges(const ModelingGraph& graph) {
 }
 
 void DotWriter::writeEdge(const Arete<EdgeData, VertexData>* edge) {
-    _out << edge->debut()->cle() << " -- " << edge->fin()->cle() << std::endl;
+    _out << edge->debut()->cle() << " -- " << edge->fin()->cle()
+         << " [label=\"[" << edge->contenu().cost() << ";"
+         << edge->contenu().time() << "]\"]" << std::endl;
 }
