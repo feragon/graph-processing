@@ -83,7 +83,7 @@ void PCC::pluscourtchemin(Sommet<VertexData>* sommet) {
     if(valeur == std::numeric_limits<int>::max())
         std::cout << "Il n'existe pas de chemin entre " << start()->cle() << " et " << sommet->cle() << std::endl;
     else {
-        std::cout << "PCC de valeur " << valeur << std::endl;
+        std::cout << "PCC de valeur " << valeur << " : ";
 
         const Sommet<VertexData> *s = sommet;
         while (s != start()) {

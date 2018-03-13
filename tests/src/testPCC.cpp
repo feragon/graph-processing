@@ -1,7 +1,7 @@
 #include <catch.hpp>
-#include <processor/vertexdata.h>
+#include <modeling/vertexdata.h>
 #include <graph/graphe.h>
-#include <processor/edgedata.h>
+#include <modeling/edgedata.h>
 #include <file/gprparser.h>
 #include <algorithm/pcc.h>
 #include <fstream>

@@ -7,7 +7,7 @@ DotWriter::DotWriter(std::ostream& out) : _out(out) {
 
 void DotWriter::writeGraph(const std::string& name, const ModelingGraph& graph, DotMetaData metaData) {
     _out << "graph " << name << " {" << std::endl;
-    writeVertices
+    //writeVertices
     writeEdges(graph, metaData);
     _out << "}" << std::endl;
 }
