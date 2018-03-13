@@ -1,0 +1,64 @@
+# Graphe N = 10 ; M = 38
+
+ressources 1
+
+sectionSommets
+i1
+i2
+i3
+i4
+i5
+i6
+i7
+i8
+i9
+i10
+sources
+i1
+
+puits
+i10  0  100
+
+sectionArcs
+arc1  i1  i2  4  7
+arc2  i1  i3  10  17
+arc3  i1  i4  5  19
+arc4  i1  i5  12  15
+arc5  i1  i6  12  15
+arc6  i1  i7  12  15
+arc7  i1  i8  12  15
+arc8  i1  i9  12  15
+arc9  i2  i5  9  15
+arc10  i2  i6  15  19
+arc11  i2  i7  16  13
+arc12  i2  i8  12  15
+arc13  i2  i9  7  16
+arc14  i2  i10  4  16
+arc15  i3  i5  9  15
+arc16  i3  i6  15  19
+arc17  i3  i7  16  13
+arc18  i3  i8  12  15
+arc19  i3  i9  7  16
+arc20  i3  i10  15  15
+arc21  i4  i5  9  15
+arc22  i4  i6  15  19
+arc23  i4  i7  16  13
+arc24  i4  i8  12  15
+arc25  i4  i9  7  16
+arc26  i4  i10  5  19
+arc27  i5  i6  15  17
+arc28  i5  i7  15  17
+arc29  i5  i8  9  15
+arc30  i5  i9  15  17
+arc31  i5  i10  15  17
+arc32  i6  i7  15  19
+arc33  i6  i8  15  17
+arc34  i6  i9  15  19
+arc35  i6  i10  15  19
+arc36  i7  i10  5  18
+arc37  i8  i10  15  19
+arc38  i9  i10  5  18
+
+sectionGraphes
+
+graphe1 i  i1  i10
