@@ -58,4 +58,4 @@ set(SOURCE_FILES
         src/view/dfsmetadata.cpp)
 
 add_executable(projet-modelisation ${SOURCE_FILES})
-add_library(projet ${SOURCE_FILES} src/view/dfsmetadata.h)
+add_library(projet ${SOURCE_FILES})

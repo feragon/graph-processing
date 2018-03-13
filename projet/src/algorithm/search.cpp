@@ -5,6 +5,7 @@
 Search::Search(const Graphe <EdgeData, VertexData>* graph, const Sommet<VertexData>* start) {
     _graph = graph;
     _start = start;
+    _nextEdgeNumber = 0;
 }
 
 void Search::search() {
@@ -22,7 +23,8 @@ void Search::search() {
         _nextVertices.erase(nextVertexIt);
 
         if(nextVertex.second) {
-            _order.push_back(nextVertex.second);
+            _order.insert(std::pair<const Arete<EdgeData, VertexData>*, unsigned int>(nextVertex.second, _nextEdgeNumber));
+            _nextEdgeNumber++;
         }
 
         analyzeVertex(nextVertex.first);

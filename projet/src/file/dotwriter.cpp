@@ -23,7 +23,9 @@ void DotWriter::writeEdges(const ModelingGraph& graph, DotMetaData* metaData) {
 
 void DotWriter::writeEdge(const Arete<EdgeData, VertexData>* edge, DotMetaData* metaData) {
     _out << edge->debut()->cle() << " -- " << edge->fin()->cle()
-         << " [label=\"" << metaData->getEdgeLabel(edge) << "\"]" << std::endl;
+         << " [label=\"" << metaData->getEdgeLabel(edge) << "\","
+         << "style=\"" << metaData->getEdgeStyle(edge) << "\"]"
+         << std::endl;
 }
 
 void DotWriter::writeVertices(const ModelingGraph& graph, DotMetaData* metaData) {

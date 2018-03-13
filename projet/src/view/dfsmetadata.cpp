@@ -1,13 +1,19 @@
 #include <graph/arete.h>
 #include <file/dotmetadata.h>
 #include "dfsmetadata.h"
+#include <algorithm>
 
 DFSMetaData::DFSMetaData(const DFS* dfs) {
     _dfs = dfs;
 }
 
 std::string DFSMetaData::getEdgeLabel(const Arete <EdgeData, VertexData>* edge) {
-    return DotMetaData::getEdgeLabel(edge);
+    try {
+        return std::to_string(_dfs->order().at(edge));
+    }
+    catch (std::out_of_range& e) {
+        return "";
+    }
 }
 
 std::string DFSMetaData::getVertexBackground(const Sommet<VertexData>* vertex) {
@@ -19,5 +25,15 @@ std::string DFSMetaData::getVertexBackground(const Sommet<VertexData>* vertex) {
     }
     else {
         return "red";
+    }
+}
+
+std::string DFSMetaData::getEdgeStyle(const Arete<EdgeData, VertexData>* edge) {
+    try {
+        _dfs->order().at(edge);
+        return "filled";
+    }
+    catch (std::out_of_range& e) {
+        return "dotted";
     }
 }

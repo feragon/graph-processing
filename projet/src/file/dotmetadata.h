@@ -19,4 +19,10 @@ class DotMetaData {
          * @return Couleur de fond du sommet
          */
         virtual std::string getVertexBackground(const Sommet<VertexData>* vertex);
+
+        /**
+         * @param edge Arête
+         * @return Donne le style de l'arête (dotted, bold, filled)
+         */
+        virtual std::string getEdgeStyle(const Arete<EdgeData, VertexData>* edge);
 };

@@ -5,6 +5,7 @@
 #include <graph/arete.h>
 #include <vector>
 #include <set>
+#include <map>
 
 /**
  * @brief Classe qui représente un parcours
@@ -32,7 +33,7 @@ class Search {
         /**
          * @return Ordre de parcours des arêtes
          */
-        inline const std::vector<const Arete<EdgeData, VertexData>*>& order() const;
+        inline const std::map<const Arete<EdgeData, VertexData>*, unsigned int>& order() const;
 
         /**
          * @return Graphe parcouru
@@ -72,27 +73,18 @@ class Search {
         inline std::vector<std::pair<const Sommet<VertexData>*, const Arete<EdgeData, VertexData>*>>& nextVertices();
 
     private:
-        /**
-         * @brief Ajoute une arête à la liste du parcours
-         * @param edge Arête parcourue
-         */
-        inline void addEdge(const Arete<EdgeData, VertexData>* edge);
-
+        unsigned int _nextEdgeNumber;
         std::set<const Sommet<VertexData>*> _explored;
         std::set<const Sommet<VertexData>*> _closed;
 
-        std::vector<const Arete<EdgeData, VertexData>*> _order;
+        std::map<const Arete<EdgeData, VertexData>*, unsigned int> _order;
         const Graphe<EdgeData, VertexData>* _graph;
         const Sommet<VertexData>* _start;
         std::vector<std::pair<const Sommet<VertexData>*, const Arete<EdgeData, VertexData>*>> _nextVertices;
 };
 
-const std::vector<const Arete<EdgeData, VertexData>*>& Search::order() const {
+const std::map<const Arete<EdgeData, VertexData>*, unsigned int>& Search::order() const {
     return _order;
-}
-
-void Search::addEdge(const Arete<EdgeData, VertexData>* edge) {
-    _order.push_back(edge);
 }
 
 const Graphe<EdgeData, VertexData>* Search::graph() const {
