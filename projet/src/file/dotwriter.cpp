@@ -5,22 +5,22 @@ DotWriter::DotWriter(std::ostream& out) : _out(out) {
 
 }
 
-void DotWriter::writeGraph(const std::string& name, const ModelingGraph& graph) {
+void DotWriter::writeGraph(const std::string& name, const ModelingGraph& graph, DotMetaData metaData) {
     _out << "graph " << name << " {" << std::endl;
-    writeEdges(graph);
+    writeVertices
+    writeEdges(graph, metaData);
     _out << "}" << std::endl;
 }
 
-void DotWriter::writeEdges(const ModelingGraph& graph) {
+void DotWriter::writeEdges(const ModelingGraph& graph, DotMetaData metaData) {
     auto tmp = graph.aretes();
 
     for(auto edge = tmp; edge; edge = edge->next) {
-        writeEdge(edge->value);
+        writeEdge(edge->value, metaData);
     }
 }
 
-void DotWriter::writeEdge(const Arete<EdgeData, VertexData>* edge) {
+void DotWriter::writeEdge(const Arete<EdgeData, VertexData>* edge, DotMetaData metaData) {
     _out << edge->debut()->cle() << " -- " << edge->fin()->cle()
-         << " [label=\"[" << edge->contenu().cost() << ";"
-         << edge->contenu().time() << "]\"]" << std::endl;
+         << " [label=\"" << metaData.getEdgeLabel(edge) << "\"]" << std::endl;
 }

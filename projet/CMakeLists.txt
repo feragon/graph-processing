@@ -53,7 +53,9 @@ set(SOURCE_FILES
         src/algorithm/pairPereValeur.h
         src/file/dotwriter.cpp
         src/file/dotwriter.h
-)
+        src/file/dotmetadata.cpp
+        src/file/dotmetadata.h
+        src/view/dfsmetadata.cpp)
 
 add_executable(projet-modelisation ${SOURCE_FILES})
-add_library(projet ${SOURCE_FILES})
+add_library(projet ${SOURCE_FILES} src/view/dfsmetadata.h)
