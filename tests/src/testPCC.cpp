@@ -35,5 +35,11 @@ TEST_CASE("testPCC") {
 
     PCC *pcc = new PCC(&graphe, x1, cout);
     pcc->search();
+    pcc->pluscourtchemin(x1);
+    pcc->pluscourtchemin(x2);
+    pcc->pluscourtchemin(x3);
+    pcc->pluscourtchemin(x4);
+    pcc->pluscourtchemin(x5);
     pcc->pluscourtchemin(x6);
+    pcc->pluscourtchemin(x7);
 }
