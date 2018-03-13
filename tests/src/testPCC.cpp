@@ -9,11 +9,7 @@
 
 TEST_CASE("testPCC") {
 
-    /*
-    std::ifstream fstream("data_VRPTW_10_3_2_4.gpr");
-    GPRParser gprp(fstream);
-    gprp.load();
-     */
+    std::cout << std::endl << "=== testPCC" << std::endl;
 
     Graphe<EdgeData, VertexData> graphe;
     auto x1 = graphe.creerSommet("x1", VertexData());
@@ -24,6 +20,7 @@ TEST_CASE("testPCC") {
     auto x6 = graphe.creerSommet("x6", VertexData());
     auto x7 = graphe.creerSommet("x7", VertexData());
 
+
     graphe.creeArete("arc1", EdgeData(2,0), x1, x2);
     graphe.creeArete("arc2", EdgeData(7,0), x1, x3);
     graphe.creeArete("arc3", EdgeData(2,0), x2, x4);
@@ -32,6 +29,7 @@ TEST_CASE("testPCC") {
     graphe.creeArete("arc6", EdgeData(1,0), x4, x3);
     graphe.creeArete("arc7", EdgeData(8,0), x4, x6);
     graphe.creeArete("arc8", EdgeData(2,0), x5, x6);
+
 
     PCC *pcc = new PCC(&graphe, x1, cout);
     pcc->search();
@@ -42,4 +40,7 @@ TEST_CASE("testPCC") {
     pcc->pluscourtchemin(x5);
     pcc->pluscourtchemin(x6);
     pcc->pluscourtchemin(x7);
+
+    REQUIRE(pcc->explored(x6));
+    REQUIRE(!pcc->explored(x7));
 }

@@ -7,6 +7,8 @@ set(SOURCE_FILES
         src/main.cpp
         src/testdfs.cpp
         src/testPCC.cpp
+        src/testPCCParser.cpp
+        src/testPCCArbreDeuxBranches.cpp
 )
 
 include_directories(catch)
