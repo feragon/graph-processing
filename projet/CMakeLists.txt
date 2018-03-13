@@ -50,7 +50,10 @@ set(SOURCE_FILES
         src/algorithm/pcc.cpp
         src/algorithm/pcc.h
         src/algorithm/pairPereValeur.cpp
-        src/algorithm/pairPereValeur.h)
+        src/algorithm/pairPereValeur.h
+        src/file/dotwriter.cpp
+        src/file/dotwriter.h
+)
 
 add_executable(projet-modelisation ${SOURCE_FILES})
 add_library(projet ${SOURCE_FILES})
