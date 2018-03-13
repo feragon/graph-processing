@@ -35,14 +35,14 @@ set(SOURCE_FILES
         src/file/arcssectionparser.h
         src/file/graphsectionparser.cpp
         src/file/graphsectionparser.h
-        src/processor/vertexdata.h
-        src/processor/vertexdata.cpp
-        src/processor/edgedata.cpp
-        src/processor/edgedata.h
-        src/processor/modelinggraph.cpp
-        src/processor/modelinggraph.h
-        src/processor/vertexnotfound.h
-        src/processor/negativevaluation.h
+        src/modeling/vertexdata.h
+        src/modeling/vertexdata.cpp
+        src/modeling/edgedata.cpp
+        src/modeling/edgedata.h
+        src/modeling/modelinggraph.cpp
+        src/modeling/modelinggraph.h
+        src/modeling/vertexnotfound.h
+        src/modeling/negativevaluation.h
         src/algorithm/dfs.cpp
         src/algorithm/dfs.h
         src/algorithm/search.h
