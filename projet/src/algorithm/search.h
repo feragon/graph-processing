@@ -22,7 +22,7 @@ class Search {
         /**
          * @brief Commence le parcours
          */
-        void search();
+        virtual void search();
 
         /**
          * @brief Traite un sommet

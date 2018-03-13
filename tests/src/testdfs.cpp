@@ -71,3 +71,55 @@ TEST_CASE("Test DFS non connexe") {
 
     REQUIRE(dfs.order().size() == 4);
 }
+
+TEST_CASE("Test DFS prefixe-suffixe") {
+    Graphe<EdgeData, VertexData> g;
+    auto s0 = g.creerSommet("s0", VertexData());
+    auto s1 = g.creerSommet("s1", VertexData());
+    auto s2 = g.creerSommet("s2", VertexData());
+
+    g.creeArete("a1", EdgeData(), s0, s1);
+    g.creeArete("a2", EdgeData(), s1, s2);
+
+    DFS dfs(&g, s0);
+    dfs.search();
+
+    REQUIRE(dfs.prefixNumber(s0) == 1);
+    REQUIRE(dfs.prefixNumber(s1) == 2);
+    REQUIRE(dfs.prefixNumber(s2) == 3);
+
+    REQUIRE(dfs.suffixNumber(s0) == 1);
+    REQUIRE(dfs.suffixNumber(s1) == 3);
+    REQUIRE(dfs.suffixNumber(s2) == 2);
+}
+
+TEST_CASE("Test DFS prefixe-suffixe 2") {
+    Graphe<EdgeData, VertexData> g;
+    auto s0 = g.creerSommet("s0", VertexData());
+    auto s1 = g.creerSommet("s1", VertexData());
+    auto s2 = g.creerSommet("s2", VertexData());
+
+    g.creeArete("a1", EdgeData(), s0, s1);
+    g.creeArete("a2", EdgeData(), s1, s2);
+    g.creeArete("a3", EdgeData(), s0, s2);
+
+    DFS dfs(&g, s0);
+    dfs.search();
+
+    REQUIRE(dfs.explored(s0));
+    REQUIRE(dfs.explored(s1));
+    REQUIRE(dfs.explored(s2));
+
+    REQUIRE(dfs.closed(s0));
+    REQUIRE(dfs.closed(s1));
+    REQUIRE(dfs.closed(s2));
+
+
+    REQUIRE(dfs.prefixNumber(s0) == 1);
+    REQUIRE(dfs.prefixNumber(s1) == 3);
+    REQUIRE(dfs.prefixNumber(s2) == 2);
+
+    REQUIRE(dfs.suffixNumber(s0) == 2);
+    REQUIRE(dfs.suffixNumber(s1) == 1);
+    REQUIRE(dfs.suffixNumber(s2) == 3);
+}
