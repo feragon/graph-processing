@@ -12,19 +12,17 @@ public:
     virtual void analyzeVertex(const Sommet<VertexData>* vertex) override;
 
     void search1();
+
+    void pluscourtchemin(Sommet<VertexData>* sommet);
 private:
     /**
-     * @brief Pointeur de fonction pour la donnée du cout ou de la duree de l'arete
+     * @brief Pointeur de fonction pour choisir la donnée soit du cout soit de la duree de l'arete
      * @return int choix de donnée
      */
-    int (*_choix)(Arete<EdgeData, VertexData>*);
+    int (*_choixDonnee)(Arete<EdgeData, VertexData>*);
     std::set<const Sommet<VertexData>*>* _sommetsMarques;
     pairPereValeur* _ppv;
 };
 
-int cout(Arete<EdgeData, VertexData>* arete) {
-    return arete->contenu().cost();
-}
-int duree(Arete<EdgeData, VertexData>* arete) {
-    return arete->contenu().time();
-}
+int cout(Arete<EdgeData, VertexData>* arete);
+int duree(Arete<EdgeData, VertexData>* arete);

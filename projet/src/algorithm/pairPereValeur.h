@@ -16,7 +16,7 @@ class pairPereValeur {
 private:
     Liste<PereLambda>* liste;
 public:
-    pairPereValeur(const Graphe<EdgeData, VertexData> *graphe);
+    pairPereValeur(const Graphe<EdgeData, VertexData> *graphe, const Sommet<VertexData>* source);
 
     /**
      * @param sommet Sommet de fin du chemin
