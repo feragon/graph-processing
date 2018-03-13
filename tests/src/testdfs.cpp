@@ -1,6 +1,6 @@
 #include <catch.hpp>
-#include <processor/vertexdata.h>
-#include <processor/edgedata.h>
+#include <modeling/vertexdata.h>
+#include <modeling/edgedata.h>
 #include <graph/graphe.h>
 #include <algorithm/dfs.h>
 
