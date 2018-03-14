@@ -29,10 +29,27 @@ void DotWriter::writeEdge(const Arete<EdgeData, VertexData>* edge, DotMetaData* 
 }
 
 void DotWriter::writeVertices(const ModelingGraph& graph, DotMetaData* metaData) {
-    auto tmp = graph.sommets();
+    unsigned int i = 0;
+    auto clusters = metaData->getVerticesCluster(graph.sommets());
 
-    for(auto vertex = tmp; vertex; vertex = vertex->next) {
-        writeVertex(vertex->value, metaData);
+    if(clusters.size() == 1) {
+        for (auto vertex : clusters.begin()->second) {
+            writeVertex(vertex, metaData);
+        }
+    }
+    else {
+        for (auto cluster : clusters) {
+            _out << "subgraph cluster" << i << " {" << std::endl;
+            _out << "color=blue" << std::endl;
+            _out << "label=\"" << cluster.first << "\"" << std::endl;
+
+            for (auto vertex : cluster.second) {
+                writeVertex(vertex, metaData);
+            }
+
+            _out << "}" << std::endl;
+            i++;
+        }
     }
 }
 

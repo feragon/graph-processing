@@ -43,3 +43,14 @@ std::string DFSMetaData::getVertexLabel(const Sommet<VertexData>* vertex) {
            + "P:" + std::to_string(_dfs->prefixNumber(vertex)) + " - "
            + "S:" + std::to_string(_dfs->suffixNumber(vertex));
 }
+
+std::map<std::string, std::vector<Sommet<VertexData>*>> DFSMetaData::getVerticesCluster(Liste<Sommet<VertexData>>* vertices) {
+    std::map<std::string, std::vector<Sommet<VertexData>*>> res;
+
+    for(auto vertex = vertices; vertex; vertex = vertex->next) {
+        std::string cluster = "Composante " + std::to_string(_dfs->component(vertex->value));
+        res[cluster].push_back(vertex->value);
+    }
+
+    return res;
+}

@@ -29,7 +29,7 @@ void DisconnectedGraphSearch::search(const Sommet<VertexData>* start) {
 
 unsigned int DisconnectedGraphSearch::component(const Sommet<VertexData>* vertex) const {
     try {
-        _vertexComponent.at(vertex);
+        return _vertexComponent.at(vertex);
     }
     catch(std::out_of_range& e) {
         return 0;

@@ -3,6 +3,9 @@
 #include <modeling/vertexdata.h>
 #include <modeling/edgedata.h>
 #include <graph/arete.h>
+#include <graph/liste.h>
+#include <vector>
+#include <map>
 
 class DotMetaData {
     public:
@@ -32,4 +35,11 @@ class DotMetaData {
          * @return Label
          */
         virtual std::string getVertexLabel(const Sommet<VertexData>* vertex);
+
+        /**
+         * @brief Retourne la liste des clusters et des sommets associés
+         * @param vertices Liste des sommets à traiter
+         * @return Association nom -> sommets
+         */
+        virtual std::map<std::string, std::vector<Sommet<VertexData>*>> getVerticesCluster(Liste<Sommet<VertexData>>* vertices);
 };
