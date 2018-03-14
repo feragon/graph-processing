@@ -20,7 +20,7 @@ void DFS::begin(const Sommet<VertexData>* start) {
 void DFS::analyzeVertex2(const Sommet<VertexData>* vertex) {
     _vertexData[vertex].prefixNumber = _nextPrefixNumber++;
 
-    unsigned int unexploredNeighborsCount = 0;
+    unsigned int openNeighborsCount = 0;
     unsigned int exploredNeighborsCount = 0;
 
     auto successors = graph()->successeurs(vertex);
@@ -33,39 +33,50 @@ void DFS::analyzeVertex2(const Sommet<VertexData>* vertex) {
         }
         else {
             _vertexData[l->value->fin()].parents.push_back(vertex);
-            unexploredNeighborsCount++;
+            openNeighborsCount++;
 
             nextEdges().insert(nextEdges().begin(), l->value);
         }
-    }
-
-    if(unexploredNeighborsCount == 0) {
-        _vertexData[vertex].suffixNumber = _nextSuffixNumber++;
-        setClosed(vertex);
     }
 
     if(exploredNeighborsCount > 0) {
         _hasCycle = true;
     }
 
-    neighborExplored(vertex);
+    setExplored(vertex);
 
-    _vertexData[vertex].unexploredNeighborsCount = unexploredNeighborsCount;
+    if(openNeighborsCount == 0) {
+        close(vertex);
+    }
+
+    _vertexData[vertex].openNeighborsCount = openNeighborsCount;
 
     Liste<Arete<EdgeData, VertexData>>::efface1(successors);
 }
 
-void DFS::neighborExplored(const Sommet<VertexData>* neighbor) {
-    setExplored(neighbor);
+void DFS::close(const Sommet<VertexData>* neighbor) {
+    std::vector<const Sommet<VertexData>*> parents;
+    parents.push_back(neighbor);
+
+    while(!parents.empty()) {
+        const Sommet<VertexData>* parent = *(parents.begin());
+        parents.erase(parents.begin());
+
+        close(parent, parents);
+    }
+}
+
+void DFS::close(const Sommet<VertexData>* neighbor, std::vector<const Sommet<VertexData>*>& parents) {
+    setClosed(neighbor);
+    _vertexData[neighbor].suffixNumber = _nextSuffixNumber++;
 
     for(const Sommet<VertexData>* parent : _vertexData[neighbor].parents) {
         if(closed(parent)) {
             continue;
         }
 
-        if(--(_vertexData[parent].unexploredNeighborsCount) == 0) {
-            _vertexData[parent].suffixNumber = _nextSuffixNumber++;
-            setClosed(parent);
+        if(--(_vertexData[parent].openNeighborsCount) == 0) {
+            parents.push_back(parent);
         }
     }
 }

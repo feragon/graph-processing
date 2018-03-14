@@ -6,7 +6,7 @@
 #include "disconnectedgraphsearch.h"
 
 struct DFSVertexData {
-    unsigned int unexploredNeighborsCount = 0;
+    unsigned int openNeighborsCount = 0;
     std::vector<const Sommet<VertexData>*> parents;
     unsigned int prefixNumber = 0;
     unsigned int suffixNumber = 0;
@@ -45,10 +45,11 @@ class DFS : public DisconnectedGraphSearch {
 
     private:
         /**
-         * @brief Marque un voisin comme exploré et ferme les sommets nécessaires
+         * @brief Ferme un voisin et ferme les sommets parents
          * @param neighbor Voisin
          */
-        void neighborExplored(const Sommet<VertexData>* neighbor);
+        void close(const Sommet<VertexData>* neighbor);
+        void close(const Sommet<VertexData>* neighbor, std::vector<const Sommet<VertexData>*>& parents);
 
         unsigned int _nextPrefixNumber;
         unsigned int _nextSuffixNumber;
