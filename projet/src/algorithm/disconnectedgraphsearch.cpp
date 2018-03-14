@@ -25,6 +25,8 @@ void DisconnectedGraphSearch::search(const Sommet<VertexData>* start) {
             Search::search(vertex->value);
         }
     }
+
+    end();
 }
 
 unsigned int DisconnectedGraphSearch::component(const Sommet<VertexData>* vertex) const {
@@ -39,4 +41,8 @@ unsigned int DisconnectedGraphSearch::component(const Sommet<VertexData>* vertex
 void DisconnectedGraphSearch::analyzeVertex(const Sommet<VertexData>* vertex) {
     _vertexComponent[vertex] = _componentsCount;
     analyzeVertex2(vertex);
+}
+
+void DisconnectedGraphSearch::end() {
+
 }

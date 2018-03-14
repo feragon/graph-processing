@@ -36,6 +36,11 @@ class DisconnectedGraphSearch : public Search {
          */
         virtual void analyzeVertex2(const Sommet<VertexData>* vertex) = 0;
 
+        /**
+         * @brief Marque la fin de la recherche
+         */
+        virtual void end();
+
     private:
         std::map<const Sommet<VertexData>*, unsigned int> _vertexComponent;
         unsigned int _componentsCount;

@@ -9,6 +9,7 @@ void DFS::reset() {
     _nextPrefixNumber = 1;
     _nextSuffixNumber = 1;
     _hasCycle = false;
+    _topologicalOrderUpdated = false;
     DisconnectedGraphSearch::reset();
 }
 
@@ -21,7 +22,6 @@ void DFS::analyzeVertex2(const Sommet<VertexData>* vertex) {
     _vertexData[vertex].prefixNumber = _nextPrefixNumber++;
 
     unsigned int openNeighborsCount = 0;
-    unsigned int exploredNeighborsCount = 0;
 
     auto successors = graph()->successeurs(vertex);
     for(auto l = successors; l; l = l->next) {
@@ -29,7 +29,9 @@ void DFS::analyzeVertex2(const Sommet<VertexData>* vertex) {
             _hasCycle = true;
         }
         if (explored(l->value->fin())) {
-            exploredNeighborsCount++;
+            if(!closed(l->value->fin())) {
+                _hasCycle = true;
+            }
         }
         else {
             _vertexData[l->value->fin()].parents.push_back(vertex);
@@ -37,10 +39,6 @@ void DFS::analyzeVertex2(const Sommet<VertexData>* vertex) {
 
             nextEdges().insert(nextEdges().begin(), l->value);
         }
-    }
-
-    if(exploredNeighborsCount > 0) {
-        _hasCycle = true;
     }
 
     setExplored(vertex);
@@ -93,6 +91,30 @@ unsigned int DFS::prefixNumber(const Sommet<VertexData>* vertex) const {
 unsigned int DFS::suffixNumber(const Sommet<VertexData>* vertex) const {
     try {
         return _vertexData.at(vertex).suffixNumber;
+    }
+    catch (std::out_of_range& e) {
+        return 0;
+    }
+}
+
+void DFS::updateTopologicalOrder() {
+    if(_topologicalOrderUpdated || _hasCycle) {
+        return;
+    }
+
+    for(auto& pair : _vertexData) {
+        pair.second.topologicalNumber = _nextSuffixNumber - pair.second.suffixNumber;
+    }
+}
+
+void DFS::end() {
+    DisconnectedGraphSearch::end();
+    updateTopologicalOrder();
+}
+
+unsigned int DFS::topologicalNumber(const Sommet<VertexData>* vertex) const {
+    try {
+        return _vertexData.at(vertex).topologicalNumber;
     }
     catch (std::out_of_range& e) {
         return 0;

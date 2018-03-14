@@ -108,3 +108,32 @@ TEST_CASE("Test DFS prefixe-suffixe 2") {
     REQUIRE(dfs.suffixNumber(s1) == 2);
     REQUIRE(dfs.suffixNumber(s2) == 1);
 }
+
+TEST_CASE("Test DFS topologique") {
+    Graphe<EdgeData, VertexData> g;
+    auto s0 = g.creerSommet("s0", VertexData());
+    auto s1 = g.creerSommet("s1", VertexData());
+    auto s2 = g.creerSommet("s2", VertexData());
+    auto s3 = g.creerSommet("s3", VertexData());
+    auto s4 = g.creerSommet("s4", VertexData());
+    auto s5 = g.creerSommet("s5", VertexData());
+
+    g.creeArete("a1", EdgeData(), s0, s1);
+    g.creeArete("a2", EdgeData(), s1, s2);
+    g.creeArete("a3", EdgeData(), s2, s5);
+
+    g.creeArete("a4", EdgeData(), s0, s3);
+    g.creeArete("a5", EdgeData(), s3, s4);
+    g.creeArete("a6", EdgeData(), s4, s5);
+
+    DFS dfs(&g);
+    dfs.begin(s0);
+
+    REQUIRE(!dfs.hasCycle());
+    REQUIRE(dfs.topologicalNumber(s5) == 6);
+    REQUIRE(dfs.topologicalNumber(s4) == 5);
+    REQUIRE(dfs.topologicalNumber(s3) == 4);
+    REQUIRE(dfs.topologicalNumber(s2) == 3);
+    REQUIRE(dfs.topologicalNumber(s1) == 2);
+    REQUIRE(dfs.topologicalNumber(s0) == 1);
+}

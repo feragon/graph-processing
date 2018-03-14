@@ -10,6 +10,7 @@ struct DFSVertexData {
     std::vector<const Sommet<VertexData>*> parents;
     unsigned int prefixNumber = 0;
     unsigned int suffixNumber = 0;
+    unsigned int topologicalNumber = 0;
 };
 
 class DFS : public DisconnectedGraphSearch {
@@ -20,12 +21,14 @@ class DFS : public DisconnectedGraphSearch {
 
         /**
          * @brief Donne le numéro de préfixe, commençant à 1
+         * @param vertex Sommet
          * @return Préfixe
          */
         unsigned int prefixNumber(const Sommet<VertexData>* vertex) const;
 
         /**
          * @brief Donne le numéro de suffixe, commençant à 1
+         * @param vertex Sommet
          * @return Suffixe
          */
         unsigned int suffixNumber(const Sommet<VertexData>* vertex) const;
@@ -43,13 +46,38 @@ class DFS : public DisconnectedGraphSearch {
          */
         inline bool hasCycle() const;
 
+        /**
+         * @brief Donne le numéro topologique du sommet, commençant à 1
+         * @param vertex Sommet
+         * @return Numéro topologique
+         */
+        unsigned int topologicalNumber(const Sommet<VertexData>* vertex) const;
+
     private:
         /**
          * @brief Ferme un voisin et ferme les sommets parents
          * @param neighbor Voisin
          */
         void close(const Sommet<VertexData>* neighbor);
+
+        /**
+         * @brief Ferme un voisin et ajoute les sommets parents à une liste
+         * @param neighbor Voisin
+         * @param parents Liste des parents
+         */
         void close(const Sommet<VertexData>* neighbor, std::vector<const Sommet<VertexData>*>& parents);
+
+        /**
+         * @brief Met à jour l'ordre topologique des sommets
+         */
+        void updateTopologicalOrder();
+
+    protected:
+        void end() override;
+
+    private:
+
+        bool _topologicalOrderUpdated;
 
         unsigned int _nextPrefixNumber;
         unsigned int _nextSuffixNumber;
