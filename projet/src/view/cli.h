@@ -2,6 +2,7 @@
 
 #include <iosfwd>
 #include <modeling/modelinggraph.h>
+#include "view.h"
 
 class CLI {
     public:
@@ -14,28 +15,46 @@ class CLI {
          */
         void start();
 
+        /**
+         * @return Graphe
+         */
+        inline ModelingGraph* graph() const;
+
+        /**
+         * @brief Change le graphe
+         * @param graph Graphe
+         */
+        inline void setGraph(ModelingGraph* graph);
+
+        /**
+         * @brief Affiche la vue précédente
+         */
+        void previousView();
+
+        /**
+         * @brief Affiche une nouvelle vue
+         * @param view Nouvelle vue
+         */
+        void setView(View* view);
+
     private:
-        /**
-         * @brief Laisse l'utilisateur choisir un graphe ou le créer
-         */
-        void chooseGraph();
-
-        /**
-         * @brief Compare deux suffixes
-         * @param fileName Nom du fichier
-         * @param suffix Suffixe
-         * @return Vrai s'ils sont egaux
-         */
-        bool sameSuffix(const std::string& fileName, const std::string& suffix) const;
-
-        /**
-         * @brief Ouvre un graphe
-         * @param path Chemin du graphe
-         */
-        void openGraph(const std::string& path);
+        Liste<View>* _views;
+        View* _currentView;
 
         ModelingGraph* _graph;
 
         std::ostream& _out;
         std::istream& _in;
 };
+
+ModelingGraph* CLI::graph() const {
+    return _graph;
+}
+
+void CLI::setGraph(ModelingGraph* graph) {
+    if(_graph) {
+        delete _graph;
+    }
+
+    _graph = graph;
+}

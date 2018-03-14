@@ -63,7 +63,9 @@ set(SOURCE_FILES
         src/algorithm/pccft.h
         src/algorithm/pccft.cpp
         src/algorithm/etiquette.h
-        src/algorithm/etiquette.cpp)
+        src/algorithm/etiquette.cpp
+        src/view/view.cpp
+        src/view/view.h src/view/changegraphview.cpp src/view/changegraphview.h)
 
 add_executable(projet-modelisation ${SOURCE_FILES})
 add_library(projet ${SOURCE_FILES})
