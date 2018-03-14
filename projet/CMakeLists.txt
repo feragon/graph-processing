@@ -57,7 +57,13 @@ set(SOURCE_FILES
         src/file/dotmetadata.h
         src/view/dfsmetadata.cpp
         src/algorithm/disconnectedgraphsearch.cpp
-        src/algorithm/disconnectedgraphsearch.h src/view/cli.cpp src/view/cli.h)
+        src/algorithm/disconnectedgraphsearch.h
+        src/view/cli.cpp
+        src/view/cli.h
+        src/algorithm/pccft.h
+        src/algorithm/pccft.cpp
+        src/algorithm/etiquette.h
+        src/algorithm/etiquette.cpp)
 
 add_executable(projet-modelisation ${SOURCE_FILES})
 add_library(projet ${SOURCE_FILES})

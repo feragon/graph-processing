@@ -22,7 +22,8 @@ void Search::search(const Sommet<VertexData>* start) {
         _order.insert(std::pair<const Arete<EdgeData, VertexData>*, unsigned int>(nextEdge, _nextEdgeNumber));
         _nextEdgeNumber++;
 
-        analyzeVertex(nextEdge->fin());
+        const Sommet<VertexData>* nextVertex = nextEdge->fin();
+        analyzeVertex(nextVertex);
     }
 }
 

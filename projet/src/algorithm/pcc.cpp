@@ -23,7 +23,6 @@ void PCC::reset() {
 
 void PCC::begin(const Sommet<VertexData>* start, int (* choix)(Arete<EdgeData, VertexData>*)) {
     reset();
-    _sommetsMarques.clear();
     _ppv = new pairPereValeur(graph(), start);
     _start = start;
     _choixDonnee = choix;
@@ -37,7 +36,6 @@ void PCC::analyzeVertex(const Sommet<VertexData>* vertex) {
     }
 
     auto successors = graph()->successeurs(vertex);
-    std::pair<Sommet<VertexData>*, Arete<EdgeData, VertexData>*>* nextVertex = NULL;
 
     for(auto l = successors; l; l = l->next) {
         if(!closed(l->value->fin())) {
