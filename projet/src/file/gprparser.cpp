@@ -44,6 +44,16 @@ void GPRParser::load() {
             std::cerr << e.what() << std::endl;
         }
     }
+
+    if(_puits->contenu().canWait()) {
+        for(auto vertex = graphe().sommets(); vertex; vertex = vertex->next) {
+            if(!vertex->value->contenu().canWait()) {
+                vertex->value->contenu().setSup(_puits->contenu().sup());
+                vertex->value->contenu().setInf(_puits->contenu().inf());
+                vertex->value->contenu().setCanWait(true);
+            }
+        }
+    }
 }
 
 

@@ -1,23 +1,26 @@
 #pragma once
 
 #include <string>
+#include <ostream>
 
 class VertexData {
     public:
         VertexData();
         VertexData(int x, int y);
 
-        inline int x() const;
+        inline int inf() const;
 
-        inline void setX(int x);
+        inline void setInf(int x);
 
-        inline int y() const;
+        inline int sup() const;
 
-        inline void setY(int y);
+        inline void setSup(int y);
 
         inline bool canWait() const;
 
         inline void setCanWait(bool canWait);
+
+        friend std::ostream& operator<<(std::ostream& os, const VertexData& data);
 
     private:
         bool _canWait;
@@ -25,19 +28,19 @@ class VertexData {
         int _sup;
 };
 
-int VertexData::x() const {
+int VertexData::inf() const {
     return _inf;
 }
 
-void VertexData::setX(int x) {
+void VertexData::setInf(int x) {
     _inf = x;
 }
 
-int VertexData::y() const {
+int VertexData::sup() const {
     return _sup;
 }
 
-void VertexData::setY(int y) {
+void VertexData::setSup(int y) {
     _sup = y;
 }
 
