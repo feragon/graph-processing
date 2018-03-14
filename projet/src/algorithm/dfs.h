@@ -3,6 +3,7 @@
 #include <graph/graphe.h>
 #include <unordered_map>
 #include "search.h"
+#include "disconnectedgraphsearch.h"
 
 struct DFSVertexData {
     unsigned int unexploredNeighborsCount = 0;
@@ -11,11 +12,11 @@ struct DFSVertexData {
     unsigned int suffixNumber = 0;
 };
 
-class DFS : public Search {
+class DFS : public DisconnectedGraphSearch {
     public:
-        DFS(const Graphe<EdgeData, VertexData>* graph, const Sommet<VertexData>* start);
+        DFS(const Graphe<EdgeData, VertexData>* graph);
 
-        virtual void analyzeVertex(const Sommet<VertexData>* vertex) override;
+        virtual void analyzeVertex2(const Sommet<VertexData>* vertex) override;
 
         /**
          * @brief Donne le numéro de préfixe, commençant à 1
@@ -29,7 +30,9 @@ class DFS : public Search {
          */
         unsigned int suffixNumber(const Sommet<VertexData>* vertex) const;
 
-        void search() override;
+        void begin(const Sommet<VertexData>* start = nullptr);
+
+        void reset() override;
 
     private:
         /**

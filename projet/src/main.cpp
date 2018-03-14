@@ -25,8 +25,8 @@ int main(int argc, char** argv) {
     g.creeArete("a6", EdgeData(), s5, s6);
     g.creeArete("a7", EdgeData(), s6, s4);
 
-    DFS dfs(&g, s0);
-    dfs.search();
+    DFS dfs(&g);
+    dfs.begin(s0);
 
     DFSMetaData* metaData = new DFSMetaData(&dfs);
 

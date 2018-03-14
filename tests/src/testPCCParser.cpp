@@ -15,8 +15,8 @@ TEST_CASE("testPCCParser") {
     GPRParser gprp(fstream);
     gprp.load();
 
-    PCC *pcc = new PCC(&gprp.graphe(), gprp.source(), cout);
-    pcc->search();
+    PCC *pcc = new PCC(&gprp.graphe());
+    pcc->begin(gprp.source(), cout);
     pcc->pluscourtchemin(gprp.puits());
 
     REQUIRE(pcc->explored(gprp.puits()));

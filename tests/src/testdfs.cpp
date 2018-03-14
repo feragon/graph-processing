@@ -16,8 +16,8 @@ TEST_CASE("Test DFS") {
     g.creeArete("a3", EdgeData(), s1, s3);
     g.creeArete("a4", EdgeData(), s2, s3);
 
-    DFS dfs(&g, s0);
-    dfs.search();
+    DFS dfs(&g);
+    dfs.begin(s0);
     
     REQUIRE(dfs.explored(s0));
     REQUIRE(dfs.explored(s1));
@@ -29,7 +29,8 @@ TEST_CASE("Test DFS") {
     REQUIRE(dfs.closed(s2));
     REQUIRE(dfs.closed(s3));
 
-    REQUIRE(dfs.order().size() == 4);
+    REQUIRE(dfs.order().size() == 3);
+    REQUIRE(dfs.componentsCount() == 1);
 }
 
 TEST_CASE("Test DFS non connexe") {
@@ -50,26 +51,10 @@ TEST_CASE("Test DFS non connexe") {
     g.creeArete("a6", EdgeData(), s5, s6);
     g.creeArete("a7", EdgeData(), s6, s4);
 
-    DFS dfs(&g, s0);
-    dfs.search();
+    DFS dfs(&g);
+    dfs.begin(s0);
 
-    REQUIRE(dfs.explored(s0));
-    REQUIRE(dfs.explored(s1));
-    REQUIRE(dfs.explored(s2));
-    REQUIRE(dfs.explored(s3));
-    REQUIRE(!dfs.explored(s4));
-    REQUIRE(!dfs.explored(s5));
-    REQUIRE(!dfs.explored(s6));
-
-    REQUIRE(dfs.closed(s0));
-    REQUIRE(dfs.closed(s1));
-    REQUIRE(dfs.closed(s2));
-    REQUIRE(dfs.closed(s3));
-    REQUIRE(!dfs.closed(s4));
-    REQUIRE(!dfs.closed(s5));
-    REQUIRE(!dfs.closed(s6));
-
-    REQUIRE(dfs.order().size() == 4);
+    REQUIRE(dfs.componentsCount() == 2);
 }
 
 TEST_CASE("Test DFS prefixe-suffixe") {
@@ -81,8 +66,8 @@ TEST_CASE("Test DFS prefixe-suffixe") {
     g.creeArete("a1", EdgeData(), s0, s1);
     g.creeArete("a2", EdgeData(), s1, s2);
 
-    DFS dfs(&g, s0);
-    dfs.search();
+    DFS dfs(&g);
+    dfs.begin(s0);
 
     REQUIRE(dfs.prefixNumber(s0) == 1);
     REQUIRE(dfs.prefixNumber(s1) == 2);
@@ -103,8 +88,8 @@ TEST_CASE("Test DFS prefixe-suffixe 2") {
     g.creeArete("a2", EdgeData(), s1, s2);
     g.creeArete("a3", EdgeData(), s0, s2);
 
-    DFS dfs(&g, s0);
-    dfs.search();
+    DFS dfs(&g);
+    dfs.begin(s0);
 
     REQUIRE(dfs.explored(s0));
     REQUIRE(dfs.explored(s1));

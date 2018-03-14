@@ -31,8 +31,8 @@ TEST_CASE("testPCC") {
     graphe.creeArete("arc8", EdgeData(2,0), x5, x6);
 
 
-    PCC *pcc = new PCC(&graphe, x1, cout);
-    pcc->search();
+    PCC *pcc = new PCC(&graphe);
+    pcc->begin(x1, cout);
     pcc->pluscourtchemin(x1);
     pcc->pluscourtchemin(x2);
     pcc->pluscourtchemin(x3);

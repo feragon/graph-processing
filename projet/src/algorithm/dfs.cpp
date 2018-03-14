@@ -1,22 +1,22 @@
 #include "dfs.h"
 
-DFS::DFS(const Graphe<EdgeData, VertexData>* graph, const Sommet<VertexData>* start) :
-        Search(graph, start) {
+DFS::DFS(const Graphe<EdgeData, VertexData>* graph) :
+        DisconnectedGraphSearch(graph) {
 
 }
 
-void DFS::search() {
+void DFS::reset() {
     _nextPrefixNumber = 1;
     _nextSuffixNumber = 1;
-
-    Search::search();
+    DisconnectedGraphSearch::reset();
 }
 
-void DFS::analyzeVertex(const Sommet<VertexData>* vertex) {
-    if(closed(vertex) || explored(vertex)) {
-        return;
-    }
+void DFS::begin(const Sommet<VertexData>* start) {
+    reset();
+    DisconnectedGraphSearch::search(start);
+}
 
+void DFS::analyzeVertex2(const Sommet<VertexData>* vertex) {
     _vertexData[vertex].prefixNumber = _nextPrefixNumber++;
 
     unsigned int unexploredNeighborsCount = 0;

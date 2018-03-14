@@ -55,7 +55,9 @@ set(SOURCE_FILES
         src/file/dotwriter.h
         src/file/dotmetadata.cpp
         src/file/dotmetadata.h
-        src/view/dfsmetadata.cpp)
+        src/view/dfsmetadata.cpp
+        src/algorithm/disconnectedgraphsearch.cpp
+        src/algorithm/disconnectedgraphsearch.h)
 
 add_executable(projet-modelisation ${SOURCE_FILES})
 add_library(projet ${SOURCE_FILES})

@@ -23,8 +23,8 @@ TEST_CASE("testPCCArbreDeuxBranches") {
     graphe.creeArete("arc3", EdgeData(5,0), x1, x4);
     graphe.creeArete("arc4", EdgeData(1,0), x4, x5);
 
-    PCC *pcc = new PCC(&graphe, x1, cout);
-    pcc->search();
+    PCC *pcc = new PCC(&graphe);
+    pcc->begin(x1, cout);
     pcc->pluscourtchemin(x3);
     pcc->pluscourtchemin(x5);
 

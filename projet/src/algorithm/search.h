@@ -15,20 +15,8 @@ class Search {
     public:
         /**
          * @param graph Graphe à parcourir
-         * @param start Sommet de départ
          */
-        Search(const Graphe<EdgeData, VertexData>* graph, const Sommet<VertexData>* start);
-
-        /**
-         * @brief Commence le parcours
-         */
-        virtual void search();
-
-        /**
-         * @brief Traite un sommet
-         * @param vertex Sommet
-         */
-        virtual void analyzeVertex(const Sommet<VertexData>* vertex) = 0;
+        Search(const Graphe<EdgeData, VertexData>* graph);
 
         /**
          * @return Ordre de parcours des arêtes
@@ -39,11 +27,6 @@ class Search {
          * @return Graphe parcouru
          */
         inline const Graphe<EdgeData, VertexData>* graph() const;
-
-        /**
-         * @return Sommet de départ
-         */
-        inline const Sommet<VertexData>* start() const;
 
         /**
          * @param vertex Sommet
@@ -69,7 +52,27 @@ class Search {
          */
         void setClosed(const Sommet<VertexData>* vertex);
 
+        /**
+         * @brief Remet a zéro l'instance
+         */
+        virtual void reset();
+
     protected:
+        /**
+         * @brief Traite un sommet
+         * @param vertex Sommet
+         */
+        virtual void analyzeVertex(const Sommet<VertexData>* vertex) = 0;
+
+        /**
+         * @brief Commence le parcours
+         * @param start Sommet de départ
+         */
+        virtual void search(const Sommet<VertexData>* start);
+
+        /**
+         * @return Liste des prochains sommets
+         */
         inline std::vector<std::pair<const Sommet<VertexData>*, const Arete<EdgeData, VertexData>*>>& nextVertices();
 
     private:
@@ -79,7 +82,6 @@ class Search {
 
         std::map<const Arete<EdgeData, VertexData>*, unsigned int> _order;
         const Graphe<EdgeData, VertexData>* _graph;
-        const Sommet<VertexData>* _start;
         std::vector<std::pair<const Sommet<VertexData>*, const Arete<EdgeData, VertexData>*>> _nextVertices;
 };
 
@@ -89,10 +91,6 @@ const std::map<const Arete<EdgeData, VertexData>*, unsigned int>& Search::order(
 
 const Graphe<EdgeData, VertexData>* Search::graph() const {
     return _graph;
-}
-
-const Sommet<VertexData>* Search::start() const {
-    return _start;
 }
 
 std::vector<std::pair<const Sommet<VertexData>*, const Arete<EdgeData, VertexData>*>>& Search::nextVertices() {
