@@ -30,9 +30,18 @@ class DFS : public DisconnectedGraphSearch {
          */
         unsigned int suffixNumber(const Sommet<VertexData>* vertex) const;
 
+        /**
+         * @brief Commence le parcours en profondeur
+         * @param start Sommet de départ, ou nullptr pour commencer d'un sommet quelconque
+         */
         void begin(const Sommet<VertexData>* start = nullptr);
 
         void reset() override;
+
+        /**
+         * @return Vrai si le graphe possède au moins un cycle
+         */
+        inline bool hasCycle() const;
 
     private:
         /**
@@ -43,5 +52,10 @@ class DFS : public DisconnectedGraphSearch {
 
         unsigned int _nextPrefixNumber;
         unsigned int _nextSuffixNumber;
+        bool _hasCycle;
         std::unordered_map<const Sommet<VertexData>*, DFSVertexData> _vertexData;
 };
+
+bool DFS::hasCycle() const {
+        return _hasCycle;
+}

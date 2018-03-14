@@ -8,6 +8,7 @@ DFS::DFS(const Graphe<EdgeData, VertexData>* graph) :
 void DFS::reset() {
     _nextPrefixNumber = 1;
     _nextSuffixNumber = 1;
+    _hasCycle = false;
     DisconnectedGraphSearch::reset();
 }
 
@@ -20,10 +21,17 @@ void DFS::analyzeVertex2(const Sommet<VertexData>* vertex) {
     _vertexData[vertex].prefixNumber = _nextPrefixNumber++;
 
     unsigned int unexploredNeighborsCount = 0;
+    unsigned int exploredNeighborsCount = 0;
 
     auto neighbors = graph()->adjacences(vertex);
     for(auto l = neighbors; l; l = l->next) {
-        if(!explored(l->value->first)) {
+        if(l->value->first == vertex) {
+            _hasCycle = true;
+        }
+        if (explored(l->value->first)) {
+            exploredNeighborsCount++;
+        }
+        else {
             _vertexData[l->value->first].parents.push_back(vertex);
             unexploredNeighborsCount++;
 
@@ -34,6 +42,10 @@ void DFS::analyzeVertex2(const Sommet<VertexData>* vertex) {
     if(unexploredNeighborsCount == 0) {
         _vertexData[vertex].suffixNumber = _nextSuffixNumber++;
         setClosed(vertex);
+    }
+
+    if(exploredNeighborsCount > 1) {
+        _hasCycle = true;
     }
 
     neighborExplored(vertex);
