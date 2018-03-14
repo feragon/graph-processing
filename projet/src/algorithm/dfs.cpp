@@ -23,19 +23,19 @@ void DFS::analyzeVertex2(const Sommet<VertexData>* vertex) {
     unsigned int unexploredNeighborsCount = 0;
     unsigned int exploredNeighborsCount = 0;
 
-    auto neighbors = graph()->adjacences(vertex);
-    for(auto l = neighbors; l; l = l->next) {
-        if(l->value->first == vertex) {
+    auto successors = graph()->successeurs(vertex);
+    for(auto l = successors; l; l = l->next) {
+        if(l->value->fin() == vertex) {
             _hasCycle = true;
         }
-        if (explored(l->value->first)) {
+        if (explored(l->value->fin())) {
             exploredNeighborsCount++;
         }
         else {
-            _vertexData[l->value->first].parents.push_back(vertex);
+            _vertexData[l->value->fin()].parents.push_back(vertex);
             unexploredNeighborsCount++;
 
-            nextVertices().insert(nextVertices().begin(), *(l->value));
+            nextEdges().insert(nextEdges().begin(), l->value);
         }
     }
 
@@ -52,7 +52,7 @@ void DFS::analyzeVertex2(const Sommet<VertexData>* vertex) {
 
     _vertexData[vertex].unexploredNeighborsCount = unexploredNeighborsCount;
 
-    Liste<std::pair<Sommet<VertexData>*, Arete<EdgeData, VertexData>*>>::efface1(neighbors);
+    Liste<Arete<EdgeData, VertexData>>::efface1(successors);
 }
 
 void DFS::neighborExplored(const Sommet<VertexData>* neighbor) {

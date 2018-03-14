@@ -8,25 +8,21 @@ Search::Search(const Graphe <EdgeData, VertexData>* graph) {
 }
 
 void Search::search(const Sommet<VertexData>* start) {
-    _nextVertices.emplace_back(
-            std::pair<const Sommet<VertexData>*, const Arete<EdgeData, VertexData>*>(start, nullptr)
-    );
+    analyzeVertex(start);
 
-    while(!_nextVertices.empty()) {
-        auto nextVertexIt = _nextVertices.begin();
-        auto nextVertex = *nextVertexIt;
-        _nextVertices.erase(nextVertexIt);
+    while(!_nextEdges.empty()) {
+        auto nextEdgeIt = _nextEdges.begin();
+        auto nextEdge = *nextEdgeIt;
+        _nextEdges.erase(nextEdgeIt);
 
-        if(closed(nextVertex.first) || explored(nextVertex.first)) {
+        if(closed(nextEdge->fin()) || explored(nextEdge->fin())) {
             continue;
         }
 
-        if(nextVertex.second) {
-            _order.insert(std::pair<const Arete<EdgeData, VertexData>*, unsigned int>(nextVertex.second, _nextEdgeNumber));
-            _nextEdgeNumber++;
-        }
+        _order.insert(std::pair<const Arete<EdgeData, VertexData>*, unsigned int>(nextEdge, _nextEdgeNumber));
+        _nextEdgeNumber++;
 
-        analyzeVertex(nextVertex.first);
+        analyzeVertex(nextEdge->fin());
     }
 }
 
@@ -49,5 +45,5 @@ void Search::setClosed(const Sommet<VertexData>* vertex) {
 void Search::reset() {
     _closed.empty();
     _explored.empty();
-    _nextVertices.empty();
+    _nextEdges.empty();
 }

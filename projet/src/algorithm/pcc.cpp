@@ -36,33 +36,33 @@ void PCC::analyzeVertex(const Sommet<VertexData>* vertex) {
         return;
     }
 
-    auto neighbors = graph()->adjacences(vertex);
+    auto successors = graph()->successeurs(vertex);
     std::pair<Sommet<VertexData>*, Arete<EdgeData, VertexData>*>* nextVertex = NULL;
 
-    for(auto l = neighbors; l; l = l->next) {
-        if(!closed(l->value->first)) {
+    for(auto l = successors; l; l = l->next) {
+        if(!closed(l->value->fin())) {
 
             int nouveauLambda = std::numeric_limits<int>::max();
 
             if (_ppv->getLambda(vertex) < nouveauLambda)
-                nouveauLambda = _ppv->getLambda(vertex) + _choixDonnee(l->value->second);
+                nouveauLambda = _ppv->getLambda(vertex) + _choixDonnee(l->value);
 
-            if (nouveauLambda < _ppv->getLambda(l->value->first)) {
-                _ppv->setLambda(l->value->first, nouveauLambda);
-                _ppv->setPere(l->value->first, vertex);
+            if (nouveauLambda < _ppv->getLambda(l->value->fin())) {
+                _ppv->setLambda(l->value->fin(), nouveauLambda);
+                _ppv->setPere(l->value->fin(), vertex);
 
-                std::cout << "Mise a jour de " << l->value->first->cle()
+                std::cout << "Mise a jour de " << l->value->fin()->cle()
                           << " : pere=" << vertex->cle()
-                          << " val=" << _ppv->getLambda(l->value->first) << std::endl;
+                          << " val=" << _ppv->getLambda(l->value->fin()) << std::endl;
             }
 
-            if(!explored(l->value->first)) {
-                auto it = nextVertices().begin();
-                while((it != nextVertices().end())
-                      && (_ppv->getLambda(l->value->first) > _ppv->getLambda(it->first))) {
+            if(!explored(l->value->fin())) {
+                auto it = nextEdges().begin();
+                while((it != nextEdges().end())
+                      && (_ppv->getLambda(l->value->fin()) > _ppv->getLambda((*it)->fin()))) {
                     it++;
                 }
-                nextVertices().insert(it, *(l->value));
+                nextEdges().insert(it, l->value);
             }
 
         }
@@ -71,7 +71,7 @@ void PCC::analyzeVertex(const Sommet<VertexData>* vertex) {
     setExplored(vertex);
     setClosed(vertex);
 
-    Liste<std::pair<Sommet<VertexData>*, Arete<EdgeData, VertexData>*>>::efface1(neighbors);
+    Liste<Arete<EdgeData, VertexData>>::efface1(successors);
 }
 
 void PCC::pluscourtchemin(Sommet<VertexData>* sommet) {

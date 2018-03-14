@@ -73,7 +73,7 @@ class Search {
         /**
          * @return Liste des prochains sommets
          */
-        inline std::vector<std::pair<const Sommet<VertexData>*, const Arete<EdgeData, VertexData>*>>& nextVertices();
+        inline std::vector<const Arete<EdgeData, VertexData>*>& nextEdges();
 
     private:
         unsigned int _nextEdgeNumber;
@@ -82,7 +82,7 @@ class Search {
 
         std::map<const Arete<EdgeData, VertexData>*, unsigned int> _order;
         const Graphe<EdgeData, VertexData>* _graph;
-        std::vector<std::pair<const Sommet<VertexData>*, const Arete<EdgeData, VertexData>*>> _nextVertices;
+        std::vector<const Arete<EdgeData, VertexData>*> _nextEdges;
 };
 
 const std::map<const Arete<EdgeData, VertexData>*, unsigned int>& Search::order() const {
@@ -93,6 +93,6 @@ const Graphe<EdgeData, VertexData>* Search::graph() const {
     return _graph;
 }
 
-std::vector<std::pair<const Sommet<VertexData>*, const Arete<EdgeData, VertexData>*>>& Search::nextVertices() {
-    return _nextVertices;
+std::vector<const Arete<EdgeData, VertexData>*>& Search::nextEdges() {
+    return _nextEdges;
 }
