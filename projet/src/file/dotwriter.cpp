@@ -37,5 +37,8 @@ void DotWriter::writeVertices(const ModelingGraph& graph, DotMetaData* metaData)
 }
 
 void DotWriter::writeVertex(const Sommet<VertexData>* vertex, DotMetaData* metaData) {
-    _out << vertex->cle() << " [color=\"" << metaData->getVertexBackground(vertex) << "\"]" << std::endl;
+    _out << vertex->cle()
+         << " [color=\"" << metaData->getVertexBackground(vertex) << "\","
+         << "label=\"" << metaData->getVertexLabel(vertex) << "\""
+         << "]" << std::endl;
 }

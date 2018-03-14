@@ -37,3 +37,9 @@ std::string DFSMetaData::getEdgeStyle(const Arete<EdgeData, VertexData>* edge) {
         return "dotted";
     }
 }
+
+std::string DFSMetaData::getVertexLabel(const Sommet<VertexData>* vertex) {
+    return DotMetaData::getVertexLabel(vertex) + " " +
+           + "P:" + std::to_string(_dfs->prefixNumber(vertex)) + " - "
+           + "S:" + std::to_string(_dfs->suffixNumber(vertex));
+}

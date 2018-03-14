@@ -25,4 +25,11 @@ class DotMetaData {
          * @return Donne le style de l'arête (dotted, bold, filled)
          */
         virtual std::string getEdgeStyle(const Arete<EdgeData, VertexData>* edge);
+
+        /**
+         * @brief Donne le label d'un sommet
+         * @param vertex Sommet
+         * @return Label
+         */
+        virtual std::string getVertexLabel(const Sommet<VertexData>* vertex);
 };

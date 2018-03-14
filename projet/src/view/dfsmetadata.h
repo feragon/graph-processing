@@ -13,6 +13,8 @@ class DFSMetaData : public DotMetaData {
 
         virtual std::string getEdgeStyle(const Arete<EdgeData, VertexData>* edge) override;
 
+        std::string getVertexLabel(const Sommet<VertexData>* vertex) override;
+
     private:
         const DFS* _dfs;
 };
