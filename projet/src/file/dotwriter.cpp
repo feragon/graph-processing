@@ -6,7 +6,7 @@ DotWriter::DotWriter(std::ostream& out) : _out(out) {
 }
 
 void DotWriter::writeGraph(const std::string& name, const ModelingGraph& graph, DotMetaData* metaData) {
-    _out << "graph " << name << " {" << std::endl;
+    _out << "digraph " << name << " {" << std::endl;
     _out << "node [style=filled]" << std::endl;
     writeVertices(graph, metaData);
     writeEdges(graph, metaData);
@@ -22,7 +22,7 @@ void DotWriter::writeEdges(const ModelingGraph& graph, DotMetaData* metaData) {
 }
 
 void DotWriter::writeEdge(const Arete<EdgeData, VertexData>* edge, DotMetaData* metaData) {
-    _out << edge->debut()->cle() << " -- " << edge->fin()->cle()
+    _out << edge->debut()->cle() << " -> " << edge->fin()->cle()
          << " [label=\"" << metaData->getEdgeLabel(edge) << "\","
          << "style=\"" << metaData->getEdgeStyle(edge) << "\"]"
          << std::endl;
