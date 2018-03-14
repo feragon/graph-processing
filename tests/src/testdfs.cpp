@@ -104,7 +104,7 @@ TEST_CASE("Test DFS prefixe-suffixe 2") {
     REQUIRE(dfs.prefixNumber(s1) == 3);
     REQUIRE(dfs.prefixNumber(s2) == 2);
 
-    REQUIRE(dfs.suffixNumber(s0) == 2);
-    REQUIRE(dfs.suffixNumber(s1) == 1);
-    REQUIRE(dfs.suffixNumber(s2) == 3);
+    REQUIRE(dfs.suffixNumber(s0) == 3);
+    REQUIRE(dfs.suffixNumber(s1) == 2);
+    REQUIRE(dfs.suffixNumber(s2) == 1);
 }

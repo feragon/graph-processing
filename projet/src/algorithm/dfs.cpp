@@ -44,7 +44,7 @@ void DFS::analyzeVertex2(const Sommet<VertexData>* vertex) {
         setClosed(vertex);
     }
 
-    if(exploredNeighborsCount > 1) {
+    if(exploredNeighborsCount > 0) {
         _hasCycle = true;
     }
 

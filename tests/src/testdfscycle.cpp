@@ -51,8 +51,8 @@ TEST_CASE("Test cycle cycle") {
     auto s2 = g.creerSommet("s2", VertexData());
 
     g.creeArete("a0", EdgeData(), s0, s1);
-    g.creeArete("a1", EdgeData(), s0, s2);
-    g.creeArete("a2", EdgeData(), s1, s2);
+    g.creeArete("a1", EdgeData(), s1, s2);
+    g.creeArete("a2", EdgeData(), s2, s0);
 
     DFS dfs(&g);
     dfs.begin(s0);
