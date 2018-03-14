@@ -15,7 +15,7 @@ set(SOURCE_FILES
         src/graph/sommet.h
         src/file/gprparser.cpp
         src/file/gprparser.h
-        src/main.cpp
+        src/view/main.cpp
         src/file/sectionparser.h
         src/file/sectionparser.cpp
         src/file/sectionparsercor.cpp
@@ -57,7 +57,7 @@ set(SOURCE_FILES
         src/file/dotmetadata.h
         src/view/dfsmetadata.cpp
         src/algorithm/disconnectedgraphsearch.cpp
-        src/algorithm/disconnectedgraphsearch.h)
+        src/algorithm/disconnectedgraphsearch.h src/view/cli.cpp src/view/cli.h)
 
 add_executable(projet-modelisation ${SOURCE_FILES})
 add_library(projet ${SOURCE_FILES})

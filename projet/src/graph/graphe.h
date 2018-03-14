@@ -25,7 +25,7 @@ class SommetClesEgales {
          * @param autre Autre sommet
          * @return Vrai s'ils sont égaux
          */
-        bool operator() (const Sommet<T>* autre) {
+        bool operator() (const Sommet<T>* autre) const {
             return _sommet->cle() == autre->cle();
         }
 };
