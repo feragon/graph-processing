@@ -110,6 +110,20 @@ class Graphe {
         Liste<Sommet<T>>*  voisins(const Sommet<T>* sommet) const;
 
         /**
+         * @brief Donne la liste des successeurs
+         * @param sommet Sommet
+         * @return Successeurs
+         */
+        Liste<Arete<S,T>>* successeurs(const Sommet<T>* sommet) const;
+
+        /**
+         * @brief Donne la liste des predecesseurs
+         * @param sommet Sommet
+         * @return Predecesseurs
+         */
+        Liste<Arete<S,T>>* predecesseurs(const Sommet<T>* sommet) const;
+
+        /**
          * @brief Donne la liste des sommets du graphe
          * @return Liste des sommets du graphe
          */
@@ -183,7 +197,7 @@ void Graphe<S,T>::copie(const Graphe& graphe) {
 
         Sommet<T>* debut = Liste<Sommet<T>>::appartient(_sommets, conditionDebut)->value;
         Sommet<T>* fin = Liste<Sommet<T>>::appartient(_sommets, conditionFin)->value;
-        creeArete(a->value, debut, fin);
+        creeArete(a->value->cle(), a->value->contenu(), debut, fin);
     }
 }
 
@@ -303,4 +317,30 @@ Arete<S, T>* Graphe<S,T>::getAreteParSommets(const Sommet<T>* s1, const Sommet<T
     }
 
     return NULL;
+}
+
+template<class S, class T>
+Liste<Arete<S, T>>* Graphe<S, T>::successeurs(const Sommet<T>* sommet) const {
+    Liste<Arete<S, T>>* res = nullptr;
+
+    for(Liste<Arete<S,T>>* arete = _aretes; arete; arete = arete->next) {
+        if(arete->value->debut() == sommet) {
+            res = new Liste<Arete<S,T>>(arete->value, res);
+        }
+    }
+
+    return res;
+}
+
+template<class S, class T>
+Liste<Arete<S, T>>* Graphe<S, T>::predecesseurs(const Sommet<T>* sommet) const {
+    Liste<Arete<S, T>>* res = nullptr;
+
+    for(Liste<Arete<S,T>>* arete = _aretes; arete; arete = arete->next) {
+        if(arete->value->fin() == sommet) {
+            res = new Liste<Arete<S,T>>(arete->value, res);
+        }
+    }
+
+    return res;
 }

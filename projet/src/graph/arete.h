@@ -74,7 +74,7 @@ Sommet<T>* Arete<S,T>::fin() const {
 
 template <class S, class T>
 bool Arete<S,T>::estEgal(const Sommet<T>* s1, const Sommet<T>* s2) const {
-    return (s1 == _debut && s2 == _fin) || (s2 == _debut && s1 == _fin);
+    return s1 == _debut && s2 == _fin;
 }
 
 template <class S, class T>
