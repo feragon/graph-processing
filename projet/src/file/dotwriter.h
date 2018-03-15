@@ -39,4 +39,4 @@ class DotWriter {
          */
         void writeVertex(const Sommet<VertexData>* vertex, DotMetaData* metaData);
         std::ostream& _out;
-};;
+};

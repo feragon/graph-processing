@@ -5,3 +5,7 @@ View::View(std::ostream& out, std::istream& in, CLI* cli) :
     _in(in) {
     _cli = cli;
 }
+
+View::~View() {
+
+}

@@ -18,7 +18,6 @@ bool PuitsSectionParser::parseInternal(const std::string& line, GPRParser* parse
 
     try {
         unsigned long pos = line.find(' ');
-        VertexData* data;
 
         Sommet<VertexData>* puits = parser->graphe().vertex(line.substr(0, line.find(' ')));
 
@@ -39,8 +38,11 @@ bool PuitsSectionParser::parseInternal(const std::string& line, GPRParser* parse
         }
 
         parser->setPuits(puits);
+
+        return true;
     }
     catch(std::exception& e) {
         std::cerr << e.what() << std::endl;
+        return false;
     }
 }

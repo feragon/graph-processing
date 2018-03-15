@@ -9,6 +9,10 @@ SectionParserCOR::SectionParserCOR(const std::string& sectionName, SectionParser
 
 }
 
+SectionParserCOR::~SectionParserCOR() {
+
+}
+
 bool SectionParserCOR::canParse(const std::string& name) const {
     return compareCaseInsensitive(sectionName(), name);
 }

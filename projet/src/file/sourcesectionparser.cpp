@@ -23,8 +23,10 @@ bool SourceSectionParser::parseInternal(const std::string& line, GPRParser* pars
 
     try {
         parser->setSource(parser->graphe().vertex(line.substr(0, line.find(' '))));
+        return true;
     }
     catch(std::exception& e) {
         std::cerr << e.what() << std::endl;
+        return false;
     }
 }

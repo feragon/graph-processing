@@ -7,6 +7,7 @@ class CLI;
 class View {
     public:
         View(std::ostream& out, std::istream& in, CLI* cli);
+        virtual ~View();
         /**
          * @brief Affiche la vue
          */

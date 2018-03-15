@@ -118,8 +118,8 @@ std::pair<Sommet<VertexData>*, Liste<Etiquette>*>* PCCFT::ETIQ(const Sommet<Vert
 
 std::pair<int, int> cout(Etiquette* E) {
     return std::pair<int, int>(E->cost(), E->time());
-};
+}
 
 std::pair<int, int> temps(Etiquette* E) {
     return std::pair<int, int>(E->time(), E->cost());
-};
+}

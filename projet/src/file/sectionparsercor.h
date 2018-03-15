@@ -5,6 +5,7 @@
 class SectionParserCOR : public SectionParser {
     public:
         SectionParserCOR(const std::string& sectionName, SectionParserCOR* next);
+        virtual ~SectionParserCOR();
 
         virtual void parse(std::istream& is, GPRParser* parser) override;
 
