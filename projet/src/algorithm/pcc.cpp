@@ -49,9 +49,9 @@ void PCC::analyzeVertex(const Sommet<VertexData>* vertex) {
                 _ppv->setLambda(l->value->fin(), nouveauLambda);
                 _ppv->setPere(l->value->fin(), vertex);
 
-                std::cout << "Mise a jour de " << l->value->fin()->cle()
+                /*std::cout << "Mise a jour de " << l->value->fin()->cle()
                           << " : pere=" << vertex->cle()
-                          << " val=" << _ppv->getLambda(l->value->fin()) << std::endl;
+                          << " val=" << _ppv->getLambda(l->value->fin()) << std::endl;*/
             }
 
             if(!explored(l->value->fin())) {
@@ -81,12 +81,13 @@ void PCC::pluscourtchemin(Sommet<VertexData>* sommet) {
         std::cout << "PCC de valeur " << valeur << " : ";
 
         const Sommet<VertexData> *s = sommet;
+
+        std::string sorti = "";
         while (s != _start) {
-            std::cout << s->cle();
+            sorti.insert(0, " -> " + s->cle());
             s = _ppv->getPere(s);
-            std::cout << " <- ";
         }
-        std::cout << s->cle() << std::endl;
+        std::cout << sorti.insert(0, s->cle()) << std::endl;
     }
 }
 

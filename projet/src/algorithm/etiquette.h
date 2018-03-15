@@ -22,10 +22,5 @@ public:
 
     int cost();
 
-    void setCost(int cost);
-
     int time();
-
-    void setTime(int time);
 };
-

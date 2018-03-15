@@ -7,11 +7,11 @@ Etiquette::Etiquette(const Sommet<VertexData> *sommet, Etiquette *predecesseur, 
     _time = duree;
 }
 
-const Sommet<VertexData> *Etiquette::sommet() {
+const Sommet<VertexData>* Etiquette::sommet() {
     return _sommet;
 }
 
-Etiquette *Etiquette::predecesseur() {
+Etiquette* Etiquette::predecesseur() {
     return _predecesseur;
 }
 
@@ -19,14 +19,6 @@ int Etiquette::cost() {
     return _cost;
 }
 
-void Etiquette::setCost(int cost) {
-    _cost = cost;
-}
-
 int Etiquette::time() {
     return _time;
-}
-
-void Etiquette::setTime(int time) {
-    _time = time;
 }

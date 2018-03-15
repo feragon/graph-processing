@@ -8,11 +8,11 @@ PCCFT::PCCFT(const Graphe<EdgeData, VertexData>* graph) :
 
 
 void PCCFT::analyzeVertex(const Sommet<VertexData> *vertex) {
+
     if(closed(vertex)) {
         return;
     }
 
-    auto predecessors = graph()->predecesseurs(vertex);
     auto successors = graph()->successeurs(vertex);
 
     for(auto l = successors; l; l = l->next) {
@@ -30,11 +30,11 @@ void PCCFT::analyzeVertex(const Sommet<VertexData> *vertex) {
     setExplored(vertex);
     setClosed(vertex);
 
-    Liste<Arete<EdgeData, VertexData>>::efface1(predecessors);
     Liste<Arete<EdgeData, VertexData>>::efface1(successors);
 }
 
 void PCCFT::begin(const Sommet<VertexData> *start) {
+
     reset();
     _start = start;
     initEtiquettes();
@@ -43,9 +43,42 @@ void PCCFT::begin(const Sommet<VertexData> *start) {
 }
 
 Liste<Etiquette>* PCCFT::pareto(std::pair<Sommet<VertexData>*, Liste<Etiquette>*> *pair, Etiquette *E) {
-    //TODO: Dominance de Pareto
 
-    return new Liste<Etiquette>(E, pair->second);
+    if(pair) {
+        auto l = pair->second;
+        while (l) {
+            if (E->cost() <= l->value->cost() && E->time() <= l->value->time()) {
+                if (E->cost() < l->value->cost() || E->time() < l->value->time()) {
+                    auto suppr = l->value;
+                    l = l->next;
+                    Liste<Etiquette>::retire(suppr, pair->second);
+                }
+                else
+                    l = l->next;
+            } else
+                l = l->next;
+        }
+
+        l = pair->second;
+        while (l) {
+            if (E->cost() >= l->value->cost() && E->time() >= l->value->time()) {
+                if (E->cost() > l->value->cost() || E->time() > l->value->time())
+                    return pair->second;
+                else
+                    l = l->next;
+            } else
+                l = l->next;
+        }
+    }
+
+    /*std::cout << "Etiquette " << E->sommet()->cle()<< " : P=";
+    if(E->predecesseur()) std::cout << E->predecesseur()->sommet()->cle();
+    std::cout << " C=" << E->cost() << " T=" << E->time() << std::endl;*/
+
+    if(pair)
+        return new Liste<Etiquette>(E, pair->second);
+    else
+        return new Liste<Etiquette>(E, nullptr);
 }
 
 void PCCFT::meilleurChemin(Sommet<VertexData> *sommet, std::pair<int, int> (*choix)(Etiquette* E), int fenetreMin, int fenetreMax) {
@@ -53,44 +86,46 @@ void PCCFT::meilleurChemin(Sommet<VertexData> *sommet, std::pair<int, int> (*cho
     Etiquette *res = nullptr;
 
     for(auto l = ETIQ(sommet)->second; l; l = l->next) {
-        if(!res)
-            res = l->value;
-        else if(choix(l->value).first < choix(res).first && (choix(l->value).second >= fenetreMin && choix(l->value).second <= fenetreMax)){
-            res = l->value;
+
+        if(choix(l->value).second >= fenetreMin && choix(l->value).second <= fenetreMax) {
+            if(!res)
+                res = l->value;
+            else if(choix(l->value).first < choix(res).first)
+                res = l->value;
         }
     }
 
     if(res) {
-        if(choix(res).second < fenetreMin || choix(res).second > fenetreMax) {
-            std::cout << "Il n'y a pas de chemin possible entre "
-                      << _start->cle() << " et " << sommet->cle() << " dans la fenetre ["
-                      << fenetreMin << ";" << fenetreMax << "]." << std::endl;
-        }
-        else {
-            std::cout << "Meilleur chemin de " << choix(res).first
-                      << " (" << choix(res).second << ") dans la fenetre ["
-                      << fenetreMin << ";" << fenetreMax << "] :" << std::endl;
+        std::cout << "Meilleur chemin de valeur " << choix(res).first
+                  << " dans la fenetre ["
+                  << fenetreMin << ";" << fenetreMax << "] (" << choix(res).second << ") :" << std::endl;
 
-            while (res->predecesseur()) {
-                std::cout << res->sommet()->cle() << " <- ";
-                res = res->predecesseur();
-            }
-            std::cout << res->sommet()->cle() << std::endl;
+        std::string sorti = "";
+        while (res->predecesseur()) {
+            sorti.insert(0, " -> " + res->sommet()->cle());
+            res = res->predecesseur();
         }
+        std::cout << sorti.insert(0, res->sommet()->cle()) << std::endl;
     }
     else {
-        std::cout << "Il n'y a pas de chemin entre " << _start->cle() << " et " << sommet->cle() << "." << std::endl;
+        std::cout << "Il n'y a pas de chemin possible entre "
+                  << _start->cle() << " et " << sommet->cle() << " dans la fenetre ["
+                  << fenetreMin << ";" << fenetreMax << "]." << std::endl;
     }
     std::cout << std::endl;
 }
 
 void PCCFT::reset() {
     Search::reset();
+
+    for(auto l = _etiquettes; l; l = l->next)
+        Liste<Etiquette>::efface1(_etiquettes->value->second);
+
     Liste<std::pair<Sommet<VertexData>*, Liste<Etiquette>*>>::efface1(_etiquettes);
 }
 
 PCCFT::~PCCFT() {
-
+    reset();
 }
 
 void PCCFT::initEtiquettes() {
