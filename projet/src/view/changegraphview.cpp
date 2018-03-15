@@ -46,7 +46,7 @@ void ChangeGraphView::openGraph(const std::string& path) {
     GPRParser gprp(ifs);
     gprp.load();
 
-    out() << "Graphe ouvert en " << float( clock () - begin_time ) /  CLOCKS_PER_SEC << " secondes." << std::endl;
+    out() << "Graphe ouvert en " << float(clock() - begin_time) / CLOCKS_PER_SEC << " secondes." << std::endl;
 
     cli()->setGraph(new ModelingGraph(gprp.graphe()));
 
