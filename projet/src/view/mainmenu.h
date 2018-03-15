@@ -8,4 +8,5 @@ class MainMenu : public MenuView {
 
     private:
         void onChangeGraphSelected();
+        void onQuitSelected();
 };
