@@ -69,7 +69,9 @@ set(SOURCE_FILES
         src/view/changegraphview.cpp
         src/view/changegraphview.h
         src/view/menuview.cpp
-        src/view/menuview.h)
+        src/view/menuview.h
+        src/view/mainmenu.cpp
+        src/view/mainmenu.h)
 
 add_executable(projet-modelisation ${SOURCE_FILES})
 add_library(projet ${SOURCE_FILES})

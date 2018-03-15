@@ -27,17 +27,17 @@ class CLI {
         inline void setGraph(ModelingGraph* graph);
 
         /**
-         * @brief Affiche la vue précédente
-         */
-        void previousView();
-
-        /**
          * @brief Affiche une nouvelle vue
          * @param view Nouvelle vue
          */
         void setView(View* view);
 
     private:
+        /**
+         * @brief Affiche la vue précédente
+         */
+        void previousView();
+
         Liste<View>* _views;
         View* _currentView;
 

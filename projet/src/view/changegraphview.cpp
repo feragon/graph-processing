@@ -18,9 +18,7 @@ ChangeGraphView::ChangeGraphView(std::ostream& out, std::istream& in, CLI* cli) 
     else {
         while ((ent = readdir(dir)) != NULL) {
             if(sameSuffix(ent->d_name, ".gpr")) {
-                addItem(ent->d_name, [&](const std::string& fileName) {
-                    openGraph(fileName);
-                });
+                addItem(ent->d_name, std::bind(&ChangeGraphView::openGraph, this, std::string(ent->d_name)));
             }
         }
         closedir(dir);
@@ -48,7 +46,7 @@ void ChangeGraphView::openGraph(const std::string& path) {
     GPRParser gprp(ifs);
     gprp.load();
 
-    out() << "Graphe ouvert en " << float( clock () - begin_time ) /  CLOCKS_PER_SEC << " secondes.";
+    out() << "Graphe ouvert en " << float( clock () - begin_time ) /  CLOCKS_PER_SEC << " secondes." << std::endl;
 
     cli()->setGraph(new ModelingGraph(gprp.graphe()));
 

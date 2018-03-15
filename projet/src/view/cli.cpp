@@ -1,6 +1,7 @@
 #include <iostream>
 #include "cli.h"
 #include "changegraphview.h"
+#include "mainmenu.h"
 #include <fstream>
 
 CLI::CLI(std::ostream& out, std::istream& in) :
@@ -8,7 +9,7 @@ CLI::CLI(std::ostream& out, std::istream& in) :
     _in(in) {
 
     _graph = nullptr;
-    _views = nullptr;
+    _views = new Liste<View>(new MainMenu(out, in, this));
     _currentView = nullptr;
 }
 
@@ -18,6 +19,10 @@ void CLI::start() {
     _out << "Choix du graphe:" << std::endl;
 
     setView(new ChangeGraphView(_out, _in, this));
+
+    while(_views) {
+        previousView();
+    }
 }
 
 CLI::~CLI() {
@@ -38,8 +43,10 @@ void CLI::previousView() {
         View* v = Liste<View>::depiler(_views);
         delete _currentView;
         _currentView = v;
+        _currentView->show();
     }
     catch(std::invalid_argument& e) {
+        _currentView = nullptr;
         return;
     }
 }

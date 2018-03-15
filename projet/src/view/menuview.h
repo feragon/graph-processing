@@ -21,9 +21,9 @@ class MenuView : public View {
          * @param name Nom
          * @param callback Fonction appelée lors de la selection
          */
-        void addItem(const std::string& name, const std::function<void(const std::string&)>& callback);
+        void addItem(const std::string& name, const std::function<void(void)>& callback);
 
     private:
         bool _showMenu;
-        std::vector<std::pair<std::string, std::function<void(std::string)>>> _items;
+        std::vector<std::pair<std::string, std::function<void(void)>>> _items;
 };
