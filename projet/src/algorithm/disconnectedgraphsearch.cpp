@@ -1,8 +1,8 @@
 #include "disconnectedgraphsearch.h"
 
-DisconnectedGraphSearch::DisconnectedGraphSearch(const Graphe<EdgeData, VertexData>* graph) :
+DisconnectedGraphSearch::DisconnectedGraphSearch(const Graphe<EdgeData, VertexData>* graph, bool exploreComponents) :
         Search(graph) {
-
+    _exploreComponents = exploreComponents;
 }
 
 void DisconnectedGraphSearch::reset() {
@@ -14,6 +14,10 @@ void DisconnectedGraphSearch::search(const Sommet<VertexData>* start) {
     if(start != nullptr) {
         _componentsCount++;
         Search::search(start);
+        if(!_exploreComponents) {
+            end();
+            return;
+        }
     }
 
     for(auto vertex = graph()->sommets(); vertex; vertex = vertex->next) {
@@ -23,6 +27,9 @@ void DisconnectedGraphSearch::search(const Sommet<VertexData>* start) {
         catch (std::out_of_range& e) {
             _componentsCount++;
             Search::search(vertex->value);
+            if(!_exploreComponents) {
+                break;
+            }
         }
     }
 

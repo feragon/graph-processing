@@ -1,6 +1,7 @@
 #pragma once
 
 #include "view.h"
+#include <file/dotmetadata.h>
 
 class DOTGeneratorView : public View {
     public:
