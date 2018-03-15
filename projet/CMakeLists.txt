@@ -65,7 +65,11 @@ set(SOURCE_FILES
         src/algorithm/etiquette.h
         src/algorithm/etiquette.cpp
         src/view/view.cpp
-        src/view/view.h src/view/changegraphview.cpp src/view/changegraphview.h)
+        src/view/view.h
+        src/view/changegraphview.cpp
+        src/view/changegraphview.h
+        src/view/menuview.cpp
+        src/view/menuview.h)
 
 add_executable(projet-modelisation ${SOURCE_FILES})
 add_library(projet ${SOURCE_FILES})

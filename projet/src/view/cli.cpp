@@ -9,6 +9,7 @@ CLI::CLI(std::ostream& out, std::istream& in) :
 
     _graph = nullptr;
     _views = nullptr;
+    _currentView = nullptr;
 }
 
 void CLI::start() {

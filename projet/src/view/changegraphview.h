@@ -1,8 +1,9 @@
 #pragma once
 
 #include "view.h"
+#include "menuview.h"
 
-class ChangeGraphView : public View {
+class ChangeGraphView : public MenuView {
     public:
         ChangeGraphView(std::ostream& out, std::istream& in, CLI* cli);
 
