@@ -11,7 +11,11 @@ TEST_CASE("testPCC") {
 
     std::cout << std::endl << "=== testPCC" << std::endl;
 
+
+    /* === Illustration de Dijkstra (cours) === */
+    
     Graphe<EdgeData, VertexData> graphe;
+    
     auto x1 = graphe.creerSommet("x1", VertexData());
     auto x2 = graphe.creerSommet("x2", VertexData());
     auto x3 = graphe.creerSommet("x3", VertexData());
@@ -19,7 +23,6 @@ TEST_CASE("testPCC") {
     auto x5 = graphe.creerSommet("x5", VertexData());
     auto x6 = graphe.creerSommet("x6", VertexData());
     auto x7 = graphe.creerSommet("x7", VertexData());
-
 
     graphe.creeArete("arc1", EdgeData(2,0), x1, x2);
     graphe.creeArete("arc2", EdgeData(7,0), x1, x3);
@@ -33,6 +36,7 @@ TEST_CASE("testPCC") {
 
     PCC *pcc = new PCC(&graphe);
     pcc->begin(x1, cout);
+    
     pcc->pluscourtchemin(x1);
     pcc->pluscourtchemin(x2);
     pcc->pluscourtchemin(x3);
