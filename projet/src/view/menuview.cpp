@@ -1,4 +1,5 @@
 #include <iostream>
+#include <limits>
 #include "menuview.h"
 
 MenuView::MenuView(std::ostream& out, std::istream& in, CLI* cli, bool canQuit) :
@@ -20,6 +21,8 @@ void MenuView::show() {
 
         unsigned long choice;
         in() >> choice;
+        in().clear();
+        in().ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
         if(choice == 0 && _canQuit) {
             quitMenu();

@@ -1,3 +1,5 @@
+#include <limits>
+#include <climits>
 #include "vertexselector.h"
 #include "cli.h"
 
@@ -25,7 +27,7 @@ void VertexSelector::show() {
         out() << ":";
 
         std::string selectedVertex;
-        in() >> selectedVertex;
+        std::getline(in(), selectedVertex);
 
         if(selectedVertex.empty() && _canBeEmpty) {
             _selected = nullptr;

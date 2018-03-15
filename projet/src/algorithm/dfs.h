@@ -17,6 +17,17 @@ class DFS : public DisconnectedGraphSearch {
     public:
         DFS(const Graphe<EdgeData, VertexData>* graph, bool exploreComponents = true);
 
+        /**
+         * @brief Cherche un chemin entre deux somets
+         * @param graph Graphe
+         * @param start Début
+         * @param end Fin
+         * @return Vrai si le chemin existe
+         */
+        static bool pathExists(const Graphe<EdgeData, VertexData>* graph,
+                               const Sommet<VertexData>* start,
+                               const Sommet<VertexData>* end);
+
         virtual void analyzeVertex2(const Sommet<VertexData>* vertex) override;
 
         /**

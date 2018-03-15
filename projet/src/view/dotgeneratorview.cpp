@@ -3,6 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <file/dotwriter.h>
+#include <limits>
 #include "dotgeneratorview.h"
 #include "cli.h"
 
@@ -22,6 +23,8 @@ void DOTGeneratorView::show() {
         out() << "Entrez le nom du fichier à créer: ";
 
         in() >> outputFile;
+        in().clear();
+        in().ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
         if (FILE* file = fopen(outputFile.c_str(), "r")) {
             fclose(file);
@@ -30,6 +33,8 @@ void DOTGeneratorView::show() {
             do {
                 out() << "Le fichier existe déjà, l'écraser ? (o/n)";
                 in() >> choice;
+                in().clear();
+                in().ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             } while (choice != 'o' && choice != 'n');
 
             ok = (choice == 'o');

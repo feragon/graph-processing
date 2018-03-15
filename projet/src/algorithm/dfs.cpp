@@ -101,6 +101,7 @@ void DFS::updateTopologicalOrder() {
     if(_topologicalOrderUpdated || _hasCycle) {
         return;
     }
+    _topologicalOrderUpdated = true;
 
     for(auto& pair : _vertexData) {
         pair.second.topologicalNumber = _nextSuffixNumber - pair.second.suffixNumber;
@@ -119,4 +120,11 @@ unsigned int DFS::topologicalNumber(const Sommet<VertexData>* vertex) const {
     catch (std::out_of_range& e) {
         return 0;
     }
+}
+
+bool DFS::pathExists(const Graphe<EdgeData, VertexData>* graph, const Sommet<VertexData>* start,
+                     const Sommet<VertexData>* end) {
+    DFS dfs(graph, false);
+    dfs.begin(start);
+    return dfs.explored(end);
 }

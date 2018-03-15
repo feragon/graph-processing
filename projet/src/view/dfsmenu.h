@@ -10,4 +10,6 @@ class DFSMenu : public MenuView {
     private:
         void onGraphicRepresentationSelected();
         void onCycleDetectionSelected();
+        void onNumberingSelected();
+        void onPathFindingSelected();
 };

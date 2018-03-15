@@ -20,6 +20,9 @@ bool VerticesSectionParser::parseInternal(const std::string& line, GPRParser* pa
         unsigned long pos = line.find(' ');
         VertexData* data;
         if(pos == std::string::npos) {
+            if(line.substr(0, 6) == "source") {
+                return false;
+            }
             data = new VertexData();
         }
         else {
