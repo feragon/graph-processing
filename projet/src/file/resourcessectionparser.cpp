@@ -15,6 +15,7 @@ bool ResourcesSectionParser::parseInternal(const std::string& line, GPRParser* p
 
     try {
         std::cout << "Resources found: " << std::stoi(line.substr(11)) << std::endl;
+        return true;
     }
     catch (std::exception& e) {
         return false;
