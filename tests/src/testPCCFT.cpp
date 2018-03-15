@@ -48,5 +48,7 @@ TEST_CASE("testPCCFT") {
     PCCFT *pccft = new PCCFT(&graphe);
     pccft->begin(x0);
 
+    pccft->meilleurChemin(x9, temps);
+    pccft->meilleurChemin(x9, cout);
     pccft->meilleurChemin(x9, cout, 0, 12);
 }
