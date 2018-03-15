@@ -6,7 +6,7 @@
 
 class MenuView : public View {
     public:
-        MenuView(std::ostream& out, std::istream& in, CLI* cli);
+        MenuView(std::ostream& out, std::istream& in, CLI* cli, bool canQuit);
 
         void show() override;
 
@@ -24,6 +24,7 @@ class MenuView : public View {
         void addItem(const std::string& name, const std::function<void(void)>& callback);
 
     private:
+        bool _canQuit;
         bool _showMenu;
         std::vector<std::pair<std::string, std::function<void(void)>>> _items;
 };

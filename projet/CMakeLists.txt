@@ -71,7 +71,7 @@ set(SOURCE_FILES
         src/view/menuview.cpp
         src/view/menuview.h
         src/view/mainmenu.cpp
-        src/view/mainmenu.h)
+        src/view/mainmenu.h src/view/dfsmenu.cpp src/view/dfsmenu.h)
 
 add_executable(projet-modelisation ${SOURCE_FILES})
 add_library(projet ${SOURCE_FILES})

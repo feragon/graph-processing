@@ -6,7 +6,7 @@
 #include "cli.h"
 
 ChangeGraphView::ChangeGraphView(std::ostream& out, std::istream& in, CLI* cli) :
-        MenuView(out, in, cli) {
+        MenuView(out, in, cli, cli->graph() != nullptr) {
     DIR* dir;
     struct dirent* ent;
 

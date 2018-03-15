@@ -1,13 +1,17 @@
 #include <iostream>
 #include "menuview.h"
 
-MenuView::MenuView(std::ostream& out, std::istream& in, CLI* cli) :
+MenuView::MenuView(std::ostream& out, std::istream& in, CLI* cli, bool canQuit) :
         View(out, in, cli) {
     _showMenu = true;
+    _canQuit = canQuit;
 }
 
 void MenuView::show() {
     while (_showMenu) {
+        if(_canQuit) {
+            out() << "0: Quitter" << std::endl;
+        }
         for (unsigned long i = 1; i <= _items.size(); i++) {
             out() << i << ": " << _items[i-1].first << std::endl;
         }
@@ -17,7 +21,10 @@ void MenuView::show() {
         unsigned long choice;
         in() >> choice;
 
-        if(choice >= 1 && choice <= _items.size()) {
+        if(choice == 0 && _canQuit) {
+            quitMenu();
+        }
+        else if(choice >= 1 && choice <= _items.size()) {
             _items[choice-1].second();
         }
         else {
