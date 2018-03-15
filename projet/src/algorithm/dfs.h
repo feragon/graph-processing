@@ -2,6 +2,7 @@
 
 #include <graph/graphe.h>
 #include <unordered_map>
+#include <modeling/modelinggraph.h>
 #include "search.h"
 #include "disconnectedgraphsearch.h"
 
@@ -27,6 +28,13 @@ class DFS : public DisconnectedGraphSearch {
         static bool pathExists(const Graphe<EdgeData, VertexData>* graph,
                                const Sommet<VertexData>* start,
                                const Sommet<VertexData>* end);
+
+        /**
+         * @brief Donne les CFC du graphe
+         * @param graph Graphe
+         * @return CFC
+         */
+        static std::map<const Sommet<VertexData>*, unsigned int> stronglyConnectedComponents(const ModelingGraph* graph);
 
         virtual void analyzeVertex2(const Sommet<VertexData>* vertex) override;
 

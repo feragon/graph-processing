@@ -17,6 +17,13 @@ class ModelingGraph : public Graphe<EdgeData, VertexData> {
 
         Sommet<VertexData>* creerSommet(const std::string& cle, const VertexData& content) override;
 
+        /**
+         * Transpose le graphe
+         * Les sommets et arêtes ne seront pas les mêmes
+         * @return Graphe transposé
+         */
+        ModelingGraph reverse() const;
+
     private:
         std::map<std::string, Sommet<VertexData>*> _vertexes;
 };

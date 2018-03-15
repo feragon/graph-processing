@@ -10,7 +10,7 @@ set(SOURCE_FILES
         src/testPCCParser.cpp
         src/testPCCArbreDeuxBranches.cpp
         src/testdfscycle.cpp
-        src/testPCCFT.cpp)
+        src/testPCCFT.cpp src/testscc.cpp)
 
 include_directories(catch)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../projet/src)

@@ -15,3 +15,17 @@ Sommet<VertexData>* ModelingGraph::vertex(const std::string& name) const {
         throw VertexNotFound(("Le sommet " + name + " n'a pas été trouvé.").c_str());
     }
 }
+
+ModelingGraph ModelingGraph::reverse() const {
+    ModelingGraph res;
+
+    for(auto l = sommets(); l; l = l->next) {
+        res.creerSommet(l->value->cle(), l->value->contenu());
+    }
+
+    for(auto l = aretes(); l; l = l->next) {
+        res.creeArete(l->value->cle(), l->value->contenu(), res.vertex(l->value->fin()->cle()), res.vertex(l->value->debut()->cle()));
+    }
+
+    return res;
+}
