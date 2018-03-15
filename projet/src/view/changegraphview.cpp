@@ -6,7 +6,7 @@
 #include "cli.h"
 
 ChangeGraphView::ChangeGraphView(std::ostream& out, std::istream& in, CLI* cli) :
-        MenuView(out, in, cli) {
+        MenuView(out, in, cli, cli->graph() != nullptr) {
     DIR* dir;
     struct dirent* ent;
 
@@ -46,7 +46,7 @@ void ChangeGraphView::openGraph(const std::string& path) {
     GPRParser gprp(ifs);
     gprp.load();
 
-    out() << "Graphe ouvert en " << float( clock () - begin_time ) /  CLOCKS_PER_SEC << " secondes." << std::endl;
+    out() << "Graphe ouvert en " << float(clock() - begin_time) / CLOCKS_PER_SEC << " secondes." << std::endl;
 
     cli()->setGraph(new ModelingGraph(gprp.graphe()));
 
