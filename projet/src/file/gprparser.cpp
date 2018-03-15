@@ -69,6 +69,9 @@ void GPRParser::cleanLine(std::string& line) {
     //Remplacement des tabulations par des espaces
     std::replace(line.begin(), line.end(), '\t', ' ');
 
+    //Suppression des \r
+    line.erase(std::remove(line.begin(), line.end(), '\r'), line.end());
+
     //Suppression des espaces en double
     std::string::iterator newEnd = std::unique(line.begin(), line.end(), bothAreSpaces);
     line.erase(newEnd, line.end());
