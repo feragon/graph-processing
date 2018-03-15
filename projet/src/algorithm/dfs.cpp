@@ -1,7 +1,7 @@
 #include "dfs.h"
 
-DFS::DFS(const Graphe<EdgeData, VertexData>* graph) :
-        DisconnectedGraphSearch(graph) {
+DFS::DFS(const Graphe<EdgeData, VertexData>* graph, bool exploreComponents) :
+        DisconnectedGraphSearch(graph, exploreComponents) {
 
 }
 

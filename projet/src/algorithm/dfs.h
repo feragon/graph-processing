@@ -15,7 +15,7 @@ struct DFSVertexData {
 
 class DFS : public DisconnectedGraphSearch {
     public:
-        DFS(const Graphe<EdgeData, VertexData>* graph);
+        DFS(const Graphe<EdgeData, VertexData>* graph, bool exploreComponents = true);
 
         virtual void analyzeVertex2(const Sommet<VertexData>* vertex) override;
 

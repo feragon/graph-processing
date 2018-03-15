@@ -5,7 +5,7 @@
 
 class DisconnectedGraphSearch : public Search {
     public:
-        DisconnectedGraphSearch(const Graphe<EdgeData, VertexData>* graph);
+        DisconnectedGraphSearch(const Graphe<EdgeData, VertexData>* graph, bool exploreComponents);
 
         /**
          * @param vertex Sommet
@@ -42,6 +42,7 @@ class DisconnectedGraphSearch : public Search {
         virtual void end();
 
     private:
+        bool _exploreComponents;
         std::map<const Sommet<VertexData>*, unsigned int> _vertexComponent;
         unsigned int _componentsCount;
 };

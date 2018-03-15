@@ -75,7 +75,9 @@ set(SOURCE_FILES
         src/view/dfsmenu.cpp
         src/view/dfsmenu.h
         src/view/dotgeneratorview.cpp
-        src/view/dotgeneratorview.h)
+        src/view/dotgeneratorview.h
+        src/view/vertexselector.cpp
+        src/view/vertexselector.h)
 
 add_executable(projet-modelisation ${SOURCE_FILES})
 add_library(projet ${SOURCE_FILES})
