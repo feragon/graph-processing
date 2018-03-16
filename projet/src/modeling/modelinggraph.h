@@ -7,6 +7,8 @@
 
 class ModelingGraph : public Graphe<EdgeData, VertexData> {
     public:
+        ModelingGraph();
+        ModelingGraph(const ModelingGraph& other);
         /**
          * @brief Donne un sommet à partir de son nom
          * @param name Nom du sommet
@@ -15,7 +17,7 @@ class ModelingGraph : public Graphe<EdgeData, VertexData> {
          */
         Sommet<VertexData>* vertex(const std::string& name) const;
 
-        Sommet<VertexData>* creerSommet(const std::string& cle, const VertexData& content) override;
+        virtual Sommet<VertexData>* creerSommet(const std::string& cle, const VertexData& content) override;
 
         /**
          * Transpose le graphe

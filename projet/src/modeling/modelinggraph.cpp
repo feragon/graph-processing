@@ -1,6 +1,16 @@
 #include "modelinggraph.h"
 #include "vertexnotfound.h"
 
+ModelingGraph::ModelingGraph() {
+
+}
+
+ModelingGraph::ModelingGraph(const ModelingGraph& other) : Graphe<EdgeData, VertexData>(other) {
+    for(auto l = sommets(); l; l = l->next) {
+        _vertexes[l->value->cle()] = l->value;
+    }
+}
+
 Sommet<VertexData>* ModelingGraph::creerSommet(const std::string& cle, const VertexData& content) {
     Sommet<VertexData>* vertex = Graphe::creerSommet(cle, content);
     _vertexes[cle] = vertex;

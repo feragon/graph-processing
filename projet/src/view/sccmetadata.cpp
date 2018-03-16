@@ -3,6 +3,7 @@
 
 SCCMetaData::SCCMetaData(const std::map<const Sommet<VertexData>*, unsigned int>& scc) {
     _scc = scc;
+    srand(time(NULL));
 }
 
 std::string SCCMetaData::getEdgeLabel(const Arete<EdgeData, VertexData>* edge) {
@@ -14,7 +15,6 @@ std::string SCCMetaData::getVertexBackground(const Sommet<VertexData>* vertex) {
         return _colors.at(_scc[vertex]);
     }
     catch (std::out_of_range& e) {
-        srand(time(NULL));
         char color[8];
         sprintf(color, "#%x%x%x", rand() % 256, rand() % 256, rand() % 256);
         std::string colorStr(color);
@@ -31,7 +31,7 @@ std::string SCCMetaData::getEdgeStyle(const Arete<EdgeData, VertexData>* edge) {
 }
 
 std::string SCCMetaData::getVertexLabel(const Sommet<VertexData>* vertex) {
-    return "";
+    return vertex->cle();
 }
 
 std::map<std::string, std::vector<Sommet<VertexData>*>> SCCMetaData::getVerticesCluster(Liste<Sommet<VertexData>>* vertices) {

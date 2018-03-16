@@ -58,13 +58,13 @@ class Graphe {
 
         Graphe<S,T>& operator = (const Graphe& graphe);
 
-        virtual /**
+        /**
           * @brief Crée un sommet dans le graphe
           * @param cle Clé du sommet
           * @param content Contenu du sommet
           * @return Nouveau sommet
           */
-        Sommet<T>* creerSommet(const std::string& cle, const T& content);
+        virtual Sommet<T>* creerSommet(const std::string& cle, const T& content);
 
         /**
          * @brief Crée une arête entre 2 sommets supposés existants
