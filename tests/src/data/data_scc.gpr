@@ -1,0 +1,21 @@
+# Graphe
+
+ressources 1
+
+sectionSommets
+s0  0  	0
+s1 0 0
+s2 0 0
+
+sources
+s0
+
+puits
+s1  50  68
+
+sectionArcs
+arc1 s0 s1 0 0
+arc2 s1 s0 0 0
+
+sectionGraphes
+graphe1 i  s0  s1
