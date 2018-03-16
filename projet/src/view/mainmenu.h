@@ -10,4 +10,5 @@ class MainMenu : public MenuView {
         void onChangeGraphSelected();
         void onVisualizeGraphSelected();
         void onDFSSelected();
+        void onShortestPathSelected();
 };

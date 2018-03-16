@@ -79,7 +79,7 @@ set(SOURCE_FILES
         src/view/vertexselector.cpp
         src/view/vertexselector.h
         src/view/sccmetadata.cpp
-        src/view/sccmetadata.h src/view/creategraphview.cpp src/view/creategraphview.h)
+        src/view/sccmetadata.h src/view/creategraphview.cpp src/view/creategraphview.h src/view/pccmenu.cpp src/view/pccmenu.h)
 
 add_executable(projet-modelisation ${SOURCE_FILES})
 add_library(projet ${SOURCE_FILES})
