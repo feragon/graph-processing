@@ -17,7 +17,14 @@ void MenuView::show() {
             out() << i << ": " << _items[i-1].first << std::endl;
         }
 
-        out() << "Choix [1-" << _items.size() << "]: ";
+        out() << "Choix [";
+        if(_canQuit) {
+            out() << "0";
+        }
+        else {
+            out() << "1";
+        }
+        out() << "-" << _items.size() << "]: ";
 
         unsigned long choice;
         in() >> choice;

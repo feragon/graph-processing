@@ -1,8 +1,8 @@
 #include "vertexdata.h"
 
-VertexData::VertexData(int x, int y) {
-    _inf = x;
-    _sup = y;
+VertexData::VertexData(int inf, int sup) {
+    _inf = inf;
+    _sup = sup;
     _canWait = true;
 }
 

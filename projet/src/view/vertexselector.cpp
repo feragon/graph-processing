@@ -3,17 +3,18 @@
 #include "vertexselector.h"
 #include "cli.h"
 
-VertexSelector::VertexSelector(std::ostream& out, std::istream& in, CLI* cli, const std::string& vertexName, bool canBeEmpty) :
+VertexSelector::VertexSelector(std::ostream& out, std::istream& in, CLI* cli, const std::string& vertexName, bool canBeEmpty, ModelingGraph* graph) :
         View(out, in, cli) {
     _vertexName = vertexName;
     _canBeEmpty = canBeEmpty;
     _selected = nullptr;
+    _graph = graph;
 }
 
 void VertexSelector::show() {
     out() << "Liste des sommets du graphe" << std::endl;
 
-    for(auto vertex = cli()->graph()->sommets(); vertex; vertex = vertex->next) {
+    for(auto vertex = graph()->sommets(); vertex; vertex = vertex->next) {
         out() << vertex->value->cle() << '\t';
     }
 
@@ -34,7 +35,7 @@ void VertexSelector::show() {
             return;
         }
 
-        for(auto vertex = cli()->graph()->sommets(); vertex; vertex = vertex->next) {
+        for(auto vertex = graph()->sommets(); vertex; vertex = vertex->next) {
             if(vertex->value->cle() == selectedVertex) {
                 _selected = vertex->value;
                 return;
@@ -43,4 +44,11 @@ void VertexSelector::show() {
 
         out() << "Sommet inexistant" << std::endl;
     } while(true);
+}
+
+ModelingGraph* VertexSelector::graph() const {
+    if(_graph) {
+        return _graph;
+    }
+    return cli()->graph();
 }

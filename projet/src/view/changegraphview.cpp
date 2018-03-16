@@ -4,9 +4,12 @@
 #include <file/gprparser.h>
 #include <fstream>
 #include "cli.h"
+#include "creategraphview.h"
 
 ChangeGraphView::ChangeGraphView(std::ostream& out, std::istream& in, CLI* cli) :
         MenuView(out, in, cli, cli->graph() != nullptr) {
+    addItem("Créer un graphe", std::bind(&ChangeGraphView::onCreateGraphSelected, this));
+
     DIR* dir;
     struct dirent* ent;
 
@@ -51,5 +54,16 @@ void ChangeGraphView::openGraph(const std::string& path) {
     cli()->setGraph(new ModelingGraph(gprp.graphe()));
 
     quitMenu();
+}
+
+void ChangeGraphView::onCreateGraphSelected() {
+    CreateGraphView cgv(out(), in(), cli());
+    cgv.show();
+
+    if(!cgv.discard()) {
+        cli()->setGraph(new ModelingGraph(cgv.graph()));
+        out() << "Graphe changé" << std::endl;
+        quitMenu();
+    }
 }
 

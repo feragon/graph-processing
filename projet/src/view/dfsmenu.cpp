@@ -111,6 +111,10 @@ void DFSMenu::onSCCSelected() {
     auto scc = DFS::stronglyConnectedComponents(cli()->graph());
     out() << "Graphe parcouru en " << float(clock() - begin_time) / CLOCKS_PER_SEC << " secondes." << std::endl;
 
+    for(auto l = cli()->graph()->sommets(); l ; l = l->next) {
+        scc.at(l->value);
+    }
+
     SCCMetaData sccMetaData(scc);
     cli()->setView(new DOTGeneratorView(out(), in(), cli(), &sccMetaData));
 }

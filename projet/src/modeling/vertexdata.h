@@ -6,15 +6,15 @@
 class VertexData {
     public:
         VertexData();
-        VertexData(int x, int y);
+        VertexData(int inf, int sup);
 
         inline int inf() const;
 
-        inline void setInf(int x);
+        inline void setInf(int inf);
 
         inline int sup() const;
 
-        inline void setSup(int y);
+        inline void setSup(int sup);
 
         inline bool canWait() const;
 
@@ -32,16 +32,16 @@ int VertexData::inf() const {
     return _inf;
 }
 
-void VertexData::setInf(int x) {
-    _inf = x;
+void VertexData::setInf(int inf) {
+    _inf = inf;
 }
 
 int VertexData::sup() const {
     return _sup;
 }
 
-void VertexData::setSup(int y) {
-    _sup = y;
+void VertexData::setSup(int sup) {
+    _sup = sup;
 }
 
 bool VertexData::canWait() const {

@@ -11,6 +11,10 @@ class ChangeGraphView : public MenuView {
 
     private:
         /**
+         * @brief Fonction appelée lorsque l'utilisateur veut créer un nouveau graphe
+         */
+        void onCreateGraphSelected();
+        /**
          * @brief Compare deux suffixes
          * @param fileName Nom du fichier
          * @param suffix Suffixe
