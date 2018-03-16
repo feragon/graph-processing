@@ -6,6 +6,7 @@
 #include "dotgeneratorview.h"
 #include "dfsmetadata.h"
 #include "vertexselector.h"
+#include "sccmetadata.h"
 
 DFSMenu::DFSMenu(std::ostream& out, std::istream& in, CLI* cli) :
         MenuView(out, in, cli, true) {
@@ -14,6 +15,7 @@ DFSMenu::DFSMenu(std::ostream& out, std::istream& in, CLI* cli) :
     addItem("Detection de circuits", std::bind(&DFSMenu::onCycleDetectionSelected, this));
     addItem("Numérotation (suffixe/prefixe/topologique)", std::bind(&DFSMenu::onNumberingSelected, this));
     addItem("Existence chemin", std::bind(&DFSMenu::onPathFindingSelected, this));
+    addItem("Affichage CFC", std::bind(&DFSMenu::onSCCSelected, this));
 }
 
 void DFSMenu::onGraphicRepresentationSelected() {
@@ -101,4 +103,14 @@ void DFSMenu::onPathFindingSelected() {
         out() << "non";
     }
     out() << "\n";
+}
+
+void DFSMenu::onSCCSelected() {
+    out() << "Début du parcours" << std::endl;
+    clock_t begin_time = clock();
+    auto scc = DFS::stronglyConnectedComponents(cli()->graph());
+    out() << "Graphe parcouru en " << float(clock() - begin_time) / CLOCKS_PER_SEC << " secondes." << std::endl;
+
+    SCCMetaData sccMetaData(scc);
+    cli()->setView(new DOTGeneratorView(out(), in(), cli(), &sccMetaData));
 }

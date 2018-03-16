@@ -12,4 +12,5 @@ class DFSMenu : public MenuView {
         void onCycleDetectionSelected();
         void onNumberingSelected();
         void onPathFindingSelected();
+        void onSCCSelected();
 };

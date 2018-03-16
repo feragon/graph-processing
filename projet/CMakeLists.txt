@@ -77,7 +77,9 @@ set(SOURCE_FILES
         src/view/dotgeneratorview.cpp
         src/view/dotgeneratorview.h
         src/view/vertexselector.cpp
-        src/view/vertexselector.h)
+        src/view/vertexselector.h
+        src/view/sccmetadata.cpp
+        src/view/sccmetadata.h)
 
 add_executable(projet-modelisation ${SOURCE_FILES})
 add_library(projet ${SOURCE_FILES})
