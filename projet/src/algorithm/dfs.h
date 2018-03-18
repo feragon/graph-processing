@@ -72,6 +72,12 @@ class DFS : public DisconnectedGraphSearch {
          */
         unsigned int topologicalNumber(const Sommet<VertexData>* vertex) const;
 
+        /**
+         * @brief Donne le nombre de numérotations suffixes
+         * @return Nombre de numérotations suffixes
+         */
+        inline unsigned int suffixNumberCount() const;
+
     private:
         /**
          * @brief Ferme un voisin et ferme les sommets parents
@@ -106,4 +112,8 @@ class DFS : public DisconnectedGraphSearch {
 
 bool DFS::hasCycle() const {
         return _hasCycle;
+}
+
+unsigned int DFS::suffixNumberCount() const {
+        return _nextSuffixNumber - 1;
 }

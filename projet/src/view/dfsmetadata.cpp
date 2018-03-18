@@ -20,9 +20,6 @@ std::string DFSMetaData::getVertexBackground(const Sommet<VertexData>* vertex) {
     if(_dfs->closed(vertex)) {
         return "green";
     }
-    else if(_dfs->explored(vertex)) { //TODO: utile ?
-        return "blue";
-    }
     else {
         return "red";
     }
@@ -44,13 +41,36 @@ std::string DFSMetaData::getVertexLabel(const Sommet<VertexData>* vertex) {
            + "S:" + std::to_string(_dfs->suffixNumber(vertex));
 }
 
-std::map<std::string, std::vector<Sommet<VertexData>*>> DFSMetaData::getVerticesCluster(Liste<Sommet<VertexData>>* vertices) {
-    std::map<std::string, std::vector<Sommet<VertexData>*>> res;
-
-    for(auto vertex = vertices; vertex; vertex = vertex->next) {
-        std::string cluster = "Composante " + std::to_string(_dfs->component(vertex->value));
-        res[cluster].push_back(vertex->value);
+std::string DFSMetaData::additionalData() {
+    if(_dfs->hasCycle()) {
+        return "";
     }
 
-    return res;
+    std::map<unsigned int, const Sommet<VertexData>*> _topologicalOrder;
+    for(auto l = _dfs->graph()->sommets(); l; l = l->next) {
+        _topologicalOrder[_dfs->topologicalNumber(l->value)] = l->value;
+    }
+
+    std::ostringstream oss;
+
+    for(unsigned int i = 1; i <= _dfs->suffixNumberCount(); i++) {
+        oss << "{" << std::endl;
+        oss << "rank=\"same\"" << std::endl;
+        oss << "T" << i << "[group=\"topologicalOrder\",shape=\"plaintext\",color=\"white\"]" << std::endl;
+
+        try {
+            oss << _topologicalOrder.at(i)->cle() << std::endl;
+        }
+        catch (std::out_of_range& e) {
+
+        }
+
+        oss << "}" << std::endl;
+    }
+
+    for(unsigned int i = 1; i < _dfs->suffixNumberCount(); i++) {
+        oss << "T" << i << " -> T" << i+1 << std::endl;
+    }
+
+    return oss.str();
 }

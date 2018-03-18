@@ -26,3 +26,7 @@ std::map<std::string, std::vector<Sommet<VertexData>*>> DotMetaData::getVertices
 
     return res;
 }
+
+std::string DotMetaData::additionalData() {
+    return "";
+}

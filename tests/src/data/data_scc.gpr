@@ -16,6 +16,7 @@ s1  50  68
 sectionArcs
 arc1 s0 s1 0 0
 arc2 s1 s0 0 0
+arc3 s1 s2 0 0
 
 sectionGraphes
 graphe1 i  s0  s1
