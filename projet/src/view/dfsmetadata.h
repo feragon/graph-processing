@@ -15,8 +15,8 @@ class DFSMetaData : public DotMetaData {
 
         std::string getVertexLabel(const Sommet<VertexData>* vertex) override;
 
-        std::map<std::string, std::vector<Sommet<VertexData>*>>
-        getVerticesCluster(Liste<Sommet<VertexData>>* vertices) override;
+        std::string additionalData() override;
+
 
     private:
         const DFS* _dfs;

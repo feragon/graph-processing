@@ -10,6 +10,7 @@ void DotWriter::writeGraph(const std::string& name, const ModelingGraph& graph, 
     _out << "node [style=filled]" << std::endl;
     writeVertices(graph, metaData);
     writeEdges(graph, metaData);
+    _out << metaData->additionalData();
     _out << "}" << std::endl;
 }
 

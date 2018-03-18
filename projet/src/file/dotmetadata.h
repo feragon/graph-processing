@@ -42,4 +42,10 @@ class DotMetaData {
          * @return Association nom -> sommets
          */
         virtual std::map<std::string, std::vector<Sommet<VertexData>*>> getVerticesCluster(Liste<Sommet<VertexData>>* vertices);
+
+        /**
+         * @brief Ajoute des données supplémentaires à la fin du graphe
+         * @return Données DOT suplémentaires
+         */
+        virtual std::string additionalData();
 };
