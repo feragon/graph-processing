@@ -36,14 +36,14 @@ TEST_CASE("testPCC") {
 
     PCC *pcc = new PCC(&graphe);
     pcc->begin(x1, cout);
-    
-    pcc->pluscourtchemin(x1);
-    pcc->pluscourtchemin(x2);
-    pcc->pluscourtchemin(x3);
-    pcc->pluscourtchemin(x4);
-    pcc->pluscourtchemin(x5);
-    pcc->pluscourtchemin(x6);
-    pcc->pluscourtchemin(x7);
+
+    pcc->plusCourtChemin(x1);
+    pcc->plusCourtChemin(x2);
+    pcc->plusCourtChemin(x3);
+    pcc->plusCourtChemin(x4);
+    pcc->plusCourtChemin(x5);
+    pcc->plusCourtChemin(x6);
+    pcc->plusCourtChemin(x7);
 
     REQUIRE(pcc->explored(x6));
     REQUIRE(!pcc->explored(x7));

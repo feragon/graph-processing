@@ -25,8 +25,8 @@ TEST_CASE("testPCCArbreDeuxBranches") {
 
     PCC *pcc = new PCC(&graphe);
     pcc->begin(x1, cout);
-    pcc->pluscourtchemin(x3);
-    pcc->pluscourtchemin(x5);
+    pcc->plusCourtChemin(x3);
+    pcc->plusCourtChemin(x5);
 
     REQUIRE(pcc->explored(x3));
     REQUIRE(pcc->explored(x5));

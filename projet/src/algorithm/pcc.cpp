@@ -72,7 +72,7 @@ void PCC::analyzeVertex(const Sommet<VertexData>* vertex) {
     Liste<Arete<EdgeData, VertexData>>::efface1(successors);
 }
 
-void PCC::pluscourtchemin(Sommet<VertexData>* sommet) {
+void PCC::plusCourtChemin(Sommet<VertexData>* sommet) {
     int valeur = _ppv->getLambda(sommet);
 
     if(valeur == std::numeric_limits<int>::max())

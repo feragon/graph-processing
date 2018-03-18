@@ -5,33 +5,41 @@
 #include "etiquette.h"
 
 class PCCFT : public Search {
-protected:
-    void analyzeVertex(const Sommet<VertexData>* vertex) override;
+    protected:
+        void analyzeVertex(const Sommet<VertexData>* vertex) override;
 
-    void initEtiquettes();
+        void initEtiquettes();
 
-    Liste<Etiquette>* pareto(std::pair<Sommet<VertexData>*, Liste<Etiquette>*> *pair, Etiquette *E);
+        Liste<Etiquette>* pareto(std::pair<Sommet<VertexData>*, Liste<Etiquette>*> *pair, Etiquette *E);
 
-    std::pair<Sommet<VertexData>*, Liste<Etiquette>*>* ETIQ(const Sommet<VertexData>* sommet);
+        std::pair<Sommet<VertexData>*, Liste<Etiquette>*>* ETIQ(const Sommet<VertexData>* sommet);
 
-public:
-    PCCFT(const Graphe<EdgeData, VertexData>* graph);
+    public:
+        PCCFT(const Graphe<EdgeData, VertexData>* graph);
 
-    /**
+        /**
          * @brief Commence la recherche
          * @param start Départ
          */
-    void begin(const Sommet<VertexData>* start);
+        void begin(const Sommet<VertexData>* start);
 
-    void meilleurChemin(Sommet<VertexData>* destination, std::pair<int, int> (*choix)(Etiquette* E), int fenetreMin = 0, int fenetreMax = std::numeric_limits<int>::max());
+        /**
+         * @brief Donne le meilleur chemin
+         * @param destination Destination
+         * @param choix Fonction de choix
+         * @param fenetreMin Fenetre minimale
+         * @param fenetreMax Fenetre maximale
+         * @TODO: retourner std::vector<Sommet<VertexData>*>
+         */
+        void meilleurChemin(Sommet<VertexData>* destination, std::pair<int, int> (*choix)(Etiquette* E), int fenetreMin = 0, int fenetreMax = std::numeric_limits<int>::max());
 
-    void reset() override;
+        void reset() override;
 
-    virtual ~PCCFT();
+        virtual ~PCCFT();
 
-private:
-    const Sommet<VertexData>* _start;
-    Liste<std::pair<Sommet<VertexData>*, Liste<Etiquette>*>>* _etiquettes;
+    private:
+        const Sommet<VertexData>* _start;
+        Liste<std::pair<Sommet<VertexData>*, Liste<Etiquette>*>>* _etiquettes;
 };
 
 std::pair<int, int> cout(Etiquette* E);

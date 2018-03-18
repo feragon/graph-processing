@@ -19,7 +19,12 @@ public:
      */
     void begin(const Sommet<VertexData>* start, int (*choix)(Arete<EdgeData, VertexData>*));
 
-    void pluscourtchemin(Sommet<VertexData>* sommet);
+    /**
+     * @brief Donne le plus court chemin
+     * @param sommet
+     * @TODO: renvoyer std::vector<Sommet<VertexData>*>
+     */
+    void plusCourtChemin(Sommet<VertexData>* sommet);
 
     void reset() override;
 

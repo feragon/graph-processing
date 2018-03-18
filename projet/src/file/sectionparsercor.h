@@ -21,6 +21,17 @@ class SectionParserCOR : public SectionParser {
          * @return Faux si la ligne n'est pas reconnue
          */
         virtual bool parseInternal(const std::string& line, GPRParser* parser) = 0;
+
+        /**
+         * @brief Retourne le prochain expert
+         * @return SectionParserCOR*
+         */
+        inline SectionParserCOR* next();
+
     private:
         SectionParserCOR* _next;
 };
+
+SectionParserCOR* SectionParserCOR::next() {
+        return _next;
+}

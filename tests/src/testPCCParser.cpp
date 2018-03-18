@@ -17,7 +17,7 @@ TEST_CASE("testPCCParser") {
 
     PCC *pcc = new PCC(&gprp.graphe());
     pcc->begin(gprp.source(), cout);
-    pcc->pluscourtchemin(gprp.puits());
+    pcc->plusCourtChemin(gprp.puits());
 
     REQUIRE(pcc->explored(gprp.puits()));
 }

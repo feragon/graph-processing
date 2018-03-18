@@ -32,7 +32,12 @@ GPRParser::GPRParser(std::istream& buffer) :
 }
 
 GPRParser::~GPRParser() {
-    delete _parser; //TODO: libérer tous les traitements
+    SectionParserCOR* next;
+    while (_parser) {
+        next = _parser->next();
+        delete _parser;
+        _parser = next;
+    }
 }
 
 void GPRParser::load() {
