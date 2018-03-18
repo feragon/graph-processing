@@ -11,7 +11,7 @@ class PCCFT : public Search {
 
         void initEtiquettes();
 
-        Liste<Etiquette>* pareto(std::pair<Sommet<VertexData>*, Liste<Etiquette>*> *pair, Etiquette *E);
+        Liste<Etiquette>* pareto(std::pair<Sommet<VertexData>*, Liste<Etiquette>*> *pair, Etiquette *E, bool *etiquetteUpdate);
 
         std::pair<Sommet<VertexData>*, Liste<Etiquette>*>* ETIQ(const Sommet<VertexData>* sommet);
 
