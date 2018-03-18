@@ -81,9 +81,10 @@ Liste<Etiquette>* PCCFT::pareto(std::pair<Sommet<VertexData>*, Liste<Etiquette>*
         return new Liste<Etiquette>(E, nullptr);
 }
 
-void PCCFT::meilleurChemin(Sommet<VertexData> *sommet, std::pair<int, int> (*choix)(Etiquette* E), int fenetreMin, int fenetreMax) {
+std::vector<const Sommet<VertexData>*> PCCFT::meilleurChemin(Sommet<VertexData> *sommet, std::pair<int, int> (*choix)(Etiquette* E), int fenetreMin, int fenetreMax) {
 
     Etiquette *res = nullptr;
+    std::vector<const Sommet<VertexData>*> chemin;
 
     for(auto l = ETIQ(sommet)->second; l; l = l->next) {
 
@@ -96,16 +97,18 @@ void PCCFT::meilleurChemin(Sommet<VertexData> *sommet, std::pair<int, int> (*cho
     }
 
     if(res) {
-        std::cout << "Meilleur chemin de valeur " << choix(res).first
-                  << " dans la fenetre ["
-                  << fenetreMin << ";" << fenetreMax << "] (" << choix(res).second << ") :" << std::endl;
+        std::cout << "Meilleur chemin de consommation " << choix(res).first
+                  << " (ressource de " << choix(res).second << ") dans la fenetre ["
+                  << fenetreMin << ";" << fenetreMax << "] :" << std::endl;
 
         std::string sorti = "";
         while (res->predecesseur()) {
             sorti.insert(0, " -> " + res->sommet()->cle());
+            chemin.insert(chemin.begin(), res->sommet());
             res = res->predecesseur();
         }
         std::cout << sorti.insert(0, res->sommet()->cle()) << std::endl;
+        chemin.insert(chemin.begin(), res->sommet());
     }
     else {
         std::cout << "Il n'y a pas de chemin possible entre "
@@ -113,6 +116,7 @@ void PCCFT::meilleurChemin(Sommet<VertexData> *sommet, std::pair<int, int> (*cho
                   << fenetreMin << ";" << fenetreMax << "]." << std::endl;
     }
     std::cout << std::endl;
+    return chemin;
 }
 
 void PCCFT::reset() {
@@ -122,6 +126,7 @@ void PCCFT::reset() {
         Liste<Etiquette>::efface1(_etiquettes->value->second);
 
     Liste<std::pair<Sommet<VertexData>*, Liste<Etiquette>*>>::efface1(_etiquettes);
+    _etiquettes = nullptr;
 }
 
 PCCFT::~PCCFT() {
@@ -129,7 +134,6 @@ PCCFT::~PCCFT() {
 }
 
 void PCCFT::initEtiquettes() {
-    _etiquettes = NULL;
 
     auto sommets = graph()->sommets();
     for(auto l = sommets; l; l = l->next) {

@@ -22,9 +22,9 @@ public:
     /**
      * @brief Donne le plus court chemin
      * @param sommet
-     * @TODO: renvoyer std::vector<Sommet<VertexData>*>
+     * @return std::vector<const Sommet<VertexData>*> Meilleur chemin de _start à destination
      */
-    void plusCourtChemin(Sommet<VertexData>* sommet);
+    std::vector<const Sommet<VertexData>*> plusCourtChemin(Sommet<VertexData>* sommet);
 
     void reset() override;
 
@@ -41,4 +41,4 @@ private:
 };
 
 int cout(Arete<EdgeData, VertexData>* arete);
-int duree(Arete<EdgeData, VertexData>* arete);
+int temps(Arete<EdgeData, VertexData>* arete);

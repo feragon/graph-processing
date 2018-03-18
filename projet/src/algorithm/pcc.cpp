@@ -72,8 +72,10 @@ void PCC::analyzeVertex(const Sommet<VertexData>* vertex) {
     Liste<Arete<EdgeData, VertexData>>::efface1(successors);
 }
 
-void PCC::plusCourtChemin(Sommet<VertexData>* sommet) {
+std::vector<const Sommet<VertexData>*> PCC::plusCourtChemin(Sommet<VertexData>* sommet) {
+
     int valeur = _ppv->getLambda(sommet);
+    std::vector<const Sommet<VertexData>*> chemin;
 
     if(valeur == std::numeric_limits<int>::max())
         std::cout << "Il n'existe pas de chemin entre " << _start->cle() << " et " << sommet->cle() << std::endl;
@@ -85,15 +87,19 @@ void PCC::plusCourtChemin(Sommet<VertexData>* sommet) {
         std::string sorti = "";
         while (s != _start) {
             sorti.insert(0, " -> " + s->cle());
+            chemin.insert(chemin.begin(), s);
             s = _ppv->getPere(s);
         }
         std::cout << sorti.insert(0, s->cle()) << std::endl;
+        chemin.insert(chemin.begin(), s);
     }
+
+    return chemin;
 }
 
 int cout(Arete<EdgeData, VertexData>* arete) {
     return arete->contenu().cost();
 }
-int duree(Arete<EdgeData, VertexData>* arete) {
+int temps(Arete<EdgeData, VertexData>* arete) {
     return arete->contenu().time();
 }
