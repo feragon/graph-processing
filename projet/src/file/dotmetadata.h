@@ -9,6 +9,7 @@
 
 class DotMetaData {
     public:
+        virtual ~DotMetaData() = default;
         /**
          * Les double quotes doivent être échapées
          * @param edge Arête

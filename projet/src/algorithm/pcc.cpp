@@ -39,19 +39,15 @@ void PCC::analyzeVertex(const Sommet<VertexData>* vertex) {
 
     for(auto l = successors; l; l = l->next) {
         if(!closed(l->value->fin())) {
-
             int nouveauLambda = std::numeric_limits<int>::max();
 
-            if (_ppv->getLambda(vertex) < nouveauLambda)
+            if (_ppv->getLambda(vertex) < nouveauLambda) {
                 nouveauLambda = _ppv->getLambda(vertex) + _choixDonnee(l->value);
+            }
 
             if (nouveauLambda < _ppv->getLambda(l->value->fin())) {
                 _ppv->setLambda(l->value->fin(), nouveauLambda);
                 _ppv->setPere(l->value->fin(), vertex);
-
-                /*std::cout << "Mise a jour de " << l->value->fin()->cle()
-                          << " : pere=" << vertex->cle()
-                          << " val=" << _ppv->getLambda(l->value->fin()) << std::endl;*/
             }
 
             if(!explored(l->value->fin())) {
@@ -62,7 +58,6 @@ void PCC::analyzeVertex(const Sommet<VertexData>* vertex) {
                 }
                 nextEdges().insert(it, l->value);
             }
-
         }
     }
 
@@ -72,25 +67,21 @@ void PCC::analyzeVertex(const Sommet<VertexData>* vertex) {
     Liste<Arete<EdgeData, VertexData>>::efface1(successors);
 }
 
-std::vector<const Sommet<VertexData>*> PCC::plusCourtChemin(Sommet<VertexData>* sommet) {
-
+std::vector<const Sommet<VertexData>*> PCC::plusCourtChemin(Sommet<VertexData>* sommet, int* res) {
     int valeur = _ppv->getLambda(sommet);
     std::vector<const Sommet<VertexData>*> chemin;
 
-    if(valeur == std::numeric_limits<int>::max())
-        std::cout << "Il n'existe pas de chemin entre " << _start->cle() << " et " << sommet->cle() << std::endl;
-    else {
-        std::cout << "PCC de valeur " << valeur << " : ";
-
+    if(valeur != std::numeric_limits<int>::max()) {
+        if(res) {
+            *res = valeur;
+        }
         const Sommet<VertexData> *s = sommet;
 
-        std::string sorti = "";
         while (s != _start) {
-            sorti.insert(0, " -> " + s->cle());
             chemin.insert(chemin.begin(), s);
             s = _ppv->getPere(s);
         }
-        std::cout << sorti.insert(0, s->cle()) << std::endl;
+
         chemin.insert(chemin.begin(), s);
     }
 

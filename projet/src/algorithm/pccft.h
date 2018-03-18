@@ -28,9 +28,15 @@ class PCCFT : public Search {
          * @param choix Fonction de choix
          * @param fenetreMin Fenetre minimale
          * @param fenetreMax Fenetre maximale
+         * @param etiquette Résultat, ou nullptr pour ne pas le renvoyer, pas changé si le chemin est vide
          * @return std::vector<const Sommet<VertexData>*> Meilleur chemin de _start à destination
          */
-        std::vector<const Sommet<VertexData>*> meilleurChemin(const Sommet<VertexData>* destination, std::pair<int, int> (*choix)(Etiquette* E), int fenetreMin = 0, int fenetreMax = std::numeric_limits<int>::max());
+        std::vector<const Sommet<VertexData>*> meilleurChemin(const Sommet<VertexData>* destination,
+                                                              std::pair<int, int> (*choix)(Etiquette* E),
+                                                              int fenetreMin = 0,
+                                                              int fenetreMax = std::numeric_limits<int>::max(),
+                                                              Etiquette* etiquette = nullptr
+        );
 
         static std::pair<int, int> cout(Etiquette* E);
         static std::pair<int, int> temps(Etiquette* E);

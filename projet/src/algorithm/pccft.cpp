@@ -86,7 +86,7 @@ Liste<Etiquette>* PCCFT::pareto(Liste<Etiquette>* etiquettes, Etiquette *E, bool
     }
 }
 
-std::vector<const Sommet<VertexData>*> PCCFT::meilleurChemin(const Sommet<VertexData> *sommet, std::pair<int, int> (*choix)(Etiquette* E), int fenetreMin, int fenetreMax) {
+std::vector<const Sommet<VertexData>*> PCCFT::meilleurChemin(const Sommet<VertexData> *sommet, std::pair<int, int> (*choix)(Etiquette* E), int fenetreMin, int fenetreMax, Etiquette* etiquette) {
 
     Etiquette *res = nullptr;
     std::vector<const Sommet<VertexData>*> chemin;
@@ -102,25 +102,15 @@ std::vector<const Sommet<VertexData>*> PCCFT::meilleurChemin(const Sommet<Vertex
     }
 
     if(res) {
-        std::cout << "Meilleur chemin de valeur " << choix(res).first
-                  << " (ressource de " << choix(res).second << ") dans la fenetre ["
-                  << fenetreMin << ";" << fenetreMax << "] :" << std::endl;
-
-        std::string sorti = "";
+        if(etiquette) {
+            *etiquette = *res;
+        }
         while (res->predecesseur()) {
-            sorti.insert(0, " -> " + res->sommet()->cle());
             chemin.insert(chemin.begin(), res->sommet());
             res = res->predecesseur();
         }
-        std::cout << sorti.insert(0, res->sommet()->cle()) << std::endl;
         chemin.insert(chemin.begin(), res->sommet());
     }
-    else {
-        std::cout << "Il n'y a pas de chemin possible entre "
-                  << _start->cle() << " et " << sommet->cle() << " dans la fenetre ["
-                  << fenetreMin << ";" << fenetreMax << "]." << std::endl;
-    }
-    std::cout << std::endl;
 
     return chemin;
 }

@@ -39,7 +39,21 @@ void PCCMenu::onShortestPathSelected() {
 
     out() << "Graphe parcouru en " << float(clock() - begin_time) / CLOCKS_PER_SEC << " secondes." << std::endl;
 
-    pcc.plusCourtChemin((Sommet<VertexData>*)vs_puit.selected());
+    int valeur;
+    auto chemin = pcc.plusCourtChemin((Sommet<VertexData>*)vs_puit.selected(), &valeur);
+    
+    out() << "Chemin";
+    for(auto sommet : chemin) {
+        out() << " -> " << sommet->cle();
+    }
+    if(chemin.empty()) {
+        out() << " non trouvé";
+    }
+    else {
+        out() << std::endl;
+        out() << "Valeur: " << valeur;
+    }
+    out() << std::endl;
 }
 
 void PCCMenu::onShortestPathVisualizationSelected() {
@@ -112,10 +126,27 @@ void PCCMenu::onShortestPathWindowSelected() {
         stream >> b;
     }
 
-    if(functChoice == 'c')
-        pccft.meilleurChemin((Sommet<VertexData>*)vs_puit.selected(), PCCFT::cout, a, b);
-    else
-        pccft.meilleurChemin((Sommet<VertexData>*)vs_puit.selected(), PCCFT::temps, a, b);
+    Etiquette e(nullptr, nullptr, 0, 0);
+    std::vector<const Sommet<VertexData>*> chemin;
+    if(functChoice == 'c') {
+        chemin = pccft.meilleurChemin((Sommet<VertexData>*) vs_puit.selected(), PCCFT::cout, a, b, &e);
+    }
+    else {
+        chemin = pccft.meilleurChemin((Sommet<VertexData>*) vs_puit.selected(), PCCFT::temps, a, b, &e);
+    }
+
+    out() << "Chemin";
+    for(auto sommet : chemin) {
+        out() << " -> " << sommet->cle();
+    }
+    if(chemin.empty()) {
+        out() << " non trouvé";
+    }
+    else {
+        out() << std::endl;
+        out() << "Coût: " << e.cost() << " temps:" << e.time() << std::endl;
+    }
+    out() << std::endl;
 }
 
 void PCCMenu::onShortestPathWindowVisualizationSelected() {
@@ -160,12 +191,14 @@ void PCCMenu::onShortestPathWindowVisualizationSelected() {
 
 
     PCCFTMetaData *pmd;
-    if(functChoice == 'c')
-        pmd = new PCCFTMetaData(&pccft, pccft.meilleurChemin((Sommet<VertexData>*)vs_puit.selected(), PCCFT::cout, a, b));
-    else
-        pmd = new PCCFTMetaData(&pccft, pccft.meilleurChemin((Sommet<VertexData>*)vs_puit.selected(), PCCFT::temps, a, b));
+    if(functChoice == 'c') {
+        pmd = new PCCFTMetaData(&pccft, pccft.meilleurChemin((Sommet<VertexData>*) vs_puit.selected(), PCCFT::cout, a, b));
+    }
+    else {
+        pmd = new PCCFTMetaData(&pccft, pccft.meilleurChemin((Sommet<VertexData>*) vs_puit.selected(), PCCFT::temps, a, b));
+    }
 
     cli()->setView(new DOTGeneratorView(out(), in(), cli(), pmd));
 
-    //delete pmd;
+    delete pmd;
 }
