@@ -11,9 +11,7 @@ class PCCFT : public Search {
 
         void initEtiquettes();
 
-        Liste<Etiquette>* pareto(std::pair<Sommet<VertexData>*, Liste<Etiquette>*> *pair, Etiquette *E, bool *etiquetteUpdate);
-
-        std::pair<Sommet<VertexData>*, Liste<Etiquette>*>* ETIQ(const Sommet<VertexData>* sommet);
+        Liste<Etiquette>* pareto(Liste<Etiquette>* etiquettes, Etiquette *E, bool *etiquetteUpdate);
 
     public:
         PCCFT(const Graphe<EdgeData, VertexData>* graph);
@@ -42,5 +40,5 @@ class PCCFT : public Search {
 
     private:
         const Sommet<VertexData>* _start;
-        Liste<std::pair<Sommet<VertexData>*, Liste<Etiquette>*>>* _etiquettes = nullptr;
+        std::map<const Sommet<VertexData>*, Liste<Etiquette>*> _etiquettes;
 };

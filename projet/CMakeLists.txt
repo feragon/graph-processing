@@ -49,8 +49,8 @@ set(SOURCE_FILES
         src/algorithm/search.cpp
         src/algorithm/pcc.cpp
         src/algorithm/pcc.h
-        src/algorithm/pairPereValeur.cpp
-        src/algorithm/pairPereValeur.h
+        src/algorithm/PairPereValeur.cpp
+        src/algorithm/PairPereValeur.h
         src/file/dotwriter.cpp
         src/file/dotwriter.h
         src/file/dotmetadata.cpp

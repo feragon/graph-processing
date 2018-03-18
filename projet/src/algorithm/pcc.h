@@ -2,7 +2,7 @@
 
 #include <graph/graphe.h>
 #include "search.h"
-#include "pairPereValeur.h"
+#include "PairPereValeur.h"
 
 
 class PCC : public Search {
@@ -39,5 +39,5 @@ private:
      */
     int (*_choixDonnee)(Arete<EdgeData, VertexData>*);
     const Sommet<VertexData>* _start;
-    pairPereValeur* _ppv;
+    PairPereValeur* _ppv;
 };

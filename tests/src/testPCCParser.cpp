@@ -20,4 +20,5 @@ TEST_CASE("testPCCParser") {
     pcc->plusCourtChemin(gprp.puits());
 
     REQUIRE(pcc->explored(gprp.puits()));
+    delete pcc;
 }

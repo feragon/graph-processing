@@ -30,5 +30,5 @@ TEST_CASE("testPCCArbreDeuxBranches") {
 
     REQUIRE(pcc->explored(x3));
     REQUIRE(pcc->explored(x5));
-
+    delete pcc;
 }

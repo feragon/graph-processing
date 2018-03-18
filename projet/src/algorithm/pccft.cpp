@@ -14,9 +14,12 @@ void PCCFT::analyzeVertex(const Sommet<VertexData> *vertex) {
 
     for(auto l = successors; l; l = l->next) {
 
-        for(auto m = ETIQ(vertex)->second; m; m = m->next) {
+        for(auto m = _etiquettes[vertex]; m; m = m->next) {
             Etiquette *E = new Etiquette(l->value->fin(), m->value, m->value->cost() + l->value->contenu().cost(), m->value->time() + l->value->contenu().time());
-            ETIQ(l->value->fin())->second = pareto(ETIQ(l->value->fin()), E, &etiquetteUpdated);
+            _etiquettes[l->value->fin()] = pareto(_etiquettes[l->value->fin()], E, &etiquetteUpdated);
+            if(!etiquetteUpdated) {
+                delete E;
+            }
 
             if(etiquetteUpdated) {
                 nextEdges().insert(nextEdges().end(), l->value);
@@ -36,32 +39,37 @@ void PCCFT::begin(const Sommet<VertexData> *start) {
     search(start);
 }
 
-Liste<Etiquette>* PCCFT::pareto(std::pair<Sommet<VertexData>*, Liste<Etiquette>*> *pair, Etiquette *E, bool *etiquetteUpdated) {
+Liste<Etiquette>* PCCFT::pareto(Liste<Etiquette>* etiquettes, Etiquette *E, bool *etiquetteUpdated) {
 
     *etiquetteUpdated = false;
 
-    if(pair) {
-        auto l = pair->second;
+    if(etiquettes) {
+        auto l = etiquettes;
         while (l) {
             if (E->cost() <= l->value->cost() && E->time() <= l->value->time()) {
                 if (E->cost() < l->value->cost() || E->time() < l->value->time()) {
                     auto suppr = l->value;
                     l = l->next;
-                    Liste<Etiquette>::retire(suppr, pair->second);
+                    Liste<Etiquette>::retire(suppr, etiquettes);
+                    delete suppr;
                 }
-                else if(E->predecesseur() == l->value->predecesseur())
-                    return pair->second;
-                else
+                else if(E->predecesseur() == l->value->predecesseur()) {
+                    return etiquettes;
+                }
+                else {
                     l = l->next;
-            } else
+                }
+            }
+            else {
                 l = l->next;
+            }
         }
 
-        l = pair->second;
+        l = etiquettes;
         while (l) {
             if (E->cost() >= l->value->cost() && E->time() >= l->value->time()) {
                 if (E->cost() > l->value->cost() || E->time() > l->value->time())
-                    return pair->second;
+                    return etiquettes;
                 else
                     l = l->next;
             } else
@@ -69,7 +77,7 @@ Liste<Etiquette>* PCCFT::pareto(std::pair<Sommet<VertexData>*, Liste<Etiquette>*
         }
 
         *etiquetteUpdated = true;
-        return new Liste<Etiquette>(E, pair->second);
+        return new Liste<Etiquette>(E, etiquettes);
     }
     else {
 
@@ -83,7 +91,7 @@ std::vector<const Sommet<VertexData>*> PCCFT::meilleurChemin(const Sommet<Vertex
     Etiquette *res = nullptr;
     std::vector<const Sommet<VertexData>*> chemin;
 
-    for(auto l = ETIQ(sommet)->second; l; l = l->next) {
+    for(auto l = _etiquettes[sommet]; l; l = l->next) {
 
         if(choix(l->value).second >= fenetreMin && choix(l->value).second <= fenetreMax) {
             if(!res)
@@ -120,11 +128,11 @@ std::vector<const Sommet<VertexData>*> PCCFT::meilleurChemin(const Sommet<Vertex
 void PCCFT::reset() {
     Search::reset();
 
-    for(auto l = _etiquettes; l; l = l->next)
-        Liste<Etiquette>::efface1(_etiquettes->value->second);
+    for(auto pair : _etiquettes) {
+        Liste<Etiquette>::efface2(pair.second);
+    }
 
-    Liste<std::pair<Sommet<VertexData>*, Liste<Etiquette>*>>::efface1(_etiquettes);
-    _etiquettes = nullptr;
+    _etiquettes.clear();
 }
 
 PCCFT::~PCCFT() {
@@ -132,25 +140,13 @@ PCCFT::~PCCFT() {
 }
 
 void PCCFT::initEtiquettes() {
-
     auto sommets = graph()->sommets();
     for(auto l = sommets; l; l = l->next) {
-        auto *pair = new std::pair<Sommet<VertexData>*, Liste<Etiquette>*>(l->value, NULL);
-
-        _etiquettes = new Liste<std::pair<Sommet<VertexData>*, Liste<Etiquette>*>>(pair, _etiquettes);
+        _etiquettes[l->value] = NULL;
     }
 
     Etiquette *E = new Etiquette(_start, nullptr, 0, 0);
-    ETIQ(_start)->second = new Liste<Etiquette>(E, nullptr);
-}
-
-std::pair<Sommet<VertexData>*, Liste<Etiquette>*>* PCCFT::ETIQ(const Sommet<VertexData>* sommet) {
-    for(auto l = _etiquettes; l; l = l->next) {
-        if(l->value->first == sommet) {
-            return l->value;
-        }
-    }
-    return nullptr;
+    _etiquettes[_start] = new Liste<Etiquette>(E, nullptr);
 }
 
 std::pair<int, int> PCCFT::cout(Etiquette* E) {

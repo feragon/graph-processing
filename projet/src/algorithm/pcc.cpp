@@ -23,7 +23,7 @@ void PCC::reset() {
 
 void PCC::begin(const Sommet<VertexData>* start, int (* choix)(Arete<EdgeData, VertexData>*)) {
     reset();
-    _ppv = new pairPereValeur(graph(), start);
+    _ppv = new PairPereValeur(graph(), start);
     _start = start;
     _choixDonnee = choix;
 

@@ -51,4 +51,5 @@ TEST_CASE("testPCCFT") {
     pccft->meilleurChemin(x9, PCCFT::temps);
     pccft->meilleurChemin(x9, PCCFT::cout);
     pccft->meilleurChemin(x9, PCCFT::cout, 0, 12);
+    delete pccft;
 }

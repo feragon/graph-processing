@@ -1,7 +1,7 @@
 #include <limits>
-#include "pairPereValeur.h"
+#include "PairPereValeur.h"
 
-pairPereValeur::pairPereValeur(const Graphe<EdgeData, VertexData> *graphe, const Sommet<VertexData>* source) {
+PairPereValeur::PairPereValeur(const Graphe<EdgeData, VertexData> *graphe, const Sommet<VertexData>* source) {
 
     Liste<Sommet<VertexData>>* l = graphe->sommets();
     liste = NULL;
@@ -19,7 +19,7 @@ pairPereValeur::pairPereValeur(const Graphe<EdgeData, VertexData> *graphe, const
     }
 }
 
-int pairPereValeur::getLambda(const Sommet<VertexData> *sommet) {
+int PairPereValeur::getLambda(const Sommet<VertexData> *sommet) {
     Liste<PereLambda>* l = liste;
 
     while(l != NULL) {
@@ -30,7 +30,7 @@ int pairPereValeur::getLambda(const Sommet<VertexData> *sommet) {
     return std::numeric_limits<int>::max();
 }
 
-const Sommet<VertexData> *pairPereValeur::getPere(const Sommet<VertexData> *sommet) {
+const Sommet<VertexData> *PairPereValeur::getPere(const Sommet<VertexData> *sommet) {
     Liste<PereLambda>* l = liste;
 
     while(l != NULL) {
@@ -41,7 +41,7 @@ const Sommet<VertexData> *pairPereValeur::getPere(const Sommet<VertexData> *somm
     return NULL;
 }
 
-void pairPereValeur::setLambda(const Sommet<VertexData> *sommet, int lambda) {
+void PairPereValeur::setLambda(const Sommet<VertexData> *sommet, int lambda) {
     Liste<PereLambda>* l = liste;
 
     while(l != NULL) {
@@ -51,7 +51,7 @@ void pairPereValeur::setLambda(const Sommet<VertexData> *sommet, int lambda) {
     }
 }
 
-void pairPereValeur::setPere(const Sommet<VertexData> *sommet, const Sommet<VertexData> *pere) {
+void PairPereValeur::setPere(const Sommet<VertexData> *sommet, const Sommet<VertexData> *pere) {
     Liste<PereLambda>* l = liste;
 
     while(l != NULL) {
@@ -59,4 +59,8 @@ void pairPereValeur::setPere(const Sommet<VertexData> *sommet, const Sommet<Vert
             l->value->pere = pere;
         l = l->next;
     }
+}
+
+PairPereValeur::~PairPereValeur() {
+    Liste<PereLambda>::efface2(liste);
 }

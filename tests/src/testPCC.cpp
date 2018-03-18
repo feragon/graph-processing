@@ -47,4 +47,5 @@ TEST_CASE("testPCC") {
 
     REQUIRE(pcc->explored(x6));
     REQUIRE(!pcc->explored(x7));
+    delete pcc;
 }
