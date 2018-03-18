@@ -35,7 +35,7 @@ TEST_CASE("testPCC") {
 
 
     PCC *pcc = new PCC(&graphe);
-    pcc->begin(x1, cout);
+    pcc->begin(x1, PCC::cout);
 
     pcc->plusCourtChemin(x1);
     pcc->plusCourtChemin(x2);

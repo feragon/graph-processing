@@ -1,0 +1,30 @@
+# Graphe N = 6 ; M = 8
+
+ressources 1
+
+sectionSommets
+x1  0  0
+x2  0  0
+x3  0  0
+x4  0  0
+x5  0  0
+x6  0  0
+
+sources
+x1
+
+puits
+x6  0  0
+
+sectionArcs
+arc_1_2  x1  x2  2  2
+arc_1_3  x1  x3  7  4
+arc_2_4  x2  x4  2  4
+arc_2_5  x2  x5  4  3
+arc_3_5  x3  x5  3  4
+arc_4_3  x4  x3  1  2
+arc_4_6  x4  x6  8  4
+arc_5_6  x5  x6  2  2
+
+sectionGraphes
+graphe2 i  x1  x6

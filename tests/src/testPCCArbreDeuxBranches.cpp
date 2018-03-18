@@ -24,7 +24,7 @@ TEST_CASE("testPCCArbreDeuxBranches") {
     graphe.creeArete("arc4", EdgeData(1,0), x4, x5);
 
     PCC *pcc = new PCC(&graphe);
-    pcc->begin(x1, cout);
+    pcc->begin(x1, PCC::cout);
     pcc->plusCourtChemin(x3);
     pcc->plusCourtChemin(x5);
 

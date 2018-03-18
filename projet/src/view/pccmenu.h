@@ -7,9 +7,9 @@ class PCCMenu : public MenuView {
         PCCMenu(std::ostream& out, std::istream& in, CLI* cli);
 
     private:
-        void onLowestCostSelected();
-        void onLowestCostVisualizationSelected();
-        void onLowestDistanceSelected();
-        void onLowestDistanceVisualizationSelected();
+        void onShortestPathSelected();
+        void onShortestPathVisualizationSelected();
+        void onShortestPathWindowSelected();
+        void onShortestPathWindowVisualizationSelected();
 
 };

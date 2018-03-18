@@ -1,25 +1,171 @@
 #include "pccmenu.h"
+#include "cli.h"
+#include "vertexselector.h"
+#include "pccmetadata.h"
+#include "pccftmetadata.h"
+#include "dotgeneratorview.h"
 
 PCCMenu::PCCMenu(std::ostream& out, std::istream& in, CLI* cli) :
         MenuView(out, in, cli, true) {
-    addItem("PCC coût", std::bind(&PCCMenu::onLowestCostSelected, this));
-    addItem("PCC coût (visualisation)", std::bind(&PCCMenu::onLowestCostVisualizationSelected, this));
-    addItem("PCC distance", std::bind(&PCCMenu::onLowestDistanceSelected, this));
-    addItem("PCC distance (visualisation)", std::bind(&PCCMenu::onLowestDistanceVisualizationSelected, this));
+    addItem("PCC (Dijkstra)", std::bind(&PCCMenu::onShortestPathSelected, this));
+    addItem("PCC (Visualisation)", std::bind(&PCCMenu::onShortestPathVisualizationSelected, this));
+    addItem("PCC avec fenêtre (Correction d'étiquette)", std::bind(&PCCMenu::onShortestPathWindowSelected, this));
+    addItem("PCC avec fenêtre (Visualisation)", std::bind(&PCCMenu::onShortestPathWindowVisualizationSelected, this));
 }
 
-void PCCMenu::onLowestCostSelected() {
+void PCCMenu::onShortestPathSelected() {
+    VertexSelector vs_source(out(), in(), cli(), "source", false);
+    VertexSelector vs_puit(out(), in(), cli(), "puit", false);
+    vs_source.show();
+    vs_puit.show();
 
+    char functChoice;
+    do {
+        out() << "Optimiser le cout ou le temps ? (c/t) : ";
+        in() >> functChoice;
+        in().clear();
+        in().ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    } while(functChoice != 'c' && functChoice != 't');
+
+    PCC pcc(cli()->graph());
+
+    out() << "Début du parcours" << std::endl;
+    clock_t begin_time = clock();
+
+    if(functChoice == 'c')
+        pcc.begin(vs_source.selected(), PCC::cout);
+    else
+        pcc.begin(vs_source.selected(), PCC::temps);
+
+    out() << "Graphe parcouru en " << float(clock() - begin_time) / CLOCKS_PER_SEC << " secondes." << std::endl;
+
+    pcc.plusCourtChemin((Sommet<VertexData>*)vs_puit.selected());
 }
 
-void PCCMenu::onLowestDistanceSelected() {
+void PCCMenu::onShortestPathVisualizationSelected() {
+    VertexSelector vs_source(out(), in(), cli(), "source", false);
+    VertexSelector vs_puit(out(), in(), cli(), "puit", false);
+    vs_source.show();
+    vs_puit.show();
 
+    char functChoice;
+    do {
+        out() << "Optimiser le cout ou le temps ? (c/t) : ";
+        in() >> functChoice;
+        in().clear();
+        in().ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    } while(functChoice != 'c' && functChoice != 't');
+
+    PCC pcc(cli()->graph());
+
+    out() << "Début du parcours" << std::endl;
+    clock_t begin_time = clock();
+
+    if(functChoice == 'c')
+        pcc.begin(vs_source.selected(), PCC::cout);
+    else
+        pcc.begin(vs_source.selected(), PCC::temps);
+
+    out() << "Graphe parcouru en " << float(clock() - begin_time) / CLOCKS_PER_SEC << " secondes." << std::endl;
+
+
+    PCCMetaData pmd(&pcc, pcc.plusCourtChemin((Sommet<VertexData>*)vs_puit.selected()));
+    cli()->setView(new DOTGeneratorView(out(), in(), cli(), &pmd));
 }
 
-void PCCMenu::onLowestCostVisualizationSelected() {
+void PCCMenu::onShortestPathWindowSelected() {
+    VertexSelector vs_source(out(), in(), cli(), "source", false);
+    VertexSelector vs_puit(out(), in(), cli(), "puit", false);
+    vs_source.show();
+    vs_puit.show();
 
+    PCCFT pccft(cli()->graph());
+
+    out() << "Début du parcours" << std::endl;
+    clock_t begin_time = clock();
+    pccft.begin(vs_source.selected());
+    out() << "Graphe parcouru en " << float(clock() - begin_time) / CLOCKS_PER_SEC << " secondes." << std::endl;
+
+    char functChoice;
+    do {
+        out() << "Optimiser le cout ou le temps ? (c/t) : ";
+        in() >> functChoice;
+        in().clear();
+        in().ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    } while(functChoice != 'c' && functChoice != 't');
+
+    int a = 0;
+    int b = std::numeric_limits<int>::max();
+    std::string input;
+
+    out() << "Borne inférieure de la fenêtre (vide pour 0) : ";
+    std::getline(in(), input);
+    if (!input.empty()) {
+        std::istringstream stream(input);
+        stream >> a;
+    }
+
+    out() << "Borne supérieure de la fenêtre (vide pour +inf) : ";
+    std::getline(in(), input);
+    if (!input.empty()) {
+        std::istringstream stream(input);
+        stream >> b;
+    }
+
+    if(functChoice == 'c')
+        pccft.meilleurChemin((Sommet<VertexData>*)vs_puit.selected(), PCCFT::cout, a, b);
+    else
+        pccft.meilleurChemin((Sommet<VertexData>*)vs_puit.selected(), PCCFT::temps, a, b);
 }
 
-void PCCMenu::onLowestDistanceVisualizationSelected() {
+void PCCMenu::onShortestPathWindowVisualizationSelected() {
+    VertexSelector vs_source(out(), in(), cli(), "source", false);
+    VertexSelector vs_puit(out(), in(), cli(), "puit", false);
+    vs_source.show();
+    vs_puit.show();
 
+    PCCFT pccft(cli()->graph());
+
+    out() << "Début du parcours" << std::endl;
+    clock_t begin_time = clock();
+    pccft.begin(vs_source.selected());
+    out() << "Graphe parcouru en " << float(clock() - begin_time) / CLOCKS_PER_SEC << " secondes." << std::endl;
+
+    char functChoice;
+    do {
+        out() << "Optimiser le cout ou le temps ? (c/t) : ";
+        in() >> functChoice;
+        in().clear();
+        in().ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    } while(functChoice != 'c' && functChoice != 't');
+
+
+    int a = 0;
+    int b = std::numeric_limits<int>::max();
+    std::string input;
+
+    out() << "Borne inférieure de la fenêtre (vide pour 0) : ";
+    std::getline(in(), input);
+    if (!input.empty()) {
+        std::istringstream stream(input);
+        stream >> a;
+    }
+
+    out() << "Borne supérieure de la fenêtre (vide pour +inf) : ";
+    std::getline(in(), input);
+    if (!input.empty()) {
+        std::istringstream stream(input);
+        stream >> b;
+    }
+
+
+    PCCFTMetaData *pmd;
+    if(functChoice == 'c')
+        pmd = new PCCFTMetaData(&pccft, pccft.meilleurChemin((Sommet<VertexData>*)vs_puit.selected(), PCCFT::cout, a, b));
+    else
+        pmd = new PCCFTMetaData(&pccft, pccft.meilleurChemin((Sommet<VertexData>*)vs_puit.selected(), PCCFT::temps, a, b));
+
+    cli()->setView(new DOTGeneratorView(out(), in(), cli(), pmd));
+
+    //delete pmd;
 }

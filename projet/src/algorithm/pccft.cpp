@@ -81,7 +81,7 @@ Liste<Etiquette>* PCCFT::pareto(std::pair<Sommet<VertexData>*, Liste<Etiquette>*
         return new Liste<Etiquette>(E, nullptr);
 }
 
-std::vector<const Sommet<VertexData>*> PCCFT::meilleurChemin(Sommet<VertexData> *sommet, std::pair<int, int> (*choix)(Etiquette* E), int fenetreMin, int fenetreMax) {
+std::vector<const Sommet<VertexData>*> PCCFT::meilleurChemin(const Sommet<VertexData> *sommet, std::pair<int, int> (*choix)(Etiquette* E), int fenetreMin, int fenetreMax) {
 
     Etiquette *res = nullptr;
     std::vector<const Sommet<VertexData>*> chemin;
@@ -97,7 +97,7 @@ std::vector<const Sommet<VertexData>*> PCCFT::meilleurChemin(Sommet<VertexData> 
     }
 
     if(res) {
-        std::cout << "Meilleur chemin de consommation " << choix(res).first
+        std::cout << "Meilleur chemin de valeur " << choix(res).first
                   << " (ressource de " << choix(res).second << ") dans la fenetre ["
                   << fenetreMin << ";" << fenetreMax << "] :" << std::endl;
 
@@ -155,10 +155,10 @@ std::pair<Sommet<VertexData>*, Liste<Etiquette>*>* PCCFT::ETIQ(const Sommet<Vert
     return nullptr;
 }
 
-std::pair<int, int> cout(Etiquette* E) {
+std::pair<int, int> PCCFT::cout(Etiquette* E) {
     return std::pair<int, int>(E->cost(), E->time());
 }
 
-std::pair<int, int> temps(Etiquette* E) {
+std::pair<int, int> PCCFT::temps(Etiquette* E) {
     return std::pair<int, int>(E->time(), E->cost());
 }

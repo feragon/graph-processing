@@ -97,9 +97,9 @@ std::vector<const Sommet<VertexData>*> PCC::plusCourtChemin(Sommet<VertexData>* 
     return chemin;
 }
 
-int cout(Arete<EdgeData, VertexData>* arete) {
+int PCC::cout(Arete<EdgeData, VertexData>* arete) {
     return arete->contenu().cost();
 }
-int temps(Arete<EdgeData, VertexData>* arete) {
+int PCC::temps(Arete<EdgeData, VertexData>* arete) {
     return arete->contenu().time();
 }

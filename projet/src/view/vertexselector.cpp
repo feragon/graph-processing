@@ -25,7 +25,7 @@ void VertexSelector::show() {
             out() << " (laissez vide pour ne pas en sélectionner)";
         }
 
-        out() << ":";
+        out() << ": ";
 
         std::string selectedVertex;
         std::getline(in(), selectedVertex);

@@ -26,8 +26,10 @@ public:
      */
     std::vector<const Sommet<VertexData>*> plusCourtChemin(Sommet<VertexData>* sommet);
 
-    void reset() override;
+    static int cout(Arete<EdgeData, VertexData>* arete);
+    static int temps(Arete<EdgeData, VertexData>* arete);
 
+    void reset() override;
     virtual ~PCC();
 
 private:
@@ -39,6 +41,3 @@ private:
     const Sommet<VertexData>* _start;
     pairPereValeur* _ppv;
 };
-
-int cout(Arete<EdgeData, VertexData>* arete);
-int temps(Arete<EdgeData, VertexData>* arete);
