@@ -25,4 +25,5 @@ Soit il faut aller dans la configuration du projet "projet-modelisation", "Debug
 Lancer les tests unitaires:
 Les tests unitaires doivent être lancés dans le dossier source "tests/src" (voir configuration du projet au-dessus)
 
-- Clic droit sur le projet "unittests" > "Debug" > "Démarrer une nouvelle instance"
+- Clic droit sur le projet "unittests" > "Debug" > "Définir comme projet de démarrage"
+- Faire Ctrl+F5 ou cliquer sur le menu "Debug" dans la barre de menus, et cliquer sur "Démarrer dsans débuggage"
