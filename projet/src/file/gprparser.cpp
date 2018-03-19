@@ -50,7 +50,7 @@ void GPRParser::load() {
         }
     }
 
-    if(_puits->contenu().canWait()) {
+    if(_puits && _puits->contenu().canWait()) {
         for(auto vertex = graphe().sommets(); vertex; vertex = vertex->next) {
             if(!vertex->value->contenu().canWait()) {
                 vertex->value->contenu().setSup(_puits->contenu().sup());

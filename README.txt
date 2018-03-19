@@ -14,4 +14,15 @@ Compilation:
 - Attendre que la configuration se fasse et cliquer sur "Generate"
 - Fermer CMake-GUI
 - Ouvrir le dossier build, la solution Visual Studio (ou autre selon le compilateur choisi) a été crée, l'ouvrir
-- Faire un clic droit sur le projet "projet-modelisation", aller dans "C/C++" > "Ligne de commande" et ajouter "/utf-8" dans "Options supplémentaires"
+
+Lancer le projet:
+Le programme va chercher les fichiers GPR dans son répertoire, qui sera donné lors de l'exécution.
+Soit il faut lancer le programme une première fois, puis de copier les fichiers GPR dans le dossier donné avant de relancer le programme.
+Soit il faut aller dans la configuration du projet "projet-modelisation", "Debugging" et éditer la valeur de "Répertoire de travail"
+
+- Clic droit sur le projet "projet-modelisation" > "Debug" > "Démarrer une nouvelle instance"
+
+Lancer les tests unitaires:
+Les tests unitaires doivent être lancés dans le dossier source "tests/src" (voir configuration du projet au-dessus)
+
+- Clic droit sur le projet "unittests" > "Debug" > "Démarrer une nouvelle instance"
