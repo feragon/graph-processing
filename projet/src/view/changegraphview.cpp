@@ -12,6 +12,7 @@
 #include <fstream>
 #include "cli.h"
 #include "creategraphview.h"
+#include <ctime>
 
 ChangeGraphView::ChangeGraphView(std::ostream& out, std::istream& in, CLI* cli) :
         MenuView(out, in, cli, cli->graph() != nullptr) {
