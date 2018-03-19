@@ -1,6 +1,7 @@
 #include "changegraphview.h"
 
 #ifdef _WIN32
+#define NOMINMAX
 #include "dirent.h"
 #include "windows.h"
 #else
