@@ -27,3 +27,9 @@ Les tests unitaires doivent être lancés dans le dossier source "tests/src" (vo
 
 - Clic droit sur le projet "unittests" > "Debug" > "Définir comme projet de démarrage"
 - Faire Ctrl+F5 ou cliquer sur le menu "Debug" dans la barre de menus, et cliquer sur "Démarrer dsans débuggage"
+
+
+Visualisation des graphes:
+Le programme permet d'exporter des programmes au format DOT afin de les lire depuis GraphViz (http://www.graphviz.org/) ou tout autre programme compatible.
+Pour les graphes les plus simples, il est possible de les visualiser sur un navigateur: https://dreampuf.github.io/GraphvizOnline/
+Pour les graphes plus complexes, le logiciel Gephi https://gephi.org/ est très performant (mais n'affiche pas toutes les informations)
