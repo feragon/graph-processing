@@ -58,7 +58,7 @@ void ChangeGraphView::openGraph(const std::string& path) {
 
     const clock_t begin_time = clock();
 
-    std::ifstream ifs(path);
+    std::ifstream ifs(path, std::ios::binary);
     GPRParser gprp(ifs);
     gprp.load();
 

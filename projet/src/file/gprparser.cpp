@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <cstring>
 #include "gprparser.h"
 #include "resourcessectionparser.h"
 #include "parseexception.h"
@@ -47,6 +48,10 @@ void GPRParser::load() {
         }
         catch (ParseException& e) {
             std::cerr << e.what() << std::endl;
+        }
+
+        if(_buffer.fail() && errno != 0) {
+            std::cerr << "Erreur de lecture: " << strerror(errno) << std::endl;
         }
     }
 
