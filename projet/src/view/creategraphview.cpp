@@ -9,6 +9,7 @@ CreateGraphView::CreateGraphView(std::ostream& out, std::istream& in, CLI* cli) 
     addItem("Créer un sommet", std::bind(&CreateGraphView::onCreateVertexSelected, this));
     addItem("Créer une arête", std::bind(&CreateGraphView::onCreateEdgeSelected, this));
     addItem("Quitter sans sauvegardeer", std::bind(&CreateGraphView::onDiscardSelected, this));
+    _discard = false;
 }
 
 void CreateGraphView::onCreateVertexSelected() {

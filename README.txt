@@ -14,4 +14,4 @@ Compilation:
 - Attendre que la configuration se fasse et cliquer sur "Generate"
 - Fermer CMake-GUI
 - Ouvrir le dossier build, la solution Visual Studio (ou autre selon le compilateur choisi) a été crée, l'ouvrir
--
+- Faire un clic droit sur le projet "projet-modelisation", aller dans "C/C++" > "Ligne de commande" et ajouter "/utf-8" dans "Options supplémentaires"
