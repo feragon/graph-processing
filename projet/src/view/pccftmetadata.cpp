@@ -9,7 +9,18 @@ PCCFTMetaData::PCCFTMetaData(const PCCFT *pccft, std::vector<const Sommet<Vertex
 }
 
 std::string PCCFTMetaData::getEdgeLabel(const Arete<EdgeData, VertexData> *edge) {
-    return DotMetaData::getEdgeLabel(edge);
+    unsigned long m = _chemin.size();
+
+    if(_chemin.empty()) {
+        return "";
+    }
+
+    for(unsigned int i = 0; i < m - 1; i++) {
+        if(_chemin[i] == edge->debut() && _chemin[i+1] == edge->fin()) {
+            return DotMetaData::getEdgeLabel(edge);
+        }
+    }
+    return "";
 }
 
 std::string PCCFTMetaData::getVertexBackground(const Sommet<VertexData> *vertex) {
