@@ -84,9 +84,6 @@ set(SOURCE_FILES
         src/view/creategraphview.h
         src/view/pccmenu.cpp
         src/view/pccmenu.h
-        src/view/pccftmetadata.cpp
-        src/view/pccftmetadata.h
-        src/view/pccmetadata.cpp
         src/view/pccmetadata.h)
 
 add_executable(projet-modelisation ${SOURCE_FILES})

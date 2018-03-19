@@ -2,9 +2,10 @@
 #include "cli.h"
 #include "vertexselector.h"
 #include "pccmetadata.h"
-#include "pccftmetadata.h"
 #include "dotgeneratorview.h"
 #include <ctime>
+#include <limits>
+#include <algorithm/pccft.h>
 
 PCCMenu::PCCMenu(std::ostream& out, std::istream& in, CLI* cli) :
         MenuView(out, in, cli, true) {
@@ -84,8 +85,9 @@ void PCCMenu::onShortestPathVisualizationSelected() {
     out() << "Graphe parcouru en " << float(clock() - begin_time) / CLOCKS_PER_SEC << " secondes." << std::endl;
 
 
-    PCCMetaData pmd(&pcc, pcc.plusCourtChemin((Sommet<VertexData>*)vs_puit.selected()));
-    cli()->setView(new DOTGeneratorView(out(), in(), cli(), &pmd));
+    PCCMetaData<PCC> pmd(&pcc, pcc.plusCourtChemin((Sommet<VertexData>*)vs_puit.selected()));
+    DOTGeneratorView dgv(out(), in(), cli(), &pmd);
+    dgv.show();
 }
 
 void PCCMenu::onShortestPathWindowSelected() {
@@ -191,15 +193,16 @@ void PCCMenu::onShortestPathWindowVisualizationSelected() {
     }
 
 
-    PCCFTMetaData *pmd;
+    PCCMetaData<PCCFT> *pmd;
     if(functChoice == 'c') {
-        pmd = new PCCFTMetaData(&pccft, pccft.meilleurChemin((Sommet<VertexData>*) vs_puit.selected(), PCCFT::cout, a, b));
+        pmd = new PCCMetaData<PCCFT>(&pccft, pccft.meilleurChemin((Sommet<VertexData>*) vs_puit.selected(), PCCFT::cout, a, b));
     }
     else {
-        pmd = new PCCFTMetaData(&pccft, pccft.meilleurChemin((Sommet<VertexData>*) vs_puit.selected(), PCCFT::temps, a, b));
+        pmd = new PCCMetaData<PCCFT>(&pccft, pccft.meilleurChemin((Sommet<VertexData>*) vs_puit.selected(), PCCFT::temps, a, b));
     }
 
-    cli()->setView(new DOTGeneratorView(out(), in(), cli(), pmd));
+    DOTGeneratorView dgv(out(), in(), cli(), pmd);
+    dgv.show();
 
     delete pmd;
 }

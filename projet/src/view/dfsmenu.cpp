@@ -36,7 +36,8 @@ void DFSMenu::onGraphicRepresentationSelected() {
     out() << "Graphe parcouru en " << float(clock() - begin_time) / CLOCKS_PER_SEC << " secondes." << std::endl;
 
     DFSMetaData dmd(&dfs);
-    cli()->setView(new DOTGeneratorView(out(), in(), cli(), &dmd));
+    DOTGeneratorView dgv(out(), in(), cli(), &dmd);
+    dgv.show();
 }
 
 void DFSMenu::onCycleDetectionSelected() {
@@ -112,5 +113,6 @@ void DFSMenu::onSCCSelected() {
     out() << "Graphe parcouru en " << float(clock() - begin_time) / CLOCKS_PER_SEC << " secondes." << std::endl;
 
     SCCMetaData sccMetaData(scc);
-    cli()->setView(new DOTGeneratorView(out(), in(), cli(), &sccMetaData));
+    DOTGeneratorView dgv(out(), in(), cli(), &sccMetaData);
+    dgv.show();
 }
