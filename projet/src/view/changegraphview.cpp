@@ -1,5 +1,12 @@
 #include "changegraphview.h"
+
+#ifdef _WIN32
+#include "dirent.h"
+#include "windows.h"
+#else
 #include <dirent.h>
+#endif
+
 #include <limits.h>
 #include <file/gprparser.h>
 #include <fstream>
@@ -30,7 +37,11 @@ ChangeGraphView::ChangeGraphView(std::ostream& out, std::istream& in, CLI* cli) 
 
 void ChangeGraphView::show() {
     char buf[PATH_MAX + 1];
-    realpath(".", buf);
+    #ifdef _WIN32
+        GetFullPathName(".", PATH_MAX, buf, NULL);
+    #else
+        realpath(".", buf);
+    #endif
     out() << "Graphes dans le dossier " << buf << ":" << std::endl;
 
     MenuView::show();

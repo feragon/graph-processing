@@ -1,6 +1,7 @@
 #include <iostream>
 #include <limits>
 #include "menuview.h"
+#include <string>
 
 MenuView::MenuView(std::ostream& out, std::istream& in, CLI* cli, bool canQuit) :
         View(out, in, cli) {

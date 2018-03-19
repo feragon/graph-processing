@@ -6,6 +6,15 @@
 #include <limits>
 #include "dotgeneratorview.h"
 #include "cli.h"
+#include <ctime>
+
+#ifndef PATH_MAX
+#define PATH_MAX _MAX_PATH
+#endif
+
+#ifdef _WIN32
+#include "windows.h"
+#endif
 
 DOTGeneratorView::DOTGeneratorView(std::ostream& out, std::istream& in, CLI* cli, DotMetaData* dmd) :
         View(out, in, cli) {
@@ -18,7 +27,13 @@ void DOTGeneratorView::show() {
 
     do {
         char buf[PATH_MAX + 1];
-        realpath(".", buf);
+
+        #ifdef _WIN32
+            GetFullPathName(".", PATH_MAX, buf, NULL);
+        #else
+            realpath(".", buf);
+        #endif
+
         out() << "Dossier actuel: " << buf << std::endl;
         out() << "Entrez le nom du fichier à créer: ";
 

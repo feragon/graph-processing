@@ -4,6 +4,7 @@
 #include "pccmetadata.h"
 #include "pccftmetadata.h"
 #include "dotgeneratorview.h"
+#include <ctime>
 
 PCCMenu::PCCMenu(std::ostream& out, std::istream& in, CLI* cli) :
         MenuView(out, in, cli, true) {

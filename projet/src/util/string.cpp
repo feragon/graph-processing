@@ -1,4 +1,5 @@
 #include "string.h"
+#include <cctype>
 
 bool compareCharInsensitive(unsigned char a, unsigned char b) {
     return std::tolower(a) == std::tolower(b);

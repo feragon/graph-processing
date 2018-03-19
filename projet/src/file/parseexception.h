@@ -1,7 +1,6 @@
 #pragma once
 
 #include <stdexcept>
-#include <gmpxx.h>
 
 class ParseException : public std::runtime_error {
     public:
