@@ -23,7 +23,7 @@ Soit il faut aller dans la configuration du projet "projet-modelisation" : clic 
 - Clic droit sur le projet "projet-modelisation" > "Déboguer" > "Démarrer une nouvelle instance"
 
 == Lancer les tests unitaires:
-Les tests unitaires doivent être lancés dans le dossier source "tests/src" (voir configuration du projet au-dessus)
+Les tests unitaires doivent être lancés dans le dossier source "tests" (voir configuration du projet au-dessus)
 
 - Clic droit sur le projet "unittests" > "Définir comme projet de démarrage"
 - Faire Ctrl+F5 ou cliquer sur le menu "Déboguer" dans la barre de menus, et cliquer sur "Exécuter sans débogage"
