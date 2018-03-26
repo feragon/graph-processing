@@ -7,6 +7,63 @@
 #include <fstream>
 
 
+TEST_CASE("TestPPCValuationPositives") {
+    Graphe<EdgeData, VertexData> graphe;
+
+    auto x1 = graphe.creerSommet("x1", VertexData());
+    auto x2 = graphe.creerSommet("x2", VertexData());
+
+    graphe.creeArete("arc1", EdgeData(0,0), x1, x2);
+
+    PCC *pcc = new PCC(&graphe);
+    pcc->begin(x1, PCC::cout);
+    pcc->begin(x1, PCC::temps);
+
+    delete pcc;
+}
+
+TEST_CASE("TestPPCValuationNegatives1") {
+    Graphe<EdgeData, VertexData> graphe;
+
+    auto x1 = graphe.creerSommet("x1", VertexData());
+    auto x2 = graphe.creerSommet("x2", VertexData());
+
+    graphe.creeArete("arc1", EdgeData(-10,0), x1, x2);
+
+    PCC *pcc = new PCC(&graphe);
+    try {
+        pcc->begin(x1, PCC::cout);
+        REQUIRE(false);
+    }
+    catch (std::exception& e) {
+        REQUIRE(true);
+    }
+    pcc->begin(x1, PCC::temps);
+
+    delete pcc;
+}
+
+TEST_CASE("TestPPCValuationNegatives2") {
+    Graphe<EdgeData, VertexData> graphe;
+
+    auto x1 = graphe.creerSommet("x1", VertexData());
+    auto x2 = graphe.creerSommet("x2", VertexData());
+
+    graphe.creeArete("arc1", EdgeData(0,-10), x1, x2);
+
+    PCC *pcc = new PCC(&graphe);
+    try {
+        pcc->begin(x1, PCC::temps);
+        REQUIRE(false);
+    }
+    catch (std::exception& e) {
+        REQUIRE(true);
+    }
+    pcc->begin(x1, PCC::cout);
+
+    delete pcc;
+}
+
 TEST_CASE("testPCC") {
 
     std::cout << std::endl << "=== testPCC" << std::endl;

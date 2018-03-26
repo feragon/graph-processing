@@ -95,10 +95,6 @@ void CreateGraphView::onCreateEdgeSelected() {
             out() << "Coût invalide" << std::endl;
             ok = false;
         }
-        else if(cost < 0) {
-            out() << "Le coût doit être positif" << std::endl;
-            ok = false;
-        }
         else {
             ok = true;
         }
@@ -111,10 +107,6 @@ void CreateGraphView::onCreateEdgeSelected() {
         in() >> time;
         if(!in()) {
             out() << "Temps invalide" << std::endl;
-            ok = false;
-        }
-        else if(time < 0) {
-            out() << "Le temps doit être positif" << std::endl;
             ok = false;
         }
         else {

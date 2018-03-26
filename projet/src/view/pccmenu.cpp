@@ -34,12 +34,18 @@ void PCCMenu::onShortestPathSelected() {
     out() << "Début du parcours" << std::endl;
     clock_t begin_time = clock();
 
-    if(functChoice == 'c')
-        pcc.begin(vs_source.selected(), PCC::cout);
-    else
-        pcc.begin(vs_source.selected(), PCC::temps);
+    try {
+        if(functChoice == 'c')
+            pcc.begin(vs_source.selected(), PCC::cout);
+        else
+            pcc.begin(vs_source.selected(), PCC::temps);
 
-    out() << "Graphe parcouru en " << float(clock() - begin_time) / CLOCKS_PER_SEC << " secondes." << std::endl;
+        out() << "Graphe parcouru en " << float(clock() - begin_time) / CLOCKS_PER_SEC << " secondes." << std::endl;
+    }
+    catch (std::exception& e) {
+        out() << "Erreur: " << e.what() << std::endl;
+    }
+
 
     int valeur;
     auto chemin = pcc.plusCourtChemin((Sommet<VertexData>*)vs_puit.selected(), &valeur);
@@ -77,13 +83,17 @@ void PCCMenu::onShortestPathVisualizationSelected() {
     out() << "Début du parcours" << std::endl;
     clock_t begin_time = clock();
 
-    if(functChoice == 'c')
-        pcc.begin(vs_source.selected(), PCC::cout);
-    else
-        pcc.begin(vs_source.selected(), PCC::temps);
+    try {
+        if (functChoice == 'c')
+            pcc.begin(vs_source.selected(), PCC::cout);
+        else
+            pcc.begin(vs_source.selected(), PCC::temps);
 
-    out() << "Graphe parcouru en " << float(clock() - begin_time) / CLOCKS_PER_SEC << " secondes." << std::endl;
-
+        out() << "Graphe parcouru en " << float(clock() - begin_time) / CLOCKS_PER_SEC << " secondes." << std::endl;
+    }
+    catch (std::exception& e) {
+        out() << "Erreur: " << e.what() << std::endl;
+    }
 
     PCCMetaData<PCC> pmd(&pcc, pcc.plusCourtChemin((Sommet<VertexData>*)vs_puit.selected()));
     DOTGeneratorView dgv(out(), in(), cli(), &pmd);

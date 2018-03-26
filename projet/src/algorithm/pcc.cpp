@@ -1,5 +1,6 @@
 #include <limits>
 #include <set>
+#include <modeling/negativevaluation.h>
 #include "pcc.h"
 
 PCC::PCC(const Graphe<EdgeData, VertexData>* graphe) :
@@ -42,7 +43,11 @@ void PCC::analyzeVertex(const Sommet<VertexData>* vertex) {
             int nouveauLambda = std::numeric_limits<int>::max();
 
             if (_ppv->getLambda(vertex) < nouveauLambda) {
-                nouveauLambda = _ppv->getLambda(vertex) + _choixDonnee(l->value);
+                int valuation = _choixDonnee(l->value);
+                if(valuation < 0) {
+                    throw NegativeValuation(("L'arête " + l->value->cle() + " a une valuation négative.").c_str());
+                }
+                nouveauLambda = _ppv->getLambda(vertex) + valuation;
             }
 
             if (nouveauLambda < _ppv->getLambda(l->value->fin())) {
