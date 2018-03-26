@@ -9,8 +9,6 @@
 
 TEST_CASE("testPCCParser") {
 
-    std::cout << std::endl << "=== testPCCParser" << std::endl;
-
     std::ifstream fstream("data/data_VRPTW_10.gpr", std::ios::binary);
     GPRParser gprp(fstream);
     gprp.load();

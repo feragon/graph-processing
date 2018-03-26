@@ -9,8 +9,6 @@
 
 TEST_CASE("testPCCArbreDeuxBranches") {
 
-    std::cout << std::endl << "=== testPCCArbreDeuxBranches" << std::endl;
-
     Graphe<EdgeData, VertexData> graphe;
     auto x1 = graphe.creerSommet("x1", VertexData());
     auto x2 = graphe.creerSommet("x2", VertexData());

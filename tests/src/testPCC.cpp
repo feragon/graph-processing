@@ -66,9 +66,6 @@ TEST_CASE("TestPPCValuationNegatives2") {
 
 TEST_CASE("testPCC") {
 
-    std::cout << std::endl << "=== testPCC" << std::endl;
-
-
     /* === Illustration de Dijkstra (cours) === */
     
     Graphe<EdgeData, VertexData> graphe;
@@ -91,16 +88,32 @@ TEST_CASE("testPCC") {
     graphe.creeArete("arc8", EdgeData(2,0), x5, x6);
 
 
+    std::vector<std::pair<const Sommet<VertexData>*, int>> chemin;
     PCC *pcc = new PCC(&graphe);
     pcc->begin(x1, PCC::cout);
 
-    pcc->plusCourtChemin(x1);
-    pcc->plusCourtChemin(x2);
-    pcc->plusCourtChemin(x3);
-    pcc->plusCourtChemin(x4);
-    pcc->plusCourtChemin(x5);
-    pcc->plusCourtChemin(x6);
-    pcc->plusCourtChemin(x7);
+
+    chemin = pcc->plusCourtChemin(x1);
+    REQUIRE(chemin[0].second == 0);
+
+    chemin = pcc->plusCourtChemin(x2);
+    REQUIRE(chemin[chemin.size()-1].second == 2);
+
+    chemin = pcc->plusCourtChemin(x3);
+    REQUIRE(chemin[chemin.size()-1].second == 5);
+
+    chemin = pcc->plusCourtChemin(x4);
+    REQUIRE(chemin[chemin.size()-1].second == 4);
+
+    chemin = pcc->plusCourtChemin(x5);
+    REQUIRE(chemin[chemin.size()-1].second == 6);
+
+    chemin = pcc->plusCourtChemin(x6);
+    REQUIRE(chemin[chemin.size()-1].second == 8);
+
+    chemin = pcc->plusCourtChemin(x7);
+    REQUIRE(chemin.empty());
+
 
     REQUIRE(pcc->explored(x6));
     REQUIRE(!pcc->explored(x7));

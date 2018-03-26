@@ -9,9 +9,6 @@
 
 TEST_CASE("testPCCFT") {
 
-    std::cout << std::endl << "=== testPCCFT" << std::endl;
-
-
     /* === Exercice 5.1 du TD === */
 
     Graphe<EdgeData, VertexData> graphe;
@@ -45,11 +42,18 @@ TEST_CASE("testPCCFT") {
     graphe.creeArete("arc16", EdgeData(3,3), x8, x9);
 
 
+    std::vector<std::pair<const Sommet<VertexData>*, int>> chemin;
     PCCFT *pccft = new PCCFT(&graphe);
     pccft->begin(x0);
 
-    pccft->meilleurChemin(x9, PCCFT::temps);
-    pccft->meilleurChemin(x9, PCCFT::cout);
-    pccft->meilleurChemin(x9, PCCFT::cout, 0, 12);
+    chemin = pccft->meilleurChemin(x9, PCCFT::temps);
+    REQUIRE(chemin[chemin.size()-1].second == 7);
+
+    chemin = pccft->meilleurChemin(x9, PCCFT::cout);
+    REQUIRE(chemin[chemin.size()-1].second == 10);
+
+    chemin = pccft->meilleurChemin(x9, PCCFT::cout, 0, 12);
+    REQUIRE(chemin[chemin.size()-1].second == 11);
+
     delete pccft;
 }
