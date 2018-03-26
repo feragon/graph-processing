@@ -35,6 +35,10 @@ std::string DFSMetaData::getEdgeStyle(const Arete<EdgeData, VertexData>* edge) {
     }
 }
 
+std::string DFSMetaData::getEdgeColor(const Arete<EdgeData, VertexData>* edge) {
+    return "black";
+}
+
 std::string DFSMetaData::getVertexLabel(const Sommet<VertexData>* vertex) {
     return DotMetaData::getVertexLabel(vertex) + " " +
            + "P:" + std::to_string(_dfs->prefixNumber(vertex)) + " - "

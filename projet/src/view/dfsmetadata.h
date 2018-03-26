@@ -13,6 +13,8 @@ class DFSMetaData : public DotMetaData {
 
         virtual std::string getEdgeStyle(const Arete<EdgeData, VertexData>* edge) override;
 
+        virtual std::string getEdgeColor(const Arete<EdgeData, VertexData>* edge) override;
+
         std::string getVertexLabel(const Sommet<VertexData>* vertex) override;
 
         std::string additionalData() override;

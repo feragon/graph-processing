@@ -13,6 +13,9 @@ std::string DotMetaData::getVertexBackground(const Sommet<VertexData>* vertex) {
 std::string DotMetaData::getEdgeStyle(const Arete<EdgeData, VertexData>* edge) {
     return "filled";
 }
+std::string DotMetaData::getEdgeColor(const Arete<EdgeData, VertexData>* edge) {
+    return "gray";
+}
 
 std::string DotMetaData::getVertexLabel(const Sommet<VertexData>* vertex) {
     return vertex->cle();
