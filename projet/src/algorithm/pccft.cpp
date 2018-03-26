@@ -86,10 +86,11 @@ Liste<Etiquette>* PCCFT::pareto(Liste<Etiquette>* etiquettes, Etiquette *E, bool
     }
 }
 
-std::vector<const Sommet<VertexData>*> PCCFT::meilleurChemin(const Sommet<VertexData> *sommet, std::pair<int, int> (*choix)(Etiquette* E), int fenetreMin, int fenetreMax, Etiquette* etiquette) {
+std::vector<std::pair<const Sommet<VertexData>*, int>> PCCFT::meilleurChemin(const Sommet<VertexData> *sommet, std::pair<int, int> (*choix)(Etiquette* E), int fenetreMin, int fenetreMax, Etiquette* etiquette) {
 
+    _choixDonnee = choix;
     Etiquette *res = nullptr;
-    std::vector<const Sommet<VertexData>*> chemin;
+    std::vector<std::pair<const Sommet<VertexData>*, int>> chemin;
 
     for(auto l = _etiquettes[sommet]; l; l = l->next) {
 
@@ -106,10 +107,10 @@ std::vector<const Sommet<VertexData>*> PCCFT::meilleurChemin(const Sommet<Vertex
             *etiquette = *res;
         }
         while (res->predecesseur()) {
-            chemin.insert(chemin.begin(), res->sommet());
+            chemin.insert(chemin.begin(), std::pair<const Sommet<VertexData>*, int>(res->sommet(), _choixDonnee(res).first));
             res = res->predecesseur();
         }
-        chemin.insert(chemin.begin(), res->sommet());
+        chemin.insert(chemin.begin(), std::pair<const Sommet<VertexData>*, int>(res->sommet(), _choixDonnee(res).first));
     }
 
     return chemin;

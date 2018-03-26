@@ -25,7 +25,7 @@ public:
      * @param valeur Valeur du chemin, nullptr pour ne pas l'utiliser, pas touchée si le chemin est vide
      * @return std::vector<const Sommet<VertexData>*> Meilleur chemin de _start à destination
      */
-    std::vector<const Sommet<VertexData>*> plusCourtChemin(Sommet<VertexData>* sommet, int* valeur = nullptr);
+    std::vector<std::pair<const Sommet<VertexData>*, int>> plusCourtChemin(Sommet<VertexData>* sommet, int* valeur = nullptr);
 
     static int cout(Arete<EdgeData, VertexData>* arete);
     static int temps(Arete<EdgeData, VertexData>* arete);
